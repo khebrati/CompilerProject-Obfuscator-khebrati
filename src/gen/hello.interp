@@ -1,0 +1,48 @@
+token literal names:
+null
+null
+'if'
+'('
+')'
+null
+null
+null
+'=='
+null
+'true'
+'false'
+null
+null
+null
+null
+null
+null
+null
+
+token symbolic names:
+null
+IF_STATEMENT
+IF
+P_OPEN
+P_CLOSE
+BOOL
+COMPARE
+VALUE
+EQUALS
+BOOL_KEY
+TRUE_KEY
+FALSE_KEY
+ID
+INT
+FLOAT
+COMMENT
+WS
+STRING
+CHAR
+
+rule names:
+start
+
+
+atn:
+[4, 1, 18, 5, 2, 0, 7, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 3, 0, 2, 1, 0, 0, 0, 2, 3, 5, 1, 0, 0, 3, 1, 1, 0, 0, 0, 0]

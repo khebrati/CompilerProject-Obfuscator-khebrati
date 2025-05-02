@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="antlr" type="repository">
+    <properties maven-id="antlr:antlr:2.7.7">
+      <exclude>
+        <dependency maven-id="antlr:antlr" />
+      </exclude>
+    </properties>
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
