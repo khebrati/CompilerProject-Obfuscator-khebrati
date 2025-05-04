@@ -8,8 +8,8 @@ statement
     : block                                                                 # blockStatement
     | SEMI                                                                  # emptyStatement
     | assignment                                                            # assignmentStatement
-    | declaration                                                           # variableDeclarationStatement
-    | 'if' parExpression ifBody=statement ('else' elseBody=statement)?                                                                      # ifStatement
+    | declarationOrFunction                                                 # eitherDeclerationOrFunction
+    | 'if' parExpression ifBody=statement ('else' elseBody=statement)?      # ifStatement
     | 'while' parExpression statement                                       # whileStatement
     | 'break' SEMI                                                          # breakStatement
     | 'exit' '(' ')' SEMI                                                   # exitStatement
@@ -17,6 +17,19 @@ statement
     | 'println' parExpression SEMI                                          # printlnStatement
     ;
 
+declarationOrFunction:
+    type Identifier decOrFun;
+
+decOrFun:
+    function | declaration;
+
+function:
+    LPAR (arg)?(COMMA arg)* RPAR;
+
+declaration : (assignmentOp expression)? SEMI;
+
+arg:
+    type Identifier;
 block
     : '{' statement* '}'
     ;
@@ -42,7 +55,6 @@ parExpression : '(' expression ')';
 
 assignment : Identifier assignmentOp expression SEMI;
 
-declaration : type Identifier (assignmentOp expression)? SEMI;
 
 assignmentOp : '=';
 
@@ -127,6 +139,7 @@ LPAR: '(';
 RPAR: ')';
 LBRACE: '{';
 RBRACE: '}';
+COMMA: ',';
 
 // must be last, otherwise some tokens like types, keywords may be incorrectly recognized as identifiers
 Identifier : (LETTER | '_') (LETTER | DIGIT | '_')* ;
