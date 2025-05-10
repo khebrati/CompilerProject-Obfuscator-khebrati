@@ -1,4 +1,4 @@
-// Generated from /home/erfan/Source/ObfusC/src/hello.g4 by ANTLR 4.13.2
+package gen;// Generated from /home/erfan/Source/ObfusC/src/Obfus.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue", "this-escape"})
-public class helloParser extends Parser {
+public class ObfusParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.13.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -23,15 +23,17 @@ public class helloParser extends Parser {
 		PRINT_KEYWORD=19, PRINTLN_KEYWORD=20, INT_TYPE=21, DOUBLE_TYPE=22, STRING_TYPE=23, 
 		BOOL_TYPE=24, MUL=25, DIV=26, PLUS=27, MINUS=28, MOD=29, LT=30, GT=31, 
 		LTEQ=32, GTEQ=33, ASSIGN=34, EQ=35, NOTEQ=36, NOT=37, AND=38, OR=39, LPAR=40, 
-		RPAR=41, LBRACE=42, RBRACE=43, Identifier=44;
+		RPAR=41, LBRACE=42, RBRACE=43, COMMA=44, Identifier=45;
 	public static final int
-		RULE_program = 0, RULE_statement = 1, RULE_block = 2, RULE_expression = 3, 
-		RULE_parExpression = 4, RULE_assignment = 5, RULE_declaration = 6, RULE_assignmentOp = 7, 
-		RULE_type = 8, RULE_literal = 9;
+		RULE_program = 0, RULE_statement = 1, RULE_declarationOrFunction = 2, 
+		RULE_decOrFun = 3, RULE_function = 4, RULE_declaration = 5, RULE_arg = 6, 
+		RULE_block = 7, RULE_expression = 8, RULE_parExpression = 9, RULE_assignment = 10, 
+		RULE_assignmentOp = 11, RULE_type = 12, RULE_literal = 13;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"program", "statement", "block", "expression", "parExpression", "assignment", 
-			"declaration", "assignmentOp", "type", "literal"
+			"program", "statement", "declarationOrFunction", "decOrFun", "function", 
+			"declaration", "arg", "block", "expression", "parExpression", "assignment", 
+			"assignmentOp", "type", "literal"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -43,7 +45,7 @@ public class helloParser extends Parser {
 			"'readLine'", "'toString'", "'print'", "'println'", "'int'", "'double'", 
 			"'string'", "'bool'", "'*'", "'/'", "'+'", "'-'", "'%'", "'<'", "'>'", 
 			"'<='", "'>='", "'='", "'=='", "'!='", "'!'", "'&&'", "'||'", "'('", 
-			"')'", "'{'", "'}'"
+			"')'", "'{'", "'}'", "','"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -56,7 +58,7 @@ public class helloParser extends Parser {
 			"PRINT_KEYWORD", "PRINTLN_KEYWORD", "INT_TYPE", "DOUBLE_TYPE", "STRING_TYPE", 
 			"BOOL_TYPE", "MUL", "DIV", "PLUS", "MINUS", "MOD", "LT", "GT", "LTEQ", 
 			"GTEQ", "ASSIGN", "EQ", "NOTEQ", "NOT", "AND", "OR", "LPAR", "RPAR", 
-			"LBRACE", "RBRACE", "Identifier"
+			"LBRACE", "RBRACE", "COMMA", "Identifier"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -94,7 +96,7 @@ public class helloParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "hello.g4"; }
+	public String getGrammarFileName() { return "Obfus.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -105,14 +107,14 @@ public class helloParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public helloParser(TokenStream input) {
+	public ObfusParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProgramContext extends ParserRuleContext {
-		public TerminalNode EOF() { return getToken(helloParser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(ObfusParser.EOF, 0); }
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
 		}
@@ -125,15 +127,15 @@ public class helloParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_program; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterProgram(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterProgram(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitProgram(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitProgram(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitProgram(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitProgram(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -145,21 +147,21 @@ public class helloParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(23);
+			setState(31);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 21990265608736L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 39582451653152L) != 0)) {
 				{
 				{
-				setState(20);
+				setState(28);
 				statement();
 				}
 				}
-				setState(25);
+				setState(33);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(26);
+			setState(34);
 			match(EOF);
 			}
 		}
@@ -188,7 +190,7 @@ public class helloParser extends Parser {
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class WhileStatementContext extends StatementContext {
-		public TerminalNode WHILE_KEYWORD() { return getToken(helloParser.WHILE_KEYWORD, 0); }
+		public TerminalNode WHILE_KEYWORD() { return getToken(ObfusParser.WHILE_KEYWORD, 0); }
 		public ParExpressionContext parExpression() {
 			return getRuleContext(ParExpressionContext.class,0);
 		}
@@ -198,55 +200,55 @@ public class helloParser extends Parser {
 		public WhileStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterWhileStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterWhileStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitWhileStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitWhileStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitWhileStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitWhileStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class EmptyStatementContext extends StatementContext {
-		public TerminalNode SEMI() { return getToken(helloParser.SEMI, 0); }
+		public TerminalNode SEMI() { return getToken(ObfusParser.SEMI, 0); }
 		public EmptyStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterEmptyStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterEmptyStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitEmptyStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitEmptyStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitEmptyStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitEmptyStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class PrintStatementContext extends StatementContext {
-		public TerminalNode PRINT_KEYWORD() { return getToken(helloParser.PRINT_KEYWORD, 0); }
+		public TerminalNode PRINT_KEYWORD() { return getToken(ObfusParser.PRINT_KEYWORD, 0); }
 		public ParExpressionContext parExpression() {
 			return getRuleContext(ParExpressionContext.class,0);
 		}
-		public TerminalNode SEMI() { return getToken(helloParser.SEMI, 0); }
+		public TerminalNode SEMI() { return getToken(ObfusParser.SEMI, 0); }
 		public PrintStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterPrintStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterPrintStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitPrintStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitPrintStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitPrintStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitPrintStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -258,36 +260,36 @@ public class helloParser extends Parser {
 		public BlockStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterBlockStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterBlockStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitBlockStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitBlockStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitBlockStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitBlockStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExitStatementContext extends StatementContext {
-		public TerminalNode EXIT_KEYWORD() { return getToken(helloParser.EXIT_KEYWORD, 0); }
-		public TerminalNode LPAR() { return getToken(helloParser.LPAR, 0); }
-		public TerminalNode RPAR() { return getToken(helloParser.RPAR, 0); }
-		public TerminalNode SEMI() { return getToken(helloParser.SEMI, 0); }
+		public TerminalNode EXIT_KEYWORD() { return getToken(ObfusParser.EXIT_KEYWORD, 0); }
+		public TerminalNode LPAR() { return getToken(ObfusParser.LPAR, 0); }
+		public TerminalNode RPAR() { return getToken(ObfusParser.RPAR, 0); }
+		public TerminalNode SEMI() { return getToken(ObfusParser.SEMI, 0); }
 		public ExitStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterExitStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterExitStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitExitStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitExitStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitExitStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitExitStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -299,54 +301,54 @@ public class helloParser extends Parser {
 		public AssignmentStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterAssignmentStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterAssignmentStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitAssignmentStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitAssignmentStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitAssignmentStatement(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class VariableDeclarationStatementContext extends StatementContext {
-		public DeclarationContext declaration() {
-			return getRuleContext(DeclarationContext.class,0);
-		}
-		public VariableDeclarationStatementContext(StatementContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterVariableDeclarationStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitVariableDeclarationStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitVariableDeclarationStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitAssignmentStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class BreakStatementContext extends StatementContext {
-		public TerminalNode BREAK_KEYWORD() { return getToken(helloParser.BREAK_KEYWORD, 0); }
-		public TerminalNode SEMI() { return getToken(helloParser.SEMI, 0); }
+		public TerminalNode BREAK_KEYWORD() { return getToken(ObfusParser.BREAK_KEYWORD, 0); }
+		public TerminalNode SEMI() { return getToken(ObfusParser.SEMI, 0); }
 		public BreakStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterBreakStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterBreakStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitBreakStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitBreakStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitBreakStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitBreakStatement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class EitherDeclerationOrFunctionContext extends StatementContext {
+		public DeclarationOrFunctionContext declarationOrFunction() {
+			return getRuleContext(DeclarationOrFunctionContext.class,0);
+		}
+		public EitherDeclerationOrFunctionContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterEitherDeclerationOrFunction(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitEitherDeclerationOrFunction(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitEitherDeclerationOrFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -354,7 +356,7 @@ public class helloParser extends Parser {
 	public static class IfStatementContext extends StatementContext {
 		public StatementContext ifBody;
 		public StatementContext elseBody;
-		public TerminalNode IF_KEYWORD() { return getToken(helloParser.IF_KEYWORD, 0); }
+		public TerminalNode IF_KEYWORD() { return getToken(ObfusParser.IF_KEYWORD, 0); }
 		public ParExpressionContext parExpression() {
 			return getRuleContext(ParExpressionContext.class,0);
 		}
@@ -364,41 +366,41 @@ public class helloParser extends Parser {
 		public StatementContext statement(int i) {
 			return getRuleContext(StatementContext.class,i);
 		}
-		public TerminalNode ELSE_KEYWORD() { return getToken(helloParser.ELSE_KEYWORD, 0); }
+		public TerminalNode ELSE_KEYWORD() { return getToken(ObfusParser.ELSE_KEYWORD, 0); }
 		public IfStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterIfStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterIfStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitIfStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitIfStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitIfStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitIfStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class PrintlnStatementContext extends StatementContext {
-		public TerminalNode PRINTLN_KEYWORD() { return getToken(helloParser.PRINTLN_KEYWORD, 0); }
+		public TerminalNode PRINTLN_KEYWORD() { return getToken(ObfusParser.PRINTLN_KEYWORD, 0); }
 		public ParExpressionContext parExpression() {
 			return getRuleContext(ParExpressionContext.class,0);
 		}
-		public TerminalNode SEMI() { return getToken(helloParser.SEMI, 0); }
+		public TerminalNode SEMI() { return getToken(ObfusParser.SEMI, 0); }
 		public PrintlnStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterPrintlnStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterPrintlnStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitPrintlnStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitPrintlnStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitPrintlnStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitPrintlnStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -407,14 +409,14 @@ public class helloParser extends Parser {
 		StatementContext _localctx = new StatementContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_statement);
 		try {
-			setState(57);
+			setState(65);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case LBRACE:
 				_localctx = new BlockStatementContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(28);
+				setState(36);
 				block();
 				}
 				break;
@@ -422,7 +424,7 @@ public class helloParser extends Parser {
 				_localctx = new EmptyStatementContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(29);
+				setState(37);
 				match(SEMI);
 				}
 				break;
@@ -430,7 +432,7 @@ public class helloParser extends Parser {
 				_localctx = new AssignmentStatementContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(30);
+				setState(38);
 				assignment();
 				}
 				break;
@@ -438,31 +440,31 @@ public class helloParser extends Parser {
 			case DOUBLE_TYPE:
 			case STRING_TYPE:
 			case BOOL_TYPE:
-				_localctx = new VariableDeclarationStatementContext(_localctx);
+				_localctx = new EitherDeclerationOrFunctionContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(31);
-				declaration();
+				setState(39);
+				declarationOrFunction();
 				}
 				break;
 			case IF_KEYWORD:
 				_localctx = new IfStatementContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(32);
+				setState(40);
 				match(IF_KEYWORD);
-				setState(33);
+				setState(41);
 				parExpression();
-				setState(34);
+				setState(42);
 				((IfStatementContext)_localctx).ifBody = statement();
-				setState(37);
+				setState(45);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 				case 1:
 					{
-					setState(35);
+					setState(43);
 					match(ELSE_KEYWORD);
-					setState(36);
+					setState(44);
 					((IfStatementContext)_localctx).elseBody = statement();
 					}
 					break;
@@ -473,11 +475,11 @@ public class helloParser extends Parser {
 				_localctx = new WhileStatementContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(39);
+				setState(47);
 				match(WHILE_KEYWORD);
-				setState(40);
+				setState(48);
 				parExpression();
-				setState(41);
+				setState(49);
 				statement();
 				}
 				break;
@@ -485,9 +487,9 @@ public class helloParser extends Parser {
 				_localctx = new BreakStatementContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(43);
+				setState(51);
 				match(BREAK_KEYWORD);
-				setState(44);
+				setState(52);
 				match(SEMI);
 				}
 				break;
@@ -495,13 +497,13 @@ public class helloParser extends Parser {
 				_localctx = new ExitStatementContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(45);
+				setState(53);
 				match(EXIT_KEYWORD);
-				setState(46);
+				setState(54);
 				match(LPAR);
-				setState(47);
+				setState(55);
 				match(RPAR);
-				setState(48);
+				setState(56);
 				match(SEMI);
 				}
 				break;
@@ -509,11 +511,11 @@ public class helloParser extends Parser {
 				_localctx = new PrintStatementContext(_localctx);
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(49);
+				setState(57);
 				match(PRINT_KEYWORD);
-				setState(50);
+				setState(58);
 				parExpression();
-				setState(51);
+				setState(59);
 				match(SEMI);
 				}
 				break;
@@ -521,11 +523,11 @@ public class helloParser extends Parser {
 				_localctx = new PrintlnStatementContext(_localctx);
 				enterOuterAlt(_localctx, 10);
 				{
-				setState(53);
+				setState(61);
 				match(PRINTLN_KEYWORD);
-				setState(54);
+				setState(62);
 				parExpression();
-				setState(55);
+				setState(63);
 				match(SEMI);
 				}
 				break;
@@ -545,9 +547,319 @@ public class helloParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
+	public static class DeclarationOrFunctionContext extends ParserRuleContext {
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
+		public TerminalNode Identifier() { return getToken(ObfusParser.Identifier, 0); }
+		public DecOrFunContext decOrFun() {
+			return getRuleContext(DecOrFunContext.class,0);
+		}
+		public DeclarationOrFunctionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_declarationOrFunction; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterDeclarationOrFunction(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitDeclarationOrFunction(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitDeclarationOrFunction(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final DeclarationOrFunctionContext declarationOrFunction() throws RecognitionException {
+		DeclarationOrFunctionContext _localctx = new DeclarationOrFunctionContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_declarationOrFunction);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(67);
+			type();
+			setState(68);
+			match(Identifier);
+			setState(69);
+			decOrFun();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class DecOrFunContext extends ParserRuleContext {
+		public FunctionContext function() {
+			return getRuleContext(FunctionContext.class,0);
+		}
+		public DeclarationContext declaration() {
+			return getRuleContext(DeclarationContext.class,0);
+		}
+		public DecOrFunContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_decOrFun; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterDecOrFun(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitDecOrFun(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitDecOrFun(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final DecOrFunContext decOrFun() throws RecognitionException {
+		DecOrFunContext _localctx = new DecOrFunContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_decOrFun);
+		try {
+			setState(73);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case LPAR:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(71);
+				function();
+				}
+				break;
+			case SEMI:
+			case ASSIGN:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(72);
+				declaration();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class FunctionContext extends ParserRuleContext {
+		public TerminalNode LPAR() { return getToken(ObfusParser.LPAR, 0); }
+		public TerminalNode RPAR() { return getToken(ObfusParser.RPAR, 0); }
+		public List<ArgContext> arg() {
+			return getRuleContexts(ArgContext.class);
+		}
+		public ArgContext arg(int i) {
+			return getRuleContext(ArgContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(ObfusParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(ObfusParser.COMMA, i);
+		}
+		public FunctionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_function; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterFunction(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitFunction(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitFunction(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final FunctionContext function() throws RecognitionException {
+		FunctionContext _localctx = new FunctionContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_function);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(75);
+			match(LPAR);
+			setState(77);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 31457280L) != 0)) {
+				{
+				setState(76);
+				arg();
+				}
+			}
+
+			setState(83);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==COMMA) {
+				{
+				{
+				setState(79);
+				match(COMMA);
+				setState(80);
+				arg();
+				}
+				}
+				setState(85);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			setState(86);
+			match(RPAR);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class DeclarationContext extends ParserRuleContext {
+		public TerminalNode SEMI() { return getToken(ObfusParser.SEMI, 0); }
+		public AssignmentOpContext assignmentOp() {
+			return getRuleContext(AssignmentOpContext.class,0);
+		}
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public DeclarationContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_declaration; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterDeclaration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitDeclaration(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitDeclaration(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final DeclarationContext declaration() throws RecognitionException {
+		DeclarationContext _localctx = new DeclarationContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_declaration);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(91);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==ASSIGN) {
+				{
+				setState(88);
+				assignmentOp();
+				setState(89);
+				expression(0);
+				}
+			}
+
+			setState(93);
+			match(SEMI);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ArgContext extends ParserRuleContext {
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
+		public TerminalNode Identifier() { return getToken(ObfusParser.Identifier, 0); }
+		public ArgContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_arg; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterArg(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitArg(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitArg(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ArgContext arg() throws RecognitionException {
+		ArgContext _localctx = new ArgContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_arg);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(95);
+			type();
+			setState(96);
+			match(Identifier);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
 	public static class BlockContext extends ParserRuleContext {
-		public TerminalNode LBRACE() { return getToken(helloParser.LBRACE, 0); }
-		public TerminalNode RBRACE() { return getToken(helloParser.RBRACE, 0); }
+		public TerminalNode LBRACE() { return getToken(ObfusParser.LBRACE, 0); }
+		public TerminalNode RBRACE() { return getToken(ObfusParser.RBRACE, 0); }
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
 		}
@@ -560,43 +872,43 @@ public class helloParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_block; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterBlock(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterBlock(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitBlock(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitBlock(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitBlock(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitBlock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final BlockContext block() throws RecognitionException {
 		BlockContext _localctx = new BlockContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_block);
+		enterRule(_localctx, 14, RULE_block);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(59);
+			setState(98);
 			match(LBRACE);
-			setState(63);
+			setState(102);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 21990265608736L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 39582451653152L) != 0)) {
 				{
 				{
-				setState(60);
+				setState(99);
 				statement();
 				}
 				}
-				setState(65);
+				setState(104);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(66);
+			setState(105);
 			match(RBRACE);
 			}
 		}
@@ -631,74 +943,74 @@ public class helloParser extends Parser {
 		public ParenthesesExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterParenthesesExpression(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterParenthesesExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitParenthesesExpression(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitParenthesesExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitParenthesesExpression(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitParenthesesExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ReadDoubleContext extends ExpressionContext {
-		public TerminalNode READ_DOUBLE_KEYWORD() { return getToken(helloParser.READ_DOUBLE_KEYWORD, 0); }
-		public TerminalNode LPAR() { return getToken(helloParser.LPAR, 0); }
-		public TerminalNode RPAR() { return getToken(helloParser.RPAR, 0); }
+		public TerminalNode READ_DOUBLE_KEYWORD() { return getToken(ObfusParser.READ_DOUBLE_KEYWORD, 0); }
+		public TerminalNode LPAR() { return getToken(ObfusParser.LPAR, 0); }
+		public TerminalNode RPAR() { return getToken(ObfusParser.RPAR, 0); }
 		public ReadDoubleContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterReadDouble(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterReadDouble(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitReadDouble(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitReadDouble(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitReadDouble(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitReadDouble(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class VariableReferenceContext extends ExpressionContext {
-		public TerminalNode Identifier() { return getToken(helloParser.Identifier, 0); }
+		public TerminalNode Identifier() { return getToken(ObfusParser.Identifier, 0); }
 		public VariableReferenceContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterVariableReference(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterVariableReference(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitVariableReference(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitVariableReference(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitVariableReference(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitVariableReference(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ToStringContext extends ExpressionContext {
-		public TerminalNode TO_STRING_KEYWORD() { return getToken(helloParser.TO_STRING_KEYWORD, 0); }
+		public TerminalNode TO_STRING_KEYWORD() { return getToken(ObfusParser.TO_STRING_KEYWORD, 0); }
 		public ParExpressionContext parExpression() {
 			return getRuleContext(ParExpressionContext.class,0);
 		}
 		public ToStringContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterToString(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterToString(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitToString(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitToString(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitToString(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitToString(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -713,31 +1025,31 @@ public class helloParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode MUL() { return getToken(helloParser.MUL, 0); }
-		public TerminalNode DIV() { return getToken(helloParser.DIV, 0); }
-		public TerminalNode MOD() { return getToken(helloParser.MOD, 0); }
-		public TerminalNode PLUS() { return getToken(helloParser.PLUS, 0); }
-		public TerminalNode MINUS() { return getToken(helloParser.MINUS, 0); }
-		public TerminalNode LT() { return getToken(helloParser.LT, 0); }
-		public TerminalNode GT() { return getToken(helloParser.GT, 0); }
-		public TerminalNode LTEQ() { return getToken(helloParser.LTEQ, 0); }
-		public TerminalNode GTEQ() { return getToken(helloParser.GTEQ, 0); }
-		public TerminalNode EQ() { return getToken(helloParser.EQ, 0); }
-		public TerminalNode NOTEQ() { return getToken(helloParser.NOTEQ, 0); }
-		public TerminalNode AND() { return getToken(helloParser.AND, 0); }
-		public TerminalNode OR() { return getToken(helloParser.OR, 0); }
+		public TerminalNode MUL() { return getToken(ObfusParser.MUL, 0); }
+		public TerminalNode DIV() { return getToken(ObfusParser.DIV, 0); }
+		public TerminalNode MOD() { return getToken(ObfusParser.MOD, 0); }
+		public TerminalNode PLUS() { return getToken(ObfusParser.PLUS, 0); }
+		public TerminalNode MINUS() { return getToken(ObfusParser.MINUS, 0); }
+		public TerminalNode LT() { return getToken(ObfusParser.LT, 0); }
+		public TerminalNode GT() { return getToken(ObfusParser.GT, 0); }
+		public TerminalNode LTEQ() { return getToken(ObfusParser.LTEQ, 0); }
+		public TerminalNode GTEQ() { return getToken(ObfusParser.GTEQ, 0); }
+		public TerminalNode EQ() { return getToken(ObfusParser.EQ, 0); }
+		public TerminalNode NOTEQ() { return getToken(ObfusParser.NOTEQ, 0); }
+		public TerminalNode AND() { return getToken(ObfusParser.AND, 0); }
+		public TerminalNode OR() { return getToken(ObfusParser.OR, 0); }
 		public BinaryOperationContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterBinaryOperation(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterBinaryOperation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitBinaryOperation(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitBinaryOperation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitBinaryOperation(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitBinaryOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -749,15 +1061,15 @@ public class helloParser extends Parser {
 		public LiteralExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterLiteralExpression(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterLiteralExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitLiteralExpression(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitLiteralExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitLiteralExpression(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitLiteralExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -767,60 +1079,60 @@ public class helloParser extends Parser {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode NOT() { return getToken(helloParser.NOT, 0); }
-		public TerminalNode MINUS() { return getToken(helloParser.MINUS, 0); }
+		public TerminalNode NOT() { return getToken(ObfusParser.NOT, 0); }
+		public TerminalNode MINUS() { return getToken(ObfusParser.MINUS, 0); }
 		public UnaryOperationContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterUnaryOperation(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterUnaryOperation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitUnaryOperation(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitUnaryOperation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitUnaryOperation(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitUnaryOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ReadIntContext extends ExpressionContext {
-		public TerminalNode READ_INT_KEYWORD() { return getToken(helloParser.READ_INT_KEYWORD, 0); }
-		public TerminalNode LPAR() { return getToken(helloParser.LPAR, 0); }
-		public TerminalNode RPAR() { return getToken(helloParser.RPAR, 0); }
+		public TerminalNode READ_INT_KEYWORD() { return getToken(ObfusParser.READ_INT_KEYWORD, 0); }
+		public TerminalNode LPAR() { return getToken(ObfusParser.LPAR, 0); }
+		public TerminalNode RPAR() { return getToken(ObfusParser.RPAR, 0); }
 		public ReadIntContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterReadInt(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterReadInt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitReadInt(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitReadInt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitReadInt(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitReadInt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ReadLineContext extends ExpressionContext {
-		public TerminalNode READ_LINE_KEYWORD() { return getToken(helloParser.READ_LINE_KEYWORD, 0); }
-		public TerminalNode LPAR() { return getToken(helloParser.LPAR, 0); }
-		public TerminalNode RPAR() { return getToken(helloParser.RPAR, 0); }
+		public TerminalNode READ_LINE_KEYWORD() { return getToken(ObfusParser.READ_LINE_KEYWORD, 0); }
+		public TerminalNode LPAR() { return getToken(ObfusParser.LPAR, 0); }
+		public TerminalNode RPAR() { return getToken(ObfusParser.RPAR, 0); }
 		public ReadLineContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterReadLine(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterReadLine(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitReadLine(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitReadLine(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitReadLine(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitReadLine(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -834,14 +1146,14 @@ public class helloParser extends Parser {
 		int _parentState = getState();
 		ExpressionContext _localctx = new ExpressionContext(_ctx, _parentState);
 		ExpressionContext _prevctx = _localctx;
-		int _startState = 6;
-		enterRecursionRule(_localctx, 6, RULE_expression, _p);
+		int _startState = 16;
+		enterRecursionRule(_localctx, 16, RULE_expression, _p);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(85);
+			setState(124);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IntegerLiteral:
@@ -853,7 +1165,7 @@ public class helloParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(69);
+				setState(108);
 				literal();
 				}
 				break;
@@ -862,7 +1174,7 @@ public class helloParser extends Parser {
 				_localctx = new VariableReferenceContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(70);
+				setState(109);
 				match(Identifier);
 				}
 				break;
@@ -872,7 +1184,7 @@ public class helloParser extends Parser {
 				_localctx = new UnaryOperationContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(71);
+				setState(110);
 				((UnaryOperationContext)_localctx).op = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(_la==MINUS || _la==NOT) ) {
@@ -883,7 +1195,7 @@ public class helloParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(72);
+				setState(111);
 				expression(12);
 				}
 				break;
@@ -892,7 +1204,7 @@ public class helloParser extends Parser {
 				_localctx = new ParenthesesExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(73);
+				setState(112);
 				parExpression();
 				}
 				break;
@@ -901,11 +1213,11 @@ public class helloParser extends Parser {
 				_localctx = new ReadIntContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(74);
+				setState(113);
 				match(READ_INT_KEYWORD);
-				setState(75);
+				setState(114);
 				match(LPAR);
-				setState(76);
+				setState(115);
 				match(RPAR);
 				}
 				break;
@@ -914,11 +1226,11 @@ public class helloParser extends Parser {
 				_localctx = new ReadDoubleContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(77);
+				setState(116);
 				match(READ_DOUBLE_KEYWORD);
-				setState(78);
+				setState(117);
 				match(LPAR);
-				setState(79);
+				setState(118);
 				match(RPAR);
 				}
 				break;
@@ -927,11 +1239,11 @@ public class helloParser extends Parser {
 				_localctx = new ReadLineContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(80);
+				setState(119);
 				match(READ_LINE_KEYWORD);
-				setState(81);
+				setState(120);
 				match(LPAR);
-				setState(82);
+				setState(121);
 				match(RPAR);
 				}
 				break;
@@ -940,9 +1252,9 @@ public class helloParser extends Parser {
 				_localctx = new ToStringContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(83);
+				setState(122);
 				match(TO_STRING_KEYWORD);
-				setState(84);
+				setState(123);
 				parExpression();
 				}
 				break;
@@ -950,25 +1262,25 @@ public class helloParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(107);
+			setState(146);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(105);
+					setState(144);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
 					case 1:
 						{
 						_localctx = new BinaryOperationContext(new ExpressionContext(_parentctx, _parentState));
 						((BinaryOperationContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(87);
+						setState(126);
 						if (!(precpred(_ctx, 11))) throw new FailedPredicateException(this, "precpred(_ctx, 11)");
-						setState(88);
+						setState(127);
 						((BinaryOperationContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 637534208L) != 0)) ) {
@@ -979,7 +1291,7 @@ public class helloParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(89);
+						setState(128);
 						((BinaryOperationContext)_localctx).right = expression(12);
 						}
 						break;
@@ -988,9 +1300,9 @@ public class helloParser extends Parser {
 						_localctx = new BinaryOperationContext(new ExpressionContext(_parentctx, _parentState));
 						((BinaryOperationContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(90);
+						setState(129);
 						if (!(precpred(_ctx, 10))) throw new FailedPredicateException(this, "precpred(_ctx, 10)");
-						setState(91);
+						setState(130);
 						((BinaryOperationContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==PLUS || _la==MINUS) ) {
@@ -1001,7 +1313,7 @@ public class helloParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(92);
+						setState(131);
 						((BinaryOperationContext)_localctx).right = expression(11);
 						}
 						break;
@@ -1010,9 +1322,9 @@ public class helloParser extends Parser {
 						_localctx = new BinaryOperationContext(new ExpressionContext(_parentctx, _parentState));
 						((BinaryOperationContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(93);
+						setState(132);
 						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
-						setState(94);
+						setState(133);
 						((BinaryOperationContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 16106127360L) != 0)) ) {
@@ -1023,7 +1335,7 @@ public class helloParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(95);
+						setState(134);
 						((BinaryOperationContext)_localctx).right = expression(10);
 						}
 						break;
@@ -1032,9 +1344,9 @@ public class helloParser extends Parser {
 						_localctx = new BinaryOperationContext(new ExpressionContext(_parentctx, _parentState));
 						((BinaryOperationContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(96);
+						setState(135);
 						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
-						setState(97);
+						setState(136);
 						((BinaryOperationContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==EQ || _la==NOTEQ) ) {
@@ -1045,7 +1357,7 @@ public class helloParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(98);
+						setState(137);
 						((BinaryOperationContext)_localctx).right = expression(9);
 						}
 						break;
@@ -1054,11 +1366,11 @@ public class helloParser extends Parser {
 						_localctx = new BinaryOperationContext(new ExpressionContext(_parentctx, _parentState));
 						((BinaryOperationContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(99);
+						setState(138);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(100);
+						setState(139);
 						((BinaryOperationContext)_localctx).op = match(AND);
-						setState(101);
+						setState(140);
 						((BinaryOperationContext)_localctx).right = expression(8);
 						}
 						break;
@@ -1067,20 +1379,20 @@ public class helloParser extends Parser {
 						_localctx = new BinaryOperationContext(new ExpressionContext(_parentctx, _parentState));
 						((BinaryOperationContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(102);
+						setState(141);
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-						setState(103);
+						setState(142);
 						((BinaryOperationContext)_localctx).op = match(OR);
-						setState(104);
+						setState(143);
 						((BinaryOperationContext)_localctx).right = expression(7);
 						}
 						break;
 					}
 					} 
 				}
-				setState(109);
+				setState(148);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
 			}
 			}
 		}
@@ -1097,41 +1409,41 @@ public class helloParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ParExpressionContext extends ParserRuleContext {
-		public TerminalNode LPAR() { return getToken(helloParser.LPAR, 0); }
+		public TerminalNode LPAR() { return getToken(ObfusParser.LPAR, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode RPAR() { return getToken(helloParser.RPAR, 0); }
+		public TerminalNode RPAR() { return getToken(ObfusParser.RPAR, 0); }
 		public ParExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterParExpression(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterParExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitParExpression(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitParExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitParExpression(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitParExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final ParExpressionContext parExpression() throws RecognitionException {
 		ParExpressionContext _localctx = new ParExpressionContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_parExpression);
+		enterRule(_localctx, 18, RULE_parExpression);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(110);
+			setState(149);
 			match(LPAR);
-			setState(111);
+			setState(150);
 			expression(0);
-			setState(112);
+			setState(151);
 			match(RPAR);
 			}
 		}
@@ -1148,116 +1460,46 @@ public class helloParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class AssignmentContext extends ParserRuleContext {
-		public TerminalNode Identifier() { return getToken(helloParser.Identifier, 0); }
+		public TerminalNode Identifier() { return getToken(ObfusParser.Identifier, 0); }
 		public AssignmentOpContext assignmentOp() {
 			return getRuleContext(AssignmentOpContext.class,0);
 		}
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode SEMI() { return getToken(helloParser.SEMI, 0); }
+		public TerminalNode SEMI() { return getToken(ObfusParser.SEMI, 0); }
 		public AssignmentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assignment; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterAssignment(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterAssignment(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitAssignment(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitAssignment(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitAssignment(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitAssignment(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final AssignmentContext assignment() throws RecognitionException {
 		AssignmentContext _localctx = new AssignmentContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_assignment);
+		enterRule(_localctx, 20, RULE_assignment);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(114);
+			setState(153);
 			match(Identifier);
-			setState(115);
+			setState(154);
 			assignmentOp();
-			setState(116);
+			setState(155);
 			expression(0);
-			setState(117);
-			match(SEMI);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class DeclarationContext extends ParserRuleContext {
-		public TypeContext type() {
-			return getRuleContext(TypeContext.class,0);
-		}
-		public TerminalNode Identifier() { return getToken(helloParser.Identifier, 0); }
-		public TerminalNode SEMI() { return getToken(helloParser.SEMI, 0); }
-		public AssignmentOpContext assignmentOp() {
-			return getRuleContext(AssignmentOpContext.class,0);
-		}
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
-		}
-		public DeclarationContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_declaration; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterDeclaration(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitDeclaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitDeclaration(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final DeclarationContext declaration() throws RecognitionException {
-		DeclarationContext _localctx = new DeclarationContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_declaration);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(119);
-			type();
-			setState(120);
-			match(Identifier);
-			setState(124);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==ASSIGN) {
-				{
-				setState(121);
-				assignmentOp();
-				setState(122);
-				expression(0);
-				}
-			}
-
-			setState(126);
+			setState(156);
 			match(SEMI);
 			}
 		}
@@ -1274,33 +1516,33 @@ public class helloParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class AssignmentOpContext extends ParserRuleContext {
-		public TerminalNode ASSIGN() { return getToken(helloParser.ASSIGN, 0); }
+		public TerminalNode ASSIGN() { return getToken(ObfusParser.ASSIGN, 0); }
 		public AssignmentOpContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assignmentOp; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterAssignmentOp(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterAssignmentOp(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitAssignmentOp(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitAssignmentOp(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitAssignmentOp(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitAssignmentOp(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final AssignmentOpContext assignmentOp() throws RecognitionException {
 		AssignmentOpContext _localctx = new AssignmentOpContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_assignmentOp);
+		enterRule(_localctx, 22, RULE_assignmentOp);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(128);
+			setState(158);
 			match(ASSIGN);
 			}
 		}
@@ -1329,89 +1571,89 @@ public class helloParser extends Parser {
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class DoubleTypeContext extends TypeContext {
-		public TerminalNode DOUBLE_TYPE() { return getToken(helloParser.DOUBLE_TYPE, 0); }
+		public TerminalNode DOUBLE_TYPE() { return getToken(ObfusParser.DOUBLE_TYPE, 0); }
 		public DoubleTypeContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterDoubleType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterDoubleType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitDoubleType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitDoubleType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitDoubleType(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitDoubleType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class BooleanTypeContext extends TypeContext {
-		public TerminalNode BOOL_TYPE() { return getToken(helloParser.BOOL_TYPE, 0); }
+		public TerminalNode BOOL_TYPE() { return getToken(ObfusParser.BOOL_TYPE, 0); }
 		public BooleanTypeContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterBooleanType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterBooleanType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitBooleanType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitBooleanType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitBooleanType(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitBooleanType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IntTypeContext extends TypeContext {
-		public TerminalNode INT_TYPE() { return getToken(helloParser.INT_TYPE, 0); }
+		public TerminalNode INT_TYPE() { return getToken(ObfusParser.INT_TYPE, 0); }
 		public IntTypeContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterIntType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterIntType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitIntType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitIntType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitIntType(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitIntType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class StringTypeContext extends TypeContext {
-		public TerminalNode STRING_TYPE() { return getToken(helloParser.STRING_TYPE, 0); }
+		public TerminalNode STRING_TYPE() { return getToken(ObfusParser.STRING_TYPE, 0); }
 		public StringTypeContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterStringType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterStringType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitStringType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitStringType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitStringType(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitStringType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final TypeContext type() throws RecognitionException {
 		TypeContext _localctx = new TypeContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_type);
+		enterRule(_localctx, 24, RULE_type);
 		try {
-			setState(134);
+			setState(164);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case INT_TYPE:
 				_localctx = new IntTypeContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(130);
+				setState(160);
 				match(INT_TYPE);
 				}
 				break;
@@ -1419,7 +1661,7 @@ public class helloParser extends Parser {
 				_localctx = new DoubleTypeContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(131);
+				setState(161);
 				match(DOUBLE_TYPE);
 				}
 				break;
@@ -1427,7 +1669,7 @@ public class helloParser extends Parser {
 				_localctx = new BooleanTypeContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(132);
+				setState(162);
 				match(BOOL_TYPE);
 				}
 				break;
@@ -1435,7 +1677,7 @@ public class helloParser extends Parser {
 				_localctx = new StringTypeContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(133);
+				setState(163);
 				match(STRING_TYPE);
 				}
 				break;
@@ -1468,89 +1710,89 @@ public class helloParser extends Parser {
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class BooleanContext extends LiteralContext {
-		public TerminalNode BooleanLiteral() { return getToken(helloParser.BooleanLiteral, 0); }
+		public TerminalNode BooleanLiteral() { return getToken(ObfusParser.BooleanLiteral, 0); }
 		public BooleanContext(LiteralContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterBoolean(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterBoolean(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitBoolean(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitBoolean(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitBoolean(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitBoolean(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class StringContext extends LiteralContext {
-		public TerminalNode StringLiteral() { return getToken(helloParser.StringLiteral, 0); }
+		public TerminalNode StringLiteral() { return getToken(ObfusParser.StringLiteral, 0); }
 		public StringContext(LiteralContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterString(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterString(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitString(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitString(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitString(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitString(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class FloatContext extends LiteralContext {
-		public TerminalNode FloatingPointLiteral() { return getToken(helloParser.FloatingPointLiteral, 0); }
+		public TerminalNode FloatingPointLiteral() { return getToken(ObfusParser.FloatingPointLiteral, 0); }
 		public FloatContext(LiteralContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterFloat(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterFloat(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitFloat(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitFloat(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitFloat(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitFloat(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IntContext extends LiteralContext {
-		public TerminalNode IntegerLiteral() { return getToken(helloParser.IntegerLiteral, 0); }
+		public TerminalNode IntegerLiteral() { return getToken(ObfusParser.IntegerLiteral, 0); }
 		public IntContext(LiteralContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).enterInt(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterInt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof helloListener ) ((helloListener)listener).exitInt(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitInt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof helloVisitor ) return ((helloVisitor<? extends T>)visitor).visitInt(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitInt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final LiteralContext literal() throws RecognitionException {
 		LiteralContext _localctx = new LiteralContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_literal);
+		enterRule(_localctx, 26, RULE_literal);
 		try {
-			setState(140);
+			setState(170);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IntegerLiteral:
 				_localctx = new IntContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(136);
+				setState(166);
 				match(IntegerLiteral);
 				}
 				break;
@@ -1558,7 +1800,7 @@ public class helloParser extends Parser {
 				_localctx = new FloatContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(137);
+				setState(167);
 				match(FloatingPointLiteral);
 				}
 				break;
@@ -1566,7 +1808,7 @@ public class helloParser extends Parser {
 				_localctx = new StringContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(138);
+				setState(168);
 				match(StringLiteral);
 				}
 				break;
@@ -1574,7 +1816,7 @@ public class helloParser extends Parser {
 				_localctx = new BooleanContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(139);
+				setState(169);
 				match(BooleanLiteral);
 				}
 				break;
@@ -1595,7 +1837,7 @@ public class helloParser extends Parser {
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 3:
+		case 8:
 			return expression_sempred((ExpressionContext)_localctx, predIndex);
 		}
 		return true;
@@ -1619,95 +1861,111 @@ public class helloParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001,\u008f\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001-\u00ad\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
-		"\b\u0007\b\u0002\t\u0007\t\u0001\u0000\u0005\u0000\u0016\b\u0000\n\u0000"+
-		"\f\u0000\u0019\t\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001"+
+		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
+		"\f\u0007\f\u0002\r\u0007\r\u0001\u0000\u0005\u0000\u001e\b\u0000\n\u0000"+
+		"\f\u0000!\t\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001"+
 		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0001\u0001\u0003\u0001&\b\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0001\u0003\u0001.\b\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
 		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
 		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0001\u0001\u0001\u0001\u0001\u0001\u0003\u0001:\b\u0001\u0001\u0002"+
-		"\u0001\u0002\u0005\u0002>\b\u0002\n\u0002\f\u0002A\t\u0002\u0001\u0002"+
-		"\u0001\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
-		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
-		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
-		"\u0003\u0003V\b\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
-		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
-		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
-		"\u0001\u0003\u0001\u0003\u0005\u0003j\b\u0003\n\u0003\f\u0003m\t\u0003"+
-		"\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0005\u0001\u0005"+
-		"\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0006\u0001\u0006\u0001\u0006"+
-		"\u0001\u0006\u0001\u0006\u0003\u0006}\b\u0006\u0001\u0006\u0001\u0006"+
-		"\u0001\u0007\u0001\u0007\u0001\b\u0001\b\u0001\b\u0001\b\u0003\b\u0087"+
-		"\b\b\u0001\t\u0001\t\u0001\t\u0001\t\u0003\t\u008d\b\t\u0001\t\u0000\u0001"+
-		"\u0006\n\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0000\u0005\u0002"+
-		"\u0000\u001c\u001c%%\u0002\u0000\u0019\u001a\u001d\u001d\u0001\u0000\u001b"+
-		"\u001c\u0001\u0000\u001e!\u0001\u0000#$\u00a4\u0000\u0017\u0001\u0000"+
-		"\u0000\u0000\u00029\u0001\u0000\u0000\u0000\u0004;\u0001\u0000\u0000\u0000"+
-		"\u0006U\u0001\u0000\u0000\u0000\bn\u0001\u0000\u0000\u0000\nr\u0001\u0000"+
-		"\u0000\u0000\fw\u0001\u0000\u0000\u0000\u000e\u0080\u0001\u0000\u0000"+
-		"\u0000\u0010\u0086\u0001\u0000\u0000\u0000\u0012\u008c\u0001\u0000\u0000"+
-		"\u0000\u0014\u0016\u0003\u0002\u0001\u0000\u0015\u0014\u0001\u0000\u0000"+
-		"\u0000\u0016\u0019\u0001\u0000\u0000\u0000\u0017\u0015\u0001\u0000\u0000"+
-		"\u0000\u0017\u0018\u0001\u0000\u0000\u0000\u0018\u001a\u0001\u0000\u0000"+
-		"\u0000\u0019\u0017\u0001\u0000\u0000\u0000\u001a\u001b\u0005\u0000\u0000"+
-		"\u0001\u001b\u0001\u0001\u0000\u0000\u0000\u001c:\u0003\u0004\u0002\u0000"+
-		"\u001d:\u0005\u0005\u0000\u0000\u001e:\u0003\n\u0005\u0000\u001f:\u0003"+
-		"\f\u0006\u0000 !\u0005\t\u0000\u0000!\"\u0003\b\u0004\u0000\"%\u0003\u0002"+
-		"\u0001\u0000#$\u0005\n\u0000\u0000$&\u0003\u0002\u0001\u0000%#\u0001\u0000"+
-		"\u0000\u0000%&\u0001\u0000\u0000\u0000&:\u0001\u0000\u0000\u0000\'(\u0005"+
-		"\u000b\u0000\u0000()\u0003\b\u0004\u0000)*\u0003\u0002\u0001\u0000*:\u0001"+
-		"\u0000\u0000\u0000+,\u0005\f\u0000\u0000,:\u0005\u0005\u0000\u0000-.\u0005"+
-		"\u000e\u0000\u0000./\u0005(\u0000\u0000/0\u0005)\u0000\u00000:\u0005\u0005"+
-		"\u0000\u000012\u0005\u0013\u0000\u000023\u0003\b\u0004\u000034\u0005\u0005"+
-		"\u0000\u00004:\u0001\u0000\u0000\u000056\u0005\u0014\u0000\u000067\u0003"+
-		"\b\u0004\u000078\u0005\u0005\u0000\u00008:\u0001\u0000\u0000\u00009\u001c"+
-		"\u0001\u0000\u0000\u00009\u001d\u0001\u0000\u0000\u00009\u001e\u0001\u0000"+
-		"\u0000\u00009\u001f\u0001\u0000\u0000\u00009 \u0001\u0000\u0000\u0000"+
-		"9\'\u0001\u0000\u0000\u00009+\u0001\u0000\u0000\u00009-\u0001\u0000\u0000"+
-		"\u000091\u0001\u0000\u0000\u000095\u0001\u0000\u0000\u0000:\u0003\u0001"+
-		"\u0000\u0000\u0000;?\u0005*\u0000\u0000<>\u0003\u0002\u0001\u0000=<\u0001"+
-		"\u0000\u0000\u0000>A\u0001\u0000\u0000\u0000?=\u0001\u0000\u0000\u0000"+
-		"?@\u0001\u0000\u0000\u0000@B\u0001\u0000\u0000\u0000A?\u0001\u0000\u0000"+
-		"\u0000BC\u0005+\u0000\u0000C\u0005\u0001\u0000\u0000\u0000DE\u0006\u0003"+
-		"\uffff\uffff\u0000EV\u0003\u0012\t\u0000FV\u0005,\u0000\u0000GH\u0007"+
-		"\u0000\u0000\u0000HV\u0003\u0006\u0003\fIV\u0003\b\u0004\u0000JK\u0005"+
-		"\u000f\u0000\u0000KL\u0005(\u0000\u0000LV\u0005)\u0000\u0000MN\u0005\u0010"+
-		"\u0000\u0000NO\u0005(\u0000\u0000OV\u0005)\u0000\u0000PQ\u0005\u0011\u0000"+
-		"\u0000QR\u0005(\u0000\u0000RV\u0005)\u0000\u0000ST\u0005\u0012\u0000\u0000"+
-		"TV\u0003\b\u0004\u0000UD\u0001\u0000\u0000\u0000UF\u0001\u0000\u0000\u0000"+
-		"UG\u0001\u0000\u0000\u0000UI\u0001\u0000\u0000\u0000UJ\u0001\u0000\u0000"+
-		"\u0000UM\u0001\u0000\u0000\u0000UP\u0001\u0000\u0000\u0000US\u0001\u0000"+
-		"\u0000\u0000Vk\u0001\u0000\u0000\u0000WX\n\u000b\u0000\u0000XY\u0007\u0001"+
-		"\u0000\u0000Yj\u0003\u0006\u0003\fZ[\n\n\u0000\u0000[\\\u0007\u0002\u0000"+
-		"\u0000\\j\u0003\u0006\u0003\u000b]^\n\t\u0000\u0000^_\u0007\u0003\u0000"+
-		"\u0000_j\u0003\u0006\u0003\n`a\n\b\u0000\u0000ab\u0007\u0004\u0000\u0000"+
-		"bj\u0003\u0006\u0003\tcd\n\u0007\u0000\u0000de\u0005&\u0000\u0000ej\u0003"+
-		"\u0006\u0003\bfg\n\u0006\u0000\u0000gh\u0005\'\u0000\u0000hj\u0003\u0006"+
-		"\u0003\u0007iW\u0001\u0000\u0000\u0000iZ\u0001\u0000\u0000\u0000i]\u0001"+
-		"\u0000\u0000\u0000i`\u0001\u0000\u0000\u0000ic\u0001\u0000\u0000\u0000"+
-		"if\u0001\u0000\u0000\u0000jm\u0001\u0000\u0000\u0000ki\u0001\u0000\u0000"+
-		"\u0000kl\u0001\u0000\u0000\u0000l\u0007\u0001\u0000\u0000\u0000mk\u0001"+
-		"\u0000\u0000\u0000no\u0005(\u0000\u0000op\u0003\u0006\u0003\u0000pq\u0005"+
-		")\u0000\u0000q\t\u0001\u0000\u0000\u0000rs\u0005,\u0000\u0000st\u0003"+
-		"\u000e\u0007\u0000tu\u0003\u0006\u0003\u0000uv\u0005\u0005\u0000\u0000"+
-		"v\u000b\u0001\u0000\u0000\u0000wx\u0003\u0010\b\u0000x|\u0005,\u0000\u0000"+
-		"yz\u0003\u000e\u0007\u0000z{\u0003\u0006\u0003\u0000{}\u0001\u0000\u0000"+
-		"\u0000|y\u0001\u0000\u0000\u0000|}\u0001\u0000\u0000\u0000}~\u0001\u0000"+
-		"\u0000\u0000~\u007f\u0005\u0005\u0000\u0000\u007f\r\u0001\u0000\u0000"+
-		"\u0000\u0080\u0081\u0005\"\u0000\u0000\u0081\u000f\u0001\u0000\u0000\u0000"+
-		"\u0082\u0087\u0005\u0015\u0000\u0000\u0083\u0087\u0005\u0016\u0000\u0000"+
-		"\u0084\u0087\u0005\u0018\u0000\u0000\u0085\u0087\u0005\u0017\u0000\u0000"+
-		"\u0086\u0082\u0001\u0000\u0000\u0000\u0086\u0083\u0001\u0000\u0000\u0000"+
-		"\u0086\u0084\u0001\u0000\u0000\u0000\u0086\u0085\u0001\u0000\u0000\u0000"+
-		"\u0087\u0011\u0001\u0000\u0000\u0000\u0088\u008d\u0005\u0001\u0000\u0000"+
-		"\u0089\u008d\u0005\u0002\u0000\u0000\u008a\u008d\u0005\u0003\u0000\u0000"+
-		"\u008b\u008d\u0005\u0004\u0000\u0000\u008c\u0088\u0001\u0000\u0000\u0000"+
-		"\u008c\u0089\u0001\u0000\u0000\u0000\u008c\u008a\u0001\u0000\u0000\u0000"+
-		"\u008c\u008b\u0001\u0000\u0000\u0000\u008d\u0013\u0001\u0000\u0000\u0000"+
-		"\n\u0017%9?Uik|\u0086\u008c";
+		"\u0001\u0001\u0001\u0001\u0001\u0003\u0001B\b\u0001\u0001\u0002\u0001"+
+		"\u0002\u0001\u0002\u0001\u0002\u0001\u0003\u0001\u0003\u0003\u0003J\b"+
+		"\u0003\u0001\u0004\u0001\u0004\u0003\u0004N\b\u0004\u0001\u0004\u0001"+
+		"\u0004\u0005\u0004R\b\u0004\n\u0004\f\u0004U\t\u0004\u0001\u0004\u0001"+
+		"\u0004\u0001\u0005\u0001\u0005\u0001\u0005\u0003\u0005\\\b\u0005\u0001"+
+		"\u0005\u0001\u0005\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0007\u0001"+
+		"\u0007\u0005\u0007e\b\u0007\n\u0007\f\u0007h\t\u0007\u0001\u0007\u0001"+
+		"\u0007\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b"+
+		"\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001"+
+		"\b\u0003\b}\b\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001"+
+		"\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001"+
+		"\b\u0001\b\u0001\b\u0005\b\u0091\b\b\n\b\f\b\u0094\t\b\u0001\t\u0001\t"+
+		"\u0001\t\u0001\t\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\u000b\u0001"+
+		"\u000b\u0001\f\u0001\f\u0001\f\u0001\f\u0003\f\u00a5\b\f\u0001\r\u0001"+
+		"\r\u0001\r\u0001\r\u0003\r\u00ab\b\r\u0001\r\u0000\u0001\u0010\u000e\u0000"+
+		"\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u0000"+
+		"\u0005\u0002\u0000\u001c\u001c%%\u0002\u0000\u0019\u001a\u001d\u001d\u0001"+
+		"\u0000\u001b\u001c\u0001\u0000\u001e!\u0001\u0000#$\u00c1\u0000\u001f"+
+		"\u0001\u0000\u0000\u0000\u0002A\u0001\u0000\u0000\u0000\u0004C\u0001\u0000"+
+		"\u0000\u0000\u0006I\u0001\u0000\u0000\u0000\bK\u0001\u0000\u0000\u0000"+
+		"\n[\u0001\u0000\u0000\u0000\f_\u0001\u0000\u0000\u0000\u000eb\u0001\u0000"+
+		"\u0000\u0000\u0010|\u0001\u0000\u0000\u0000\u0012\u0095\u0001\u0000\u0000"+
+		"\u0000\u0014\u0099\u0001\u0000\u0000\u0000\u0016\u009e\u0001\u0000\u0000"+
+		"\u0000\u0018\u00a4\u0001\u0000\u0000\u0000\u001a\u00aa\u0001\u0000\u0000"+
+		"\u0000\u001c\u001e\u0003\u0002\u0001\u0000\u001d\u001c\u0001\u0000\u0000"+
+		"\u0000\u001e!\u0001\u0000\u0000\u0000\u001f\u001d\u0001\u0000\u0000\u0000"+
+		"\u001f \u0001\u0000\u0000\u0000 \"\u0001\u0000\u0000\u0000!\u001f\u0001"+
+		"\u0000\u0000\u0000\"#\u0005\u0000\u0000\u0001#\u0001\u0001\u0000\u0000"+
+		"\u0000$B\u0003\u000e\u0007\u0000%B\u0005\u0005\u0000\u0000&B\u0003\u0014"+
+		"\n\u0000\'B\u0003\u0004\u0002\u0000()\u0005\t\u0000\u0000)*\u0003\u0012"+
+		"\t\u0000*-\u0003\u0002\u0001\u0000+,\u0005\n\u0000\u0000,.\u0003\u0002"+
+		"\u0001\u0000-+\u0001\u0000\u0000\u0000-.\u0001\u0000\u0000\u0000.B\u0001"+
+		"\u0000\u0000\u0000/0\u0005\u000b\u0000\u000001\u0003\u0012\t\u000012\u0003"+
+		"\u0002\u0001\u00002B\u0001\u0000\u0000\u000034\u0005\f\u0000\u00004B\u0005"+
+		"\u0005\u0000\u000056\u0005\u000e\u0000\u000067\u0005(\u0000\u000078\u0005"+
+		")\u0000\u00008B\u0005\u0005\u0000\u00009:\u0005\u0013\u0000\u0000:;\u0003"+
+		"\u0012\t\u0000;<\u0005\u0005\u0000\u0000<B\u0001\u0000\u0000\u0000=>\u0005"+
+		"\u0014\u0000\u0000>?\u0003\u0012\t\u0000?@\u0005\u0005\u0000\u0000@B\u0001"+
+		"\u0000\u0000\u0000A$\u0001\u0000\u0000\u0000A%\u0001\u0000\u0000\u0000"+
+		"A&\u0001\u0000\u0000\u0000A\'\u0001\u0000\u0000\u0000A(\u0001\u0000\u0000"+
+		"\u0000A/\u0001\u0000\u0000\u0000A3\u0001\u0000\u0000\u0000A5\u0001\u0000"+
+		"\u0000\u0000A9\u0001\u0000\u0000\u0000A=\u0001\u0000\u0000\u0000B\u0003"+
+		"\u0001\u0000\u0000\u0000CD\u0003\u0018\f\u0000DE\u0005-\u0000\u0000EF"+
+		"\u0003\u0006\u0003\u0000F\u0005\u0001\u0000\u0000\u0000GJ\u0003\b\u0004"+
+		"\u0000HJ\u0003\n\u0005\u0000IG\u0001\u0000\u0000\u0000IH\u0001\u0000\u0000"+
+		"\u0000J\u0007\u0001\u0000\u0000\u0000KM\u0005(\u0000\u0000LN\u0003\f\u0006"+
+		"\u0000ML\u0001\u0000\u0000\u0000MN\u0001\u0000\u0000\u0000NS\u0001\u0000"+
+		"\u0000\u0000OP\u0005,\u0000\u0000PR\u0003\f\u0006\u0000QO\u0001\u0000"+
+		"\u0000\u0000RU\u0001\u0000\u0000\u0000SQ\u0001\u0000\u0000\u0000ST\u0001"+
+		"\u0000\u0000\u0000TV\u0001\u0000\u0000\u0000US\u0001\u0000\u0000\u0000"+
+		"VW\u0005)\u0000\u0000W\t\u0001\u0000\u0000\u0000XY\u0003\u0016\u000b\u0000"+
+		"YZ\u0003\u0010\b\u0000Z\\\u0001\u0000\u0000\u0000[X\u0001\u0000\u0000"+
+		"\u0000[\\\u0001\u0000\u0000\u0000\\]\u0001\u0000\u0000\u0000]^\u0005\u0005"+
+		"\u0000\u0000^\u000b\u0001\u0000\u0000\u0000_`\u0003\u0018\f\u0000`a\u0005"+
+		"-\u0000\u0000a\r\u0001\u0000\u0000\u0000bf\u0005*\u0000\u0000ce\u0003"+
+		"\u0002\u0001\u0000dc\u0001\u0000\u0000\u0000eh\u0001\u0000\u0000\u0000"+
+		"fd\u0001\u0000\u0000\u0000fg\u0001\u0000\u0000\u0000gi\u0001\u0000\u0000"+
+		"\u0000hf\u0001\u0000\u0000\u0000ij\u0005+\u0000\u0000j\u000f\u0001\u0000"+
+		"\u0000\u0000kl\u0006\b\uffff\uffff\u0000l}\u0003\u001a\r\u0000m}\u0005"+
+		"-\u0000\u0000no\u0007\u0000\u0000\u0000o}\u0003\u0010\b\fp}\u0003\u0012"+
+		"\t\u0000qr\u0005\u000f\u0000\u0000rs\u0005(\u0000\u0000s}\u0005)\u0000"+
+		"\u0000tu\u0005\u0010\u0000\u0000uv\u0005(\u0000\u0000v}\u0005)\u0000\u0000"+
+		"wx\u0005\u0011\u0000\u0000xy\u0005(\u0000\u0000y}\u0005)\u0000\u0000z"+
+		"{\u0005\u0012\u0000\u0000{}\u0003\u0012\t\u0000|k\u0001\u0000\u0000\u0000"+
+		"|m\u0001\u0000\u0000\u0000|n\u0001\u0000\u0000\u0000|p\u0001\u0000\u0000"+
+		"\u0000|q\u0001\u0000\u0000\u0000|t\u0001\u0000\u0000\u0000|w\u0001\u0000"+
+		"\u0000\u0000|z\u0001\u0000\u0000\u0000}\u0092\u0001\u0000\u0000\u0000"+
+		"~\u007f\n\u000b\u0000\u0000\u007f\u0080\u0007\u0001\u0000\u0000\u0080"+
+		"\u0091\u0003\u0010\b\f\u0081\u0082\n\n\u0000\u0000\u0082\u0083\u0007\u0002"+
+		"\u0000\u0000\u0083\u0091\u0003\u0010\b\u000b\u0084\u0085\n\t\u0000\u0000"+
+		"\u0085\u0086\u0007\u0003\u0000\u0000\u0086\u0091\u0003\u0010\b\n\u0087"+
+		"\u0088\n\b\u0000\u0000\u0088\u0089\u0007\u0004\u0000\u0000\u0089\u0091"+
+		"\u0003\u0010\b\t\u008a\u008b\n\u0007\u0000\u0000\u008b\u008c\u0005&\u0000"+
+		"\u0000\u008c\u0091\u0003\u0010\b\b\u008d\u008e\n\u0006\u0000\u0000\u008e"+
+		"\u008f\u0005\'\u0000\u0000\u008f\u0091\u0003\u0010\b\u0007\u0090~\u0001"+
+		"\u0000\u0000\u0000\u0090\u0081\u0001\u0000\u0000\u0000\u0090\u0084\u0001"+
+		"\u0000\u0000\u0000\u0090\u0087\u0001\u0000\u0000\u0000\u0090\u008a\u0001"+
+		"\u0000\u0000\u0000\u0090\u008d\u0001\u0000\u0000\u0000\u0091\u0094\u0001"+
+		"\u0000\u0000\u0000\u0092\u0090\u0001\u0000\u0000\u0000\u0092\u0093\u0001"+
+		"\u0000\u0000\u0000\u0093\u0011\u0001\u0000\u0000\u0000\u0094\u0092\u0001"+
+		"\u0000\u0000\u0000\u0095\u0096\u0005(\u0000\u0000\u0096\u0097\u0003\u0010"+
+		"\b\u0000\u0097\u0098\u0005)\u0000\u0000\u0098\u0013\u0001\u0000\u0000"+
+		"\u0000\u0099\u009a\u0005-\u0000\u0000\u009a\u009b\u0003\u0016\u000b\u0000"+
+		"\u009b\u009c\u0003\u0010\b\u0000\u009c\u009d\u0005\u0005\u0000\u0000\u009d"+
+		"\u0015\u0001\u0000\u0000\u0000\u009e\u009f\u0005\"\u0000\u0000\u009f\u0017"+
+		"\u0001\u0000\u0000\u0000\u00a0\u00a5\u0005\u0015\u0000\u0000\u00a1\u00a5"+
+		"\u0005\u0016\u0000\u0000\u00a2\u00a5\u0005\u0018\u0000\u0000\u00a3\u00a5"+
+		"\u0005\u0017\u0000\u0000\u00a4\u00a0\u0001\u0000\u0000\u0000\u00a4\u00a1"+
+		"\u0001\u0000\u0000\u0000\u00a4\u00a2\u0001\u0000\u0000\u0000\u00a4\u00a3"+
+		"\u0001\u0000\u0000\u0000\u00a5\u0019\u0001\u0000\u0000\u0000\u00a6\u00ab"+
+		"\u0005\u0001\u0000\u0000\u00a7\u00ab\u0005\u0002\u0000\u0000\u00a8\u00ab"+
+		"\u0005\u0003\u0000\u0000\u00a9\u00ab\u0005\u0004\u0000\u0000\u00aa\u00a6"+
+		"\u0001\u0000\u0000\u0000\u00aa\u00a7\u0001\u0000\u0000\u0000\u00aa\u00a8"+
+		"\u0001\u0000\u0000\u0000\u00aa\u00a9\u0001\u0000\u0000\u0000\u00ab\u001b"+
+		"\u0001\u0000\u0000\u0000\r\u001f-AIMS[f|\u0090\u0092\u00a4\u00aa";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

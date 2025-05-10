@@ -1,4 +1,4 @@
-grammar hello;
+grammar Obfus;
 
 program
     : statement* EOF
