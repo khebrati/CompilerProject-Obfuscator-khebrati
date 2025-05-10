@@ -1,4 +1,4 @@
-package gen;// Generated from /home/erfan/Source/ObfusC/src/Obfus.g4 by ANTLR 4.13.2
+// Generated from /home/erfan/Source/ObfusC/src/Obfus.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -127,15 +127,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_program; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterProgram(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterProgram(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitProgram(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitProgram(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitProgram(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitProgram(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -200,15 +200,15 @@ public class ObfusParser extends Parser {
 		public WhileStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterWhileStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterWhileStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitWhileStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitWhileStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitWhileStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitWhileStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -218,15 +218,15 @@ public class ObfusParser extends Parser {
 		public EmptyStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterEmptyStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterEmptyStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitEmptyStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitEmptyStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitEmptyStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitEmptyStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -240,15 +240,15 @@ public class ObfusParser extends Parser {
 		public PrintStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterPrintStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterPrintStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitPrintStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitPrintStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitPrintStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitPrintStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -260,15 +260,15 @@ public class ObfusParser extends Parser {
 		public BlockStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterBlockStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterBlockStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitBlockStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitBlockStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitBlockStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitBlockStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -281,15 +281,15 @@ public class ObfusParser extends Parser {
 		public ExitStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterExitStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterExitStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitExitStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitExitStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitExitStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitExitStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -301,15 +301,15 @@ public class ObfusParser extends Parser {
 		public AssignmentStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterAssignmentStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterAssignmentStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitAssignmentStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitAssignmentStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitAssignmentStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitAssignmentStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -321,15 +321,15 @@ public class ObfusParser extends Parser {
 		public DeclarationOrFunctionContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterDeclarationOrFunction(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterDeclarationOrFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitDeclarationOrFunction(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitDeclarationOrFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitDeclarationOrFunction(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitDeclarationOrFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -340,15 +340,15 @@ public class ObfusParser extends Parser {
 		public BreakStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterBreakStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterBreakStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitBreakStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitBreakStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitBreakStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitBreakStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -370,15 +370,15 @@ public class ObfusParser extends Parser {
 		public IfStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterIfStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterIfStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitIfStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitIfStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitIfStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitIfStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -392,15 +392,15 @@ public class ObfusParser extends Parser {
 		public PrintlnStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterPrintlnStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterPrintlnStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitPrintlnStatement(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitPrintlnStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitPrintlnStatement(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitPrintlnStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -561,15 +561,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_declarationOrFun; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterDeclarationOrFun(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterDeclarationOrFun(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitDeclarationOrFun(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitDeclarationOrFun(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitDeclarationOrFun(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitDeclarationOrFun(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -613,15 +613,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_decOrFun; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterDecOrFun(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterDecOrFun(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitDecOrFun(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitDecOrFun(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitDecOrFun(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitDecOrFun(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -683,15 +683,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_function; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterFunction(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitFunction(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitFunction(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -761,15 +761,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_declaration; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterDeclaration(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterDeclaration(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitDeclaration(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitDeclaration(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitDeclaration(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitDeclaration(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -820,15 +820,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_arg; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterArg(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterArg(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitArg(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitArg(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitArg(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitArg(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -872,15 +872,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_block; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterBlock(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterBlock(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitBlock(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitBlock(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitBlock(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitBlock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -943,15 +943,15 @@ public class ObfusParser extends Parser {
 		public ParenthesesExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterParenthesesExpression(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterParenthesesExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitParenthesesExpression(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitParenthesesExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitParenthesesExpression(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitParenthesesExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -963,15 +963,15 @@ public class ObfusParser extends Parser {
 		public ReadDoubleContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterReadDouble(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterReadDouble(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitReadDouble(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitReadDouble(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitReadDouble(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitReadDouble(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -981,15 +981,15 @@ public class ObfusParser extends Parser {
 		public VariableReferenceContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterVariableReference(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterVariableReference(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitVariableReference(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitVariableReference(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitVariableReference(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitVariableReference(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1002,15 +1002,15 @@ public class ObfusParser extends Parser {
 		public ToStringContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterToString(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterToString(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitToString(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitToString(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitToString(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitToString(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1041,15 +1041,15 @@ public class ObfusParser extends Parser {
 		public BinaryOperationContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterBinaryOperation(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterBinaryOperation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitBinaryOperation(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitBinaryOperation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitBinaryOperation(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitBinaryOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1061,15 +1061,15 @@ public class ObfusParser extends Parser {
 		public LiteralExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterLiteralExpression(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterLiteralExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitLiteralExpression(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitLiteralExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitLiteralExpression(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitLiteralExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1084,15 +1084,15 @@ public class ObfusParser extends Parser {
 		public UnaryOperationContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterUnaryOperation(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterUnaryOperation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitUnaryOperation(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitUnaryOperation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitUnaryOperation(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitUnaryOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1104,15 +1104,15 @@ public class ObfusParser extends Parser {
 		public ReadIntContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterReadInt(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterReadInt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitReadInt(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitReadInt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitReadInt(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitReadInt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1124,15 +1124,15 @@ public class ObfusParser extends Parser {
 		public ReadLineContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterReadLine(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterReadLine(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitReadLine(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitReadLine(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitReadLine(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitReadLine(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1265,7 +1265,7 @@ public class ObfusParser extends Parser {
 			setState(146);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
-			while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER ) {
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
@@ -1420,15 +1420,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_parExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterParExpression(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterParExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitParExpression(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitParExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitParExpression(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitParExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1474,15 +1474,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_assignment; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterAssignment(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterAssignment(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitAssignment(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitAssignment(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitAssignment(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitAssignment(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1523,15 +1523,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_assignmentOp; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterAssignmentOp(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterAssignmentOp(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitAssignmentOp(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitAssignmentOp(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitAssignmentOp(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitAssignmentOp(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1575,15 +1575,15 @@ public class ObfusParser extends Parser {
 		public DoubleTypeContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterDoubleType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterDoubleType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitDoubleType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitDoubleType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitDoubleType(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitDoubleType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1593,15 +1593,15 @@ public class ObfusParser extends Parser {
 		public BooleanTypeContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterBooleanType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterBooleanType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitBooleanType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitBooleanType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitBooleanType(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitBooleanType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1611,15 +1611,15 @@ public class ObfusParser extends Parser {
 		public IntTypeContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterIntType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterIntType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitIntType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitIntType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitIntType(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitIntType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1629,15 +1629,15 @@ public class ObfusParser extends Parser {
 		public StringTypeContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterStringType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterStringType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitStringType(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitStringType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitStringType(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitStringType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1714,15 +1714,15 @@ public class ObfusParser extends Parser {
 		public BooleanContext(LiteralContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterBoolean(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterBoolean(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitBoolean(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitBoolean(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitBoolean(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitBoolean(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1732,15 +1732,15 @@ public class ObfusParser extends Parser {
 		public StringContext(LiteralContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterString(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterString(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitString(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitString(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitString(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitString(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1750,15 +1750,15 @@ public class ObfusParser extends Parser {
 		public FloatContext(LiteralContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterFloat(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterFloat(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitFloat(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitFloat(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitFloat(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitFloat(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1768,15 +1768,15 @@ public class ObfusParser extends Parser {
 		public IntContext(LiteralContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterInt(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).enterInt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitInt(this);
+			if ( listener instanceof ObfusListener ) ((ObfusListener)listener).exitInt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitInt(this);
+			if ( visitor instanceof ObfusVisitor ) return ((ObfusVisitor<? extends T>)visitor).visitInt(this);
 			else return visitor.visitChildren(this);
 		}
 	}

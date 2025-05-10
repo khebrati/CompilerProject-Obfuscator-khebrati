@@ -33,11 +33,8 @@ public class VariableObfuscator extends ObfusBaseListener {
         return sb.toString();
     }
 
-    /**
-     * Captures variable declarations and creates mappings to random names
-     */
-    @Override
-    public void enterDeclaration(ObfusParser.DeclarationContext ctx) {
+
+    @Override public void enterDeclarationOrFun(ObfusParser.DeclarationOrFunContext ctx) {
         if (ctx.getToken(ObfusParser.Identifier,0) != null) {
             String originalName = ctx.getToken(ObfusParser.Identifier,0).getText();
             String newName = generateRandomName();
@@ -47,6 +44,7 @@ public class VariableObfuscator extends ObfusBaseListener {
             rewriter.replace(ctx.getToken(ObfusParser.Identifier,0).getSymbol(), newName);
         }
     }
+
 
     /**
      * Updates variable references in expressions
@@ -80,10 +78,10 @@ public class VariableObfuscator extends ObfusBaseListener {
     /**
      * Apply Obfusation to a parse tree
      */
-    public static String Obfusate(ObfusParser.ProgramContext programContext, CommonTokenStream tokens) {
-        VariableObfuscator Obfusator = new VariableObfuscator(tokens);
+    public static String Obfuscate(ObfusParser.ProgramContext programContext, CommonTokenStream tokens) {
+        VariableObfuscator Obfuscator = new VariableObfuscator(tokens);
         ParseTreeWalker walker = new ParseTreeWalker();
-        walker.walk(Obfusator, programContext);
-        return Obfusator.getObfusatedCode();
+        walker.walk(Obfuscator, programContext);
+        return Obfuscator.getObfusatedCode();
     }
 }

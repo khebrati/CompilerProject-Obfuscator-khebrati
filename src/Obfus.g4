@@ -8,7 +8,7 @@ statement
     : block                                                                 # blockStatement
     | SEMI                                                                  # emptyStatement
     | assignment                                                            # assignmentStatement
-    | declarationOrFunction                                                 # eitherDeclerationOrFunction
+    | declarationOrFun                                                      # declarationOrFunction
     | 'if' parExpression ifBody=statement ('else' elseBody=statement)?      # ifStatement
     | 'while' parExpression statement                                       # whileStatement
     | 'break' SEMI                                                          # breakStatement
@@ -17,7 +17,7 @@ statement
     | 'println' parExpression SEMI                                          # printlnStatement
     ;
 
-declarationOrFunction:
+declarationOrFun:
     type Identifier decOrFun;
 
 decOrFun:

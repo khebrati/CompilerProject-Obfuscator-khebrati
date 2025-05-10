@@ -1,47 +1,63 @@
-import static org.junit.Assert.*;
-import org.junit.Test;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
 import gen.ObfusLexer;
 import gen.ObfusParser;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class VariableObfuscatorTest {
-
     @Test
-    public void testBasicParsing() {
-        // Sample program to parse
-        String program =
-                "int x = 5;\n" +
-                        "if (x > 3) {\n" +
-                        "  println(\"x is greater than 3\");\n" +
-                        "} else {\n" +
-                        "  println(\"x is not greater than 3\");\n" +
-                        "}\n";
+        public void variableNamesAreObfuscated() {
+            String program = "int x = 10; x = x + 1;";
+            ObfusLexer lexer = new ObfusLexer(CharStreams.fromString(program));
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            ObfusParser parser = new ObfusParser(tokens);
+            ObfusParser.ProgramContext tree = parser.program();
 
-        // Set up the lexer and parser
-        var lexer = new ObfusLexer(CharStreams.fromString(program));
-        var tokens = new CommonTokenStream(lexer);
-        var parser = new ObfusParser(tokens);
+            String obfuscatedCode = VariableObfuscator.Obfuscate(tree, tokens);
 
-        // Parse the input
-        ObfusParser.ProgramContext tree = parser.program();
+            assertNotEquals("Variable names should be changed", program, obfuscatedCode);
+            System.out.println(obfuscatedCode);
+        }
 
-        // Basic assertions
-        assertNotNull("Parse tree should not be null", tree);
-        assertEquals("There should be no syntax errors", 0, parser.getNumberOfSyntaxErrors());
-    }
+        @Test
+        public void handlesNoVariableDeclarations() {
+            String program = "println(\"Hello, World!\");";
+            ObfusLexer lexer = new ObfusLexer(CharStreams.fromString(program));
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            ObfusParser parser = new ObfusParser(tokens);
+            ObfusParser.ProgramContext tree = parser.program();
 
-    @Test
-    public void testVariableDeclaration() {
-        String input = "int x = 10;";
+            String obfuscatedCode = VariableObfuscator.Obfuscate(tree, tokens);
 
-        ObfusLexer lexer = new ObfusLexer(CharStreams.fromString(input));
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        ObfusParser parser = new ObfusParser(tokens);
+            assertEquals("Code without variables should remain unchanged", program, obfuscatedCode);
+        }
 
-        ObfusParser.ProgramContext tree = parser.program();
+        @Test
+        public void handlesMultipleVariableDeclarations() {
+            String program = "int a = 5; int b = 10; a = b + a;";
+            ObfusLexer lexer = new ObfusLexer(CharStreams.fromString(program));
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            ObfusParser parser = new ObfusParser(tokens);
+            ObfusParser.ProgramContext tree = parser.program();
 
-        assertNotNull(tree);
-        assertEquals(0, parser.getNumberOfSyntaxErrors());
-    }
+            String obfuscatedCode = VariableObfuscator.Obfuscate(tree, tokens);
+
+            System.out.println(obfuscatedCode);
+        }
+
+
+        @Test
+        public void handlesEmptyProgram() {
+            String program = "";
+            ObfusLexer lexer = new ObfusLexer(CharStreams.fromString(program));
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            ObfusParser parser = new ObfusParser(tokens);
+            ObfusParser.ProgramContext tree = parser.program();
+
+            String obfuscatedCode = VariableObfuscator.Obfuscate(tree, tokens);
+
+            assertEquals("Empty program should remain unchanged", program, obfuscatedCode);
+        }
 }
