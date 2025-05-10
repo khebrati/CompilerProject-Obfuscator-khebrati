@@ -1,4 +1,4 @@
-// Generated from /home/erfan/Source/ObfusC/src/Obfus.g4 by ANTLR 4.13.2
+package gen;// Generated from /home/erfan/Source/MinicC/src/Minic.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue", "this-escape"})
-public class ObfusLexer extends Lexer {
+public class MinicLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.13.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -104,13 +104,13 @@ public class ObfusLexer extends Lexer {
 	}
 
 
-	public ObfusLexer(CharStream input) {
+	public MinicLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Obfus.g4"; }
+	public String getGrammarFileName() { return "Minic.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

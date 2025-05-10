@@ -1,4 +1,4 @@
-grammar Obfus;
+grammar Minic;
 
 program
     : statement* EOF

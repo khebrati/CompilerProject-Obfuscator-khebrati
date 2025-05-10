@@ -1,5 +1,5 @@
-import gen.ObfusBaseListener;
-import gen.ObfusParser;
+import gen.MinicBaseListener;
+import gen.MinicParser;
 import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
@@ -9,15 +9,15 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Variable name Obfusator that renames each variable to a random name.
+ * Variable name Minicator that renames each variable to a random name.
  */
-public class VariableObfuscator extends ObfusBaseListener {
+public class VariableRenamer extends MinicBaseListener {
 
     private final Map<String, String> variableMap = new HashMap<>();
     private final Random random = new Random();
     private TokenStreamRewriter rewriter;
 
-    public VariableObfuscator(CommonTokenStream tokens) {
+    public VariableRenamer(CommonTokenStream tokens) {
         this.rewriter = new TokenStreamRewriter(tokens);
     }
 
@@ -34,14 +34,13 @@ public class VariableObfuscator extends ObfusBaseListener {
     }
 
 
-    @Override public void enterDeclarationOrFun(ObfusParser.DeclarationOrFunContext ctx) {
-        if (ctx.getToken(ObfusParser.Identifier,0) != null) {
-            String originalName = ctx.getToken(ObfusParser.Identifier,0).getText();
+    @Override public void enterDeclarationOrFun(MinicParser.DeclarationOrFunContext ctx) {
+        if (ctx.getToken(MinicParser.Identifier,0) != null) {
+            String originalName = ctx.getToken(MinicParser.Identifier,0).getText();
             String newName = generateRandomName();
             variableMap.put(originalName, newName);
 
-            // Replace the original identifier with the Obfusated one
-            rewriter.replace(ctx.getToken(ObfusParser.Identifier,0).getSymbol(), newName);
+            rewriter.replace(ctx.getToken(MinicParser.Identifier,0).getSymbol(), newName);
         }
     }
 
@@ -50,7 +49,7 @@ public class VariableObfuscator extends ObfusBaseListener {
      * Updates variable references in expressions
      */
     @Override
-    public void enterVariableReference(ObfusParser.VariableReferenceContext ctx) {
+    public void enterVariableReference(MinicParser.VariableReferenceContext ctx) {
         String originalName = ctx.Identifier().getText();
         if (variableMap.containsKey(originalName)) {
             rewriter.replace(ctx.Identifier().getSymbol(), variableMap.get(originalName));
@@ -61,7 +60,7 @@ public class VariableObfuscator extends ObfusBaseListener {
      * Updates variable references in assignments
      */
     @Override
-    public void enterAssignment(ObfusParser.AssignmentContext ctx) {
+    public void enterAssignment(MinicParser.AssignmentContext ctx) {
         String originalName = ctx.Identifier().getText();
         if (variableMap.containsKey(originalName)) {
             rewriter.replace(ctx.Identifier().getSymbol(), variableMap.get(originalName));
@@ -69,19 +68,19 @@ public class VariableObfuscator extends ObfusBaseListener {
     }
 
     /**
-     * Get the Obfusated source code
+     * Get the Minicated source code
      */
-    public String getObfusatedCode() {
+    public String getRenamedCode() {
         return rewriter.getText();
     }
 
     /**
-     * Apply Obfusation to a parse tree
+     * Apply Minication to a parse tree
      */
-    public static String Obfuscate(ObfusParser.ProgramContext programContext, CommonTokenStream tokens) {
-        VariableObfuscator Obfuscator = new VariableObfuscator(tokens);
+    public static String renameVar(MinicParser.ProgramContext programContext, CommonTokenStream tokens) {
+        VariableRenamer renamer = new VariableRenamer(tokens);
         ParseTreeWalker walker = new ParseTreeWalker();
-        walker.walk(Obfuscator, programContext);
-        return Obfuscator.getObfusatedCode();
+        walker.walk(renamer, programContext);
+        return renamer.getRenamedCode();
     }
 }

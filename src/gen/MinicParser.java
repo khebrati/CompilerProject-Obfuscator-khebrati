@@ -1,4 +1,4 @@
-package gen;// Generated from /home/erfan/Source/ObfusC/src/Obfus.g4 by ANTLR 4.13.2
+package gen;// Generated from /home/erfan/Source/MinicC/src/Minic.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue", "this-escape"})
-public class ObfusParser extends Parser {
+public class MinicParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.13.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -96,7 +96,7 @@ public class ObfusParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Obfus.g4"; }
+	public String getGrammarFileName() { return "Minic.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -107,14 +107,14 @@ public class ObfusParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public ObfusParser(TokenStream input) {
+	public MinicParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProgramContext extends ParserRuleContext {
-		public TerminalNode EOF() { return getToken(ObfusParser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(MinicParser.EOF, 0); }
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
 		}
@@ -127,15 +127,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_program; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterProgram(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterProgram(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitProgram(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitProgram(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitProgram(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitProgram(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -190,7 +190,7 @@ public class ObfusParser extends Parser {
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class WhileStatementContext extends StatementContext {
-		public TerminalNode WHILE_KEYWORD() { return getToken(ObfusParser.WHILE_KEYWORD, 0); }
+		public TerminalNode WHILE_KEYWORD() { return getToken(MinicParser.WHILE_KEYWORD, 0); }
 		public ParExpressionContext parExpression() {
 			return getRuleContext(ParExpressionContext.class,0);
 		}
@@ -200,55 +200,55 @@ public class ObfusParser extends Parser {
 		public WhileStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterWhileStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterWhileStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitWhileStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitWhileStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitWhileStatement(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitWhileStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class EmptyStatementContext extends StatementContext {
-		public TerminalNode SEMI() { return getToken(ObfusParser.SEMI, 0); }
+		public TerminalNode SEMI() { return getToken(MinicParser.SEMI, 0); }
 		public EmptyStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterEmptyStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterEmptyStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitEmptyStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitEmptyStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitEmptyStatement(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitEmptyStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class PrintStatementContext extends StatementContext {
-		public TerminalNode PRINT_KEYWORD() { return getToken(ObfusParser.PRINT_KEYWORD, 0); }
+		public TerminalNode PRINT_KEYWORD() { return getToken(MinicParser.PRINT_KEYWORD, 0); }
 		public ParExpressionContext parExpression() {
 			return getRuleContext(ParExpressionContext.class,0);
 		}
-		public TerminalNode SEMI() { return getToken(ObfusParser.SEMI, 0); }
+		public TerminalNode SEMI() { return getToken(MinicParser.SEMI, 0); }
 		public PrintStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterPrintStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterPrintStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitPrintStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitPrintStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitPrintStatement(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitPrintStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -260,36 +260,36 @@ public class ObfusParser extends Parser {
 		public BlockStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterBlockStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterBlockStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitBlockStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitBlockStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitBlockStatement(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitBlockStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExitStatementContext extends StatementContext {
-		public TerminalNode EXIT_KEYWORD() { return getToken(ObfusParser.EXIT_KEYWORD, 0); }
-		public TerminalNode LPAR() { return getToken(ObfusParser.LPAR, 0); }
-		public TerminalNode RPAR() { return getToken(ObfusParser.RPAR, 0); }
-		public TerminalNode SEMI() { return getToken(ObfusParser.SEMI, 0); }
+		public TerminalNode EXIT_KEYWORD() { return getToken(MinicParser.EXIT_KEYWORD, 0); }
+		public TerminalNode LPAR() { return getToken(MinicParser.LPAR, 0); }
+		public TerminalNode RPAR() { return getToken(MinicParser.RPAR, 0); }
+		public TerminalNode SEMI() { return getToken(MinicParser.SEMI, 0); }
 		public ExitStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterExitStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterExitStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitExitStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitExitStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitExitStatement(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitExitStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -301,15 +301,15 @@ public class ObfusParser extends Parser {
 		public AssignmentStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterAssignmentStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterAssignmentStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitAssignmentStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitAssignmentStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitAssignmentStatement(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitAssignmentStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -321,34 +321,34 @@ public class ObfusParser extends Parser {
 		public DeclarationOrFunctionContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterDeclarationOrFunction(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterDeclarationOrFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitDeclarationOrFunction(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitDeclarationOrFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitDeclarationOrFunction(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitDeclarationOrFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class BreakStatementContext extends StatementContext {
-		public TerminalNode BREAK_KEYWORD() { return getToken(ObfusParser.BREAK_KEYWORD, 0); }
-		public TerminalNode SEMI() { return getToken(ObfusParser.SEMI, 0); }
+		public TerminalNode BREAK_KEYWORD() { return getToken(MinicParser.BREAK_KEYWORD, 0); }
+		public TerminalNode SEMI() { return getToken(MinicParser.SEMI, 0); }
 		public BreakStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterBreakStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterBreakStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitBreakStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitBreakStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitBreakStatement(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitBreakStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -356,7 +356,7 @@ public class ObfusParser extends Parser {
 	public static class IfStatementContext extends StatementContext {
 		public StatementContext ifBody;
 		public StatementContext elseBody;
-		public TerminalNode IF_KEYWORD() { return getToken(ObfusParser.IF_KEYWORD, 0); }
+		public TerminalNode IF_KEYWORD() { return getToken(MinicParser.IF_KEYWORD, 0); }
 		public ParExpressionContext parExpression() {
 			return getRuleContext(ParExpressionContext.class,0);
 		}
@@ -366,41 +366,41 @@ public class ObfusParser extends Parser {
 		public StatementContext statement(int i) {
 			return getRuleContext(StatementContext.class,i);
 		}
-		public TerminalNode ELSE_KEYWORD() { return getToken(ObfusParser.ELSE_KEYWORD, 0); }
+		public TerminalNode ELSE_KEYWORD() { return getToken(MinicParser.ELSE_KEYWORD, 0); }
 		public IfStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterIfStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterIfStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitIfStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitIfStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitIfStatement(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitIfStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class PrintlnStatementContext extends StatementContext {
-		public TerminalNode PRINTLN_KEYWORD() { return getToken(ObfusParser.PRINTLN_KEYWORD, 0); }
+		public TerminalNode PRINTLN_KEYWORD() { return getToken(MinicParser.PRINTLN_KEYWORD, 0); }
 		public ParExpressionContext parExpression() {
 			return getRuleContext(ParExpressionContext.class,0);
 		}
-		public TerminalNode SEMI() { return getToken(ObfusParser.SEMI, 0); }
+		public TerminalNode SEMI() { return getToken(MinicParser.SEMI, 0); }
 		public PrintlnStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterPrintlnStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterPrintlnStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitPrintlnStatement(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitPrintlnStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitPrintlnStatement(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitPrintlnStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -551,7 +551,7 @@ public class ObfusParser extends Parser {
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
 		}
-		public TerminalNode Identifier() { return getToken(ObfusParser.Identifier, 0); }
+		public TerminalNode Identifier() { return getToken(MinicParser.Identifier, 0); }
 		public DecOrFunContext decOrFun() {
 			return getRuleContext(DecOrFunContext.class,0);
 		}
@@ -561,15 +561,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_declarationOrFun; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterDeclarationOrFun(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterDeclarationOrFun(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitDeclarationOrFun(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitDeclarationOrFun(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitDeclarationOrFun(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitDeclarationOrFun(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -613,15 +613,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_decOrFun; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterDecOrFun(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterDecOrFun(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitDecOrFun(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitDecOrFun(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitDecOrFun(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitDecOrFun(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -665,17 +665,17 @@ public class ObfusParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class FunctionContext extends ParserRuleContext {
-		public TerminalNode LPAR() { return getToken(ObfusParser.LPAR, 0); }
-		public TerminalNode RPAR() { return getToken(ObfusParser.RPAR, 0); }
+		public TerminalNode LPAR() { return getToken(MinicParser.LPAR, 0); }
+		public TerminalNode RPAR() { return getToken(MinicParser.RPAR, 0); }
 		public List<ArgContext> arg() {
 			return getRuleContexts(ArgContext.class);
 		}
 		public ArgContext arg(int i) {
 			return getRuleContext(ArgContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(ObfusParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(MinicParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(ObfusParser.COMMA, i);
+			return getToken(MinicParser.COMMA, i);
 		}
 		public FunctionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -683,15 +683,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_function; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterFunction(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitFunction(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitFunction(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -748,7 +748,7 @@ public class ObfusParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DeclarationContext extends ParserRuleContext {
-		public TerminalNode SEMI() { return getToken(ObfusParser.SEMI, 0); }
+		public TerminalNode SEMI() { return getToken(MinicParser.SEMI, 0); }
 		public AssignmentOpContext assignmentOp() {
 			return getRuleContext(AssignmentOpContext.class,0);
 		}
@@ -761,15 +761,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_declaration; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterDeclaration(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterDeclaration(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitDeclaration(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitDeclaration(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitDeclaration(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitDeclaration(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -813,22 +813,22 @@ public class ObfusParser extends Parser {
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
 		}
-		public TerminalNode Identifier() { return getToken(ObfusParser.Identifier, 0); }
+		public TerminalNode Identifier() { return getToken(MinicParser.Identifier, 0); }
 		public ArgContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arg; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterArg(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterArg(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitArg(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitArg(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitArg(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitArg(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -858,8 +858,8 @@ public class ObfusParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class BlockContext extends ParserRuleContext {
-		public TerminalNode LBRACE() { return getToken(ObfusParser.LBRACE, 0); }
-		public TerminalNode RBRACE() { return getToken(ObfusParser.RBRACE, 0); }
+		public TerminalNode LBRACE() { return getToken(MinicParser.LBRACE, 0); }
+		public TerminalNode RBRACE() { return getToken(MinicParser.RBRACE, 0); }
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
 		}
@@ -872,15 +872,15 @@ public class ObfusParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_block; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterBlock(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterBlock(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitBlock(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitBlock(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitBlock(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitBlock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -943,74 +943,74 @@ public class ObfusParser extends Parser {
 		public ParenthesesExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterParenthesesExpression(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterParenthesesExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitParenthesesExpression(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitParenthesesExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitParenthesesExpression(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitParenthesesExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ReadDoubleContext extends ExpressionContext {
-		public TerminalNode READ_DOUBLE_KEYWORD() { return getToken(ObfusParser.READ_DOUBLE_KEYWORD, 0); }
-		public TerminalNode LPAR() { return getToken(ObfusParser.LPAR, 0); }
-		public TerminalNode RPAR() { return getToken(ObfusParser.RPAR, 0); }
+		public TerminalNode READ_DOUBLE_KEYWORD() { return getToken(MinicParser.READ_DOUBLE_KEYWORD, 0); }
+		public TerminalNode LPAR() { return getToken(MinicParser.LPAR, 0); }
+		public TerminalNode RPAR() { return getToken(MinicParser.RPAR, 0); }
 		public ReadDoubleContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterReadDouble(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterReadDouble(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitReadDouble(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitReadDouble(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitReadDouble(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitReadDouble(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class VariableReferenceContext extends ExpressionContext {
-		public TerminalNode Identifier() { return getToken(ObfusParser.Identifier, 0); }
+		public TerminalNode Identifier() { return getToken(MinicParser.Identifier, 0); }
 		public VariableReferenceContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterVariableReference(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterVariableReference(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitVariableReference(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitVariableReference(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitVariableReference(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitVariableReference(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ToStringContext extends ExpressionContext {
-		public TerminalNode TO_STRING_KEYWORD() { return getToken(ObfusParser.TO_STRING_KEYWORD, 0); }
+		public TerminalNode TO_STRING_KEYWORD() { return getToken(MinicParser.TO_STRING_KEYWORD, 0); }
 		public ParExpressionContext parExpression() {
 			return getRuleContext(ParExpressionContext.class,0);
 		}
 		public ToStringContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterToString(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterToString(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitToString(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitToString(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitToString(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitToString(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1025,31 +1025,31 @@ public class ObfusParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode MUL() { return getToken(ObfusParser.MUL, 0); }
-		public TerminalNode DIV() { return getToken(ObfusParser.DIV, 0); }
-		public TerminalNode MOD() { return getToken(ObfusParser.MOD, 0); }
-		public TerminalNode PLUS() { return getToken(ObfusParser.PLUS, 0); }
-		public TerminalNode MINUS() { return getToken(ObfusParser.MINUS, 0); }
-		public TerminalNode LT() { return getToken(ObfusParser.LT, 0); }
-		public TerminalNode GT() { return getToken(ObfusParser.GT, 0); }
-		public TerminalNode LTEQ() { return getToken(ObfusParser.LTEQ, 0); }
-		public TerminalNode GTEQ() { return getToken(ObfusParser.GTEQ, 0); }
-		public TerminalNode EQ() { return getToken(ObfusParser.EQ, 0); }
-		public TerminalNode NOTEQ() { return getToken(ObfusParser.NOTEQ, 0); }
-		public TerminalNode AND() { return getToken(ObfusParser.AND, 0); }
-		public TerminalNode OR() { return getToken(ObfusParser.OR, 0); }
+		public TerminalNode MUL() { return getToken(MinicParser.MUL, 0); }
+		public TerminalNode DIV() { return getToken(MinicParser.DIV, 0); }
+		public TerminalNode MOD() { return getToken(MinicParser.MOD, 0); }
+		public TerminalNode PLUS() { return getToken(MinicParser.PLUS, 0); }
+		public TerminalNode MINUS() { return getToken(MinicParser.MINUS, 0); }
+		public TerminalNode LT() { return getToken(MinicParser.LT, 0); }
+		public TerminalNode GT() { return getToken(MinicParser.GT, 0); }
+		public TerminalNode LTEQ() { return getToken(MinicParser.LTEQ, 0); }
+		public TerminalNode GTEQ() { return getToken(MinicParser.GTEQ, 0); }
+		public TerminalNode EQ() { return getToken(MinicParser.EQ, 0); }
+		public TerminalNode NOTEQ() { return getToken(MinicParser.NOTEQ, 0); }
+		public TerminalNode AND() { return getToken(MinicParser.AND, 0); }
+		public TerminalNode OR() { return getToken(MinicParser.OR, 0); }
 		public BinaryOperationContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterBinaryOperation(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterBinaryOperation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitBinaryOperation(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitBinaryOperation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitBinaryOperation(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitBinaryOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1061,15 +1061,15 @@ public class ObfusParser extends Parser {
 		public LiteralExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterLiteralExpression(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterLiteralExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitLiteralExpression(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitLiteralExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitLiteralExpression(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitLiteralExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1079,60 +1079,60 @@ public class ObfusParser extends Parser {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode NOT() { return getToken(ObfusParser.NOT, 0); }
-		public TerminalNode MINUS() { return getToken(ObfusParser.MINUS, 0); }
+		public TerminalNode NOT() { return getToken(MinicParser.NOT, 0); }
+		public TerminalNode MINUS() { return getToken(MinicParser.MINUS, 0); }
 		public UnaryOperationContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterUnaryOperation(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterUnaryOperation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitUnaryOperation(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitUnaryOperation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitUnaryOperation(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitUnaryOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ReadIntContext extends ExpressionContext {
-		public TerminalNode READ_INT_KEYWORD() { return getToken(ObfusParser.READ_INT_KEYWORD, 0); }
-		public TerminalNode LPAR() { return getToken(ObfusParser.LPAR, 0); }
-		public TerminalNode RPAR() { return getToken(ObfusParser.RPAR, 0); }
+		public TerminalNode READ_INT_KEYWORD() { return getToken(MinicParser.READ_INT_KEYWORD, 0); }
+		public TerminalNode LPAR() { return getToken(MinicParser.LPAR, 0); }
+		public TerminalNode RPAR() { return getToken(MinicParser.RPAR, 0); }
 		public ReadIntContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterReadInt(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterReadInt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitReadInt(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitReadInt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitReadInt(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitReadInt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ReadLineContext extends ExpressionContext {
-		public TerminalNode READ_LINE_KEYWORD() { return getToken(ObfusParser.READ_LINE_KEYWORD, 0); }
-		public TerminalNode LPAR() { return getToken(ObfusParser.LPAR, 0); }
-		public TerminalNode RPAR() { return getToken(ObfusParser.RPAR, 0); }
+		public TerminalNode READ_LINE_KEYWORD() { return getToken(MinicParser.READ_LINE_KEYWORD, 0); }
+		public TerminalNode LPAR() { return getToken(MinicParser.LPAR, 0); }
+		public TerminalNode RPAR() { return getToken(MinicParser.RPAR, 0); }
 		public ReadLineContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterReadLine(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterReadLine(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitReadLine(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitReadLine(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitReadLine(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitReadLine(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1265,7 +1265,7 @@ public class ObfusParser extends Parser {
 			setState(146);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
-			while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER ) {
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
@@ -1409,26 +1409,26 @@ public class ObfusParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ParExpressionContext extends ParserRuleContext {
-		public TerminalNode LPAR() { return getToken(ObfusParser.LPAR, 0); }
+		public TerminalNode LPAR() { return getToken(MinicParser.LPAR, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode RPAR() { return getToken(ObfusParser.RPAR, 0); }
+		public TerminalNode RPAR() { return getToken(MinicParser.RPAR, 0); }
 		public ParExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterParExpression(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterParExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitParExpression(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitParExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitParExpression(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitParExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1460,29 +1460,29 @@ public class ObfusParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class AssignmentContext extends ParserRuleContext {
-		public TerminalNode Identifier() { return getToken(ObfusParser.Identifier, 0); }
+		public TerminalNode Identifier() { return getToken(MinicParser.Identifier, 0); }
 		public AssignmentOpContext assignmentOp() {
 			return getRuleContext(AssignmentOpContext.class,0);
 		}
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode SEMI() { return getToken(ObfusParser.SEMI, 0); }
+		public TerminalNode SEMI() { return getToken(MinicParser.SEMI, 0); }
 		public AssignmentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assignment; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterAssignment(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterAssignment(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitAssignment(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitAssignment(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitAssignment(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitAssignment(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1516,22 +1516,22 @@ public class ObfusParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class AssignmentOpContext extends ParserRuleContext {
-		public TerminalNode ASSIGN() { return getToken(ObfusParser.ASSIGN, 0); }
+		public TerminalNode ASSIGN() { return getToken(MinicParser.ASSIGN, 0); }
 		public AssignmentOpContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assignmentOp; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterAssignmentOp(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterAssignmentOp(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitAssignmentOp(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitAssignmentOp(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitAssignmentOp(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitAssignmentOp(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1571,73 +1571,73 @@ public class ObfusParser extends Parser {
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class DoubleTypeContext extends TypeContext {
-		public TerminalNode DOUBLE_TYPE() { return getToken(ObfusParser.DOUBLE_TYPE, 0); }
+		public TerminalNode DOUBLE_TYPE() { return getToken(MinicParser.DOUBLE_TYPE, 0); }
 		public DoubleTypeContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterDoubleType(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterDoubleType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitDoubleType(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitDoubleType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitDoubleType(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitDoubleType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class BooleanTypeContext extends TypeContext {
-		public TerminalNode BOOL_TYPE() { return getToken(ObfusParser.BOOL_TYPE, 0); }
+		public TerminalNode BOOL_TYPE() { return getToken(MinicParser.BOOL_TYPE, 0); }
 		public BooleanTypeContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterBooleanType(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterBooleanType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitBooleanType(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitBooleanType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitBooleanType(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitBooleanType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IntTypeContext extends TypeContext {
-		public TerminalNode INT_TYPE() { return getToken(ObfusParser.INT_TYPE, 0); }
+		public TerminalNode INT_TYPE() { return getToken(MinicParser.INT_TYPE, 0); }
 		public IntTypeContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterIntType(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterIntType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitIntType(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitIntType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitIntType(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitIntType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class StringTypeContext extends TypeContext {
-		public TerminalNode STRING_TYPE() { return getToken(ObfusParser.STRING_TYPE, 0); }
+		public TerminalNode STRING_TYPE() { return getToken(MinicParser.STRING_TYPE, 0); }
 		public StringTypeContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterStringType(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterStringType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitStringType(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitStringType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitStringType(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitStringType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1710,73 +1710,73 @@ public class ObfusParser extends Parser {
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class BooleanContext extends LiteralContext {
-		public TerminalNode BooleanLiteral() { return getToken(ObfusParser.BooleanLiteral, 0); }
+		public TerminalNode BooleanLiteral() { return getToken(MinicParser.BooleanLiteral, 0); }
 		public BooleanContext(LiteralContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterBoolean(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterBoolean(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitBoolean(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitBoolean(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitBoolean(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitBoolean(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class StringContext extends LiteralContext {
-		public TerminalNode StringLiteral() { return getToken(ObfusParser.StringLiteral, 0); }
+		public TerminalNode StringLiteral() { return getToken(MinicParser.StringLiteral, 0); }
 		public StringContext(LiteralContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterString(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterString(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitString(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitString(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitString(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitString(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class FloatContext extends LiteralContext {
-		public TerminalNode FloatingPointLiteral() { return getToken(ObfusParser.FloatingPointLiteral, 0); }
+		public TerminalNode FloatingPointLiteral() { return getToken(MinicParser.FloatingPointLiteral, 0); }
 		public FloatContext(LiteralContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterFloat(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterFloat(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitFloat(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitFloat(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitFloat(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitFloat(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IntContext extends LiteralContext {
-		public TerminalNode IntegerLiteral() { return getToken(ObfusParser.IntegerLiteral, 0); }
+		public TerminalNode IntegerLiteral() { return getToken(MinicParser.IntegerLiteral, 0); }
 		public IntContext(LiteralContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).enterInt(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).enterInt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ObfusListener) ((ObfusListener)listener).exitInt(this);
+			if ( listener instanceof MinicListener ) ((MinicListener)listener).exitInt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ObfusVisitor) return ((ObfusVisitor<? extends T>)visitor).visitInt(this);
+			if ( visitor instanceof MinicVisitor ) return ((MinicVisitor<? extends T>)visitor).visitInt(this);
 			else return visitor.visitChildren(this);
 		}
 	}

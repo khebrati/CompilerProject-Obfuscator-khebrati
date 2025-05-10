@@ -2,8 +2,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import gen.ObfusLexer;
-import gen.ObfusParser;
+import gen.MinicLexer;
+import gen.MinicParser;
 
 public class BaseParsingTest {
 
@@ -18,11 +18,11 @@ public class BaseParsingTest {
                         "  println(\"x is not greater than 3\");\n" +
                         "}\n";
 
-        var lexer = new ObfusLexer(CharStreams.fromString(program));
+        var lexer = new MinicLexer(CharStreams.fromString(program));
         var tokens = new CommonTokenStream(lexer);
-        var parser = new ObfusParser(tokens);
+        var parser = new MinicParser(tokens);
 
-        ObfusParser.ProgramContext tree = parser.program();
+        MinicParser.ProgramContext tree = parser.program();
 
         // Basic assertions
         assertNotNull("Parse tree should not be null", tree);
@@ -32,9 +32,9 @@ public class BaseParsingTest {
     @Test
     public void testSyntaxErrorProgram(){
         String program = "if(a > 2)";
-        var lexer = new ObfusLexer(CharStreams.fromString(program));
+        var lexer = new MinicLexer(CharStreams.fromString(program));
         var tokens = new CommonTokenStream(lexer);
-        var parser = new ObfusParser(tokens);
+        var parser = new MinicParser(tokens);
 
         var tree = parser.program();
         assertEquals(1, parser.getNumberOfSyntaxErrors());
@@ -44,11 +44,11 @@ public class BaseParsingTest {
     public void testVariableDeclaration() {
         var input = "int x = 10;";
 
-        ObfusLexer lexer = new ObfusLexer(CharStreams.fromString(input));
+        MinicLexer lexer = new MinicLexer(CharStreams.fromString(input));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        ObfusParser parser = new ObfusParser(tokens);
+        MinicParser parser = new MinicParser(tokens);
 
-        ObfusParser.ProgramContext tree = parser.program();
+        MinicParser.ProgramContext tree = parser.program();
 
         assertNotNull(tree);
         assertEquals(0, parser.getNumberOfSyntaxErrors());
