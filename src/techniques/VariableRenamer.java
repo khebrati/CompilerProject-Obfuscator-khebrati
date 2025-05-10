@@ -1,3 +1,5 @@
+package techniques;
+
 import gen.MinicBaseListener;
 import gen.MinicParser;
 import org.antlr.v4.runtime.TokenStreamRewriter;
