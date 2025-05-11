@@ -64,7 +64,7 @@ expression
     ;
 
 argsListOrNothing:
-    (paramList)?;
+    (callArgsList)?;
 
 
 parExpression : '(' expression ')';
@@ -102,7 +102,7 @@ fragment UNICODE : 'u' HEX HEX HEX HEX ;
 fragment HEX : [0-9a-fA-F] ;
 
 
-WS  :  [ \t\r\n\u000C]+ -> skip
+WS  :  [ \t\r\n\u000C]+ -> channel(HIDDEN)
     ;
 
 BLOCK_COMMENT : '/*' .*? '*/' -> skip

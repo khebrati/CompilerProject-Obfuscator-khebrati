@@ -24,6 +24,8 @@ bin/
 
 ### VS Code ###
 .vscode/
+src/test/cases
+src/test/target
 
 ### Mac OS ###
 .DS_Store

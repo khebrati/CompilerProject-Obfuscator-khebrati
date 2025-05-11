@@ -36,7 +36,6 @@ public class BaseParsingTest {
         var tokens = new CommonTokenStream(lexer);
         var parser = new MinicParser(tokens);
 
-        var tree = parser.program();
         assertEquals(1, parser.getNumberOfSyntaxErrors());
     }
 

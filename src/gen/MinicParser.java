@@ -1757,8 +1757,8 @@ public class MinicParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ArgsListOrNothingContext extends ParserRuleContext {
-		public ParamListContext paramList() {
-			return getRuleContext(ParamListContext.class,0);
+		public CallArgsListContext callArgsList() {
+			return getRuleContext(CallArgsListContext.class,0);
 		}
 		public ArgsListOrNothingContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1791,7 +1791,7 @@ public class MinicParser extends Parser {
 			case 1:
 				{
 				setState(193);
-				paramList();
+				callArgsList();
 				}
 				break;
 			}
@@ -2282,7 +2282,7 @@ public class MinicParser extends Parser {
 		"\u00bc\u00b9\u0001\u0000\u0000\u0000\u00bd\u00c0\u0001\u0000\u0000\u0000"+
 		"\u00be\u00bc\u0001\u0000\u0000\u0000\u00be\u00bf\u0001\u0000\u0000\u0000"+
 		"\u00bf\u001b\u0001\u0000\u0000\u0000\u00c0\u00be\u0001\u0000\u0000\u0000"+
-		"\u00c1\u00c3\u0003\u0012\t\u0000\u00c2\u00c1\u0001\u0000\u0000\u0000\u00c2"+
+		"\u00c1\u00c3\u0003\n\u0005\u0000\u00c2\u00c1\u0001\u0000\u0000\u0000\u00c2"+
 		"\u00c3\u0001\u0000\u0000\u0000\u00c3\u001d\u0001\u0000\u0000\u0000\u00c4"+
 		"\u00c5\u0005)\u0000\u0000\u00c5\u00c6\u0003\u001a\r\u0000\u00c6\u00c7"+
 		"\u0005*\u0000\u0000\u00c7\u001f\u0001\u0000\u0000\u0000\u00c8\u00cd\u0005"+
