@@ -1,4 +1,4 @@
-package techniques;
+package techniques.renamer;
 
 import gen.MinicBaseListener;
 import gen.MinicParser;
@@ -70,19 +70,19 @@ public class VariableRenamer extends MinicBaseListener {
     }
 
     /**
-     * Get the Minicated source code
+     * Get the source code
      */
     public String getRenamedCode() {
         return rewriter.getText();
     }
 
     /**
-     * Apply Minication to a parse tree
+     * Apply Var renaming to a parse tree
      */
-    public static String renameVar(MinicParser.ProgramContext programContext, CommonTokenStream tokens) {
+    public static String renameVar(MinicParser.ProgramContext tree, CommonTokenStream tokens) {
         VariableRenamer renamer = new VariableRenamer(tokens);
         ParseTreeWalker walker = new ParseTreeWalker();
-        walker.walk(renamer, programContext);
+        walker.walk(renamer, tree);
         return renamer.getRenamedCode();
     }
 }

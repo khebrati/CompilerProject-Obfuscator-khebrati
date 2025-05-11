@@ -24,7 +24,7 @@ decOrFun:
     function | declaration;
 
 function:
-    LPAR (arg)?(COMMA arg)* RPAR;
+    LPAR (arg)?(COMMA arg)* RPAR block;
 
 declaration : (assignmentOp expression)? SEMI;
 

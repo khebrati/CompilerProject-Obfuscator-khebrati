@@ -1,4 +1,4 @@
-package techniques;
+package techniques.renamer;
 
 import gen.MinicLexer;
 import gen.MinicParser;
@@ -10,17 +10,17 @@ import static org.junit.Assert.*;
 
 public class VariableRenamerTest {
     @Test
-        public void variableNamesAreMiniccated() {
+        public void variableNamesAreChanged() {
             String program = "int x = 10; x = x + 1;";
             MinicLexer lexer = new MinicLexer(CharStreams.fromString(program));
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             MinicParser parser = new MinicParser(tokens);
             MinicParser.ProgramContext tree = parser.program();
 
-            String MiniccatedCode = VariableRenamer.renameVar(tree, tokens);
+            String variableRenamedCode = VariableRenamer.renameVar(tree, tokens);
 
-            assertNotEquals("Variable names should be changed", program, MiniccatedCode);
-            System.out.println(MiniccatedCode);
+            assertNotEquals("Variable names should be changed", program, variableRenamedCode);
+            System.out.println(variableRenamedCode);
         }
 
         @Test

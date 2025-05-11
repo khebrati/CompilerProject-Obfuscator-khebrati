@@ -1,4 +1,4 @@
-package gen;// Generated from /home/erfan/Source/MinicC/src/Minic.g4 by ANTLR 4.13.2
+package gen;// Generated from /home/erfan/Source/ObfusC/src/Minic.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -10,7 +10,7 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
  * operations with no return type.
  */
 @SuppressWarnings("CheckReturnValue")
-public class MinicBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements MinicVisitor<T> {
+public class 	MinicBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements MinicVisitor<T> {
 	/**
 	 * {@inheritDoc}
 	 *
