@@ -1,3 +1,5 @@
+package techniques.renamer;
+
 import gen.MinicLexer;
 import gen.MinicParser;
 import org.antlr.v4.runtime.CharStreams;
@@ -8,17 +10,17 @@ import static org.junit.Assert.*;
 
 public class VariableRenamerTest {
     @Test
-        public void variableNamesAreMiniccated() {
+        public void variableNamesAreChanged() {
             String program = "int x = 10; x = x + 1;";
             MinicLexer lexer = new MinicLexer(CharStreams.fromString(program));
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             MinicParser parser = new MinicParser(tokens);
             MinicParser.ProgramContext tree = parser.program();
 
-            String MiniccatedCode = VariableRenamer.renameVar(tree, tokens);
+            String variableRenamedCode = VariableRenamer.renameVar(tree, tokens);
 
-            assertNotEquals("Variable names should be changed", program, MiniccatedCode);
-            System.out.println(MiniccatedCode);
+            assertNotEquals("Variable names should be changed", program, variableRenamedCode);
+            System.out.println(variableRenamedCode);
         }
 
         @Test
@@ -42,9 +44,32 @@ public class VariableRenamerTest {
             MinicParser parser = new MinicParser(tokens);
             MinicParser.ProgramContext tree = parser.program();
 
-            String MiniccatedCode = VariableRenamer.renameVar(tree, tokens);
+            String varChangedCode = VariableRenamer.renameVar(tree, tokens);
 
-            System.out.println(MiniccatedCode);
+            System.out.println(varChangedCode);
+        }
+
+        @Test
+        public void changesFunctionNames(){
+            String program = "int doSthFunction(){ int y = 5 + 8;}";
+            var lexer = new MinicLexer(CharStreams.fromString(program));
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            MinicParser parser = new MinicParser(tokens);
+            var funRenamedCode = VariableRenamer.renameVar(parser.program(),tokens);
+            System.out.println(funRenamedCode);
+        }
+
+        @Test
+        public void changesFunctionNamesWithRef(){
+            String program = "int anotherFunction(int a, string b){ " +
+                    "int b = 8 + 9;" +
+                    " }" +
+                    "anotherFunction();";
+            var lexer = new MinicLexer(CharStreams.fromString(program));
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            MinicParser parser = new MinicParser(tokens);
+            var funRenamedCode = VariableRenamer.renameVar(parser.program(),tokens);
+            System.out.println(funRenamedCode);
         }
 
 

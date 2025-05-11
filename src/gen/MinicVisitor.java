@@ -1,4 +1,5 @@
-package gen;// Generated from /home/erfan/Source/MinicC/src/Minic.g4 by ANTLR 4.13.2
+// Generated from /home/erfan/Source/ObfusC/src/Minic.g4 by ANTLR 4.13.2
+package gen;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -30,19 +31,19 @@ public interface MinicVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitEmptyStatement(MinicParser.EmptyStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code assignmentStatement}
+	 * Visit a parse tree produced by the {@code assignmentOrFunCall}
 	 * labeled alternative in {@link MinicParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAssignmentStatement(MinicParser.AssignmentStatementContext ctx);
+	T visitAssignmentOrFunCall(MinicParser.AssignmentOrFunCallContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code declarationOrFunction}
+	 * Visit a parse tree produced by the {@code decOrFunDefinition}
 	 * labeled alternative in {@link MinicParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDeclarationOrFunction(MinicParser.DeclarationOrFunctionContext ctx);
+	T visitDecOrFunDefinition(MinicParser.DecOrFunDefinitionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ifStatement}
 	 * labeled alternative in {@link MinicParser#statement}.
@@ -86,35 +87,72 @@ public interface MinicVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrintlnStatement(MinicParser.PrintlnStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MinicParser#declarationOrFun}.
+	 * Visit a parse tree produced by the {@code returnStatement}
+	 * labeled alternative in {@link MinicParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDeclarationOrFun(MinicParser.DeclarationOrFunContext ctx);
+	T visitReturnStatement(MinicParser.ReturnStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MinicParser#decOrFun}.
+	 * Visit a parse tree produced by {@link MinicParser#assignBodyOrArgsList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDecOrFun(MinicParser.DecOrFunContext ctx);
+	T visitAssignBodyOrArgsList(MinicParser.AssignBodyOrArgsListContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MinicParser#function}.
+	 * Visit a parse tree produced by {@link MinicParser#assignBody}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunction(MinicParser.FunctionContext ctx);
+	T visitAssignBody(MinicParser.AssignBodyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MinicParser#declaration}.
+	 * Visit a parse tree produced by {@link MinicParser#assignmentOp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDeclaration(MinicParser.DeclarationContext ctx);
+	T visitAssignmentOp(MinicParser.AssignmentOpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MinicParser#callArgsList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCallArgsList(MinicParser.CallArgsListContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MinicParser#arg}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitArg(MinicParser.ArgContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MinicParser#decOrFunBody}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDecOrFunBody(MinicParser.DecOrFunBodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MinicParser#paramListBlock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParamListBlock(MinicParser.ParamListBlockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MinicParser#paramList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParamList(MinicParser.ParamListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MinicParser#declarationBody}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclarationBody(MinicParser.DeclarationBodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MinicParser#param}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParam(MinicParser.ParamContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MinicParser#block}.
 	 * @param ctx the parse tree
@@ -135,13 +173,6 @@ public interface MinicVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitReadDouble(MinicParser.ReadDoubleContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code variableReference}
-	 * labeled alternative in {@link MinicParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVariableReference(MinicParser.VariableReferenceContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code toString}
 	 * labeled alternative in {@link MinicParser#expression}.
@@ -185,23 +216,24 @@ public interface MinicVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitReadLine(MinicParser.ReadLineContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code variableOrFunctionCall}
+	 * labeled alternative in {@link MinicParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariableOrFunctionCall(MinicParser.VariableOrFunctionCallContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MinicParser#argsListOrNothing}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArgsListOrNothing(MinicParser.ArgsListOrNothingContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MinicParser#parExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitParExpression(MinicParser.ParExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MinicParser#assignment}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAssignment(MinicParser.AssignmentContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MinicParser#assignmentOp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAssignmentOp(MinicParser.AssignmentOpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code intType}
 	 * labeled alternative in {@link MinicParser#type}.

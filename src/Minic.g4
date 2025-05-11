@@ -7,28 +7,40 @@ program
 statement
     : block                                                                 # blockStatement
     | SEMI                                                                  # emptyStatement
-    | assignment                                                            # assignmentStatement
-    | declarationOrFun                                                      # declarationOrFunction
+    | Identifier assignBodyOrArgsList                                       # assignmentOrFunCall
+    | type Identifier decOrFunBody                                          # decOrFunDefinition
     | 'if' parExpression ifBody=statement ('else' elseBody=statement)?      # ifStatement
     | 'while' parExpression statement                                       # whileStatement
     | 'break' SEMI                                                          # breakStatement
     | 'exit' '(' ')' SEMI                                                   # exitStatement
     | 'print' parExpression SEMI                                            # printStatement
     | 'println' parExpression SEMI                                          # printlnStatement
+    | RETURN_KEYWORD (expression)? SEMI                                     # returnStatement
     ;
 
-declarationOrFun:
-    type Identifier decOrFun;
+assignBodyOrArgsList: assignBody | callArgsList SEMI;
 
-decOrFun:
-    function | declaration;
+assignBody : assignmentOp expression SEMI;
 
-function:
-    LPAR (arg)?(COMMA arg)* RPAR;
+assignmentOp : '=';
 
-declaration : (assignmentOp expression)? SEMI;
+callArgsList:
+LPAR (expression(COMMA expression)*)? RPAR;
 
-arg:
+arg: Identifier;
+
+decOrFunBody:
+    declarationBody | paramListBlock;
+
+paramListBlock:
+    paramList block;
+
+paramList:
+    LPAR (param(COMMA param)*)? RPAR;
+
+declarationBody : (assignmentOp expression)? SEMI;
+
+param:
     type Identifier;
 block
     : '{' statement* '}'
@@ -36,7 +48,7 @@ block
 
 expression
     : literal                                                           # literalExpression
-    | Identifier                                                        # variableReference
+    | Identifier argsListOrNothing                                      # variableOrFunctionCall
     | op=('!' | '-') expression                                         # unaryOperation
     | left=expression op=('*' | '/' | '%') right=expression             # binaryOperation
     | left=expression op=('+' | '-') right=expression                   # binaryOperation
@@ -51,12 +63,12 @@ expression
     | 'toString' parExpression                                          # toString
     ;
 
+argsListOrNothing:
+    (paramList)?;
+
+
 parExpression : '(' expression ')';
 
-assignment : Identifier assignmentOp expression SEMI;
-
-
-assignmentOp : '=';
 
 type : INT_TYPE     # intType
      | DOUBLE_TYPE  # doubleType
@@ -106,6 +118,7 @@ ELSE_KEYWORD: 'else';
 WHILE_KEYWORD: 'while';
 BREAK_KEYWORD: 'break';
 CONTINUE_KEYWORD: 'continue';
+RETURN_KEYWORD: 'return';
 
 EXIT_KEYWORD: 'exit';
 READ_INT_KEYWORD: 'readInt';

@@ -1,4 +1,5 @@
-package gen;// Generated from /home/erfan/Source/MinicC/src/Minic.g4 by ANTLR 4.13.2
+// Generated from /home/erfan/Source/ObfusC/src/Minic.g4 by ANTLR 4.13.2
+package gen;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -41,29 +42,29 @@ public interface MinicListener extends ParseTreeListener {
 	 */
 	void exitEmptyStatement(MinicParser.EmptyStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code assignmentStatement}
+	 * Enter a parse tree produced by the {@code assignmentOrFunCall}
 	 * labeled alternative in {@link MinicParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssignmentStatement(MinicParser.AssignmentStatementContext ctx);
+	void enterAssignmentOrFunCall(MinicParser.AssignmentOrFunCallContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code assignmentStatement}
+	 * Exit a parse tree produced by the {@code assignmentOrFunCall}
 	 * labeled alternative in {@link MinicParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssignmentStatement(MinicParser.AssignmentStatementContext ctx);
+	void exitAssignmentOrFunCall(MinicParser.AssignmentOrFunCallContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code declarationOrFunction}
+	 * Enter a parse tree produced by the {@code decOrFunDefinition}
 	 * labeled alternative in {@link MinicParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterDeclarationOrFunction(MinicParser.DeclarationOrFunctionContext ctx);
+	void enterDecOrFunDefinition(MinicParser.DecOrFunDefinitionContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code declarationOrFunction}
+	 * Exit a parse tree produced by the {@code decOrFunDefinition}
 	 * labeled alternative in {@link MinicParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitDeclarationOrFunction(MinicParser.DeclarationOrFunctionContext ctx);
+	void exitDecOrFunDefinition(MinicParser.DecOrFunDefinitionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ifStatement}
 	 * labeled alternative in {@link MinicParser#statement}.
@@ -137,45 +138,57 @@ public interface MinicListener extends ParseTreeListener {
 	 */
 	void exitPrintlnStatement(MinicParser.PrintlnStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MinicParser#declarationOrFun}.
+	 * Enter a parse tree produced by the {@code returnStatement}
+	 * labeled alternative in {@link MinicParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterDeclarationOrFun(MinicParser.DeclarationOrFunContext ctx);
+	void enterReturnStatement(MinicParser.ReturnStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MinicParser#declarationOrFun}.
+	 * Exit a parse tree produced by the {@code returnStatement}
+	 * labeled alternative in {@link MinicParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitDeclarationOrFun(MinicParser.DeclarationOrFunContext ctx);
+	void exitReturnStatement(MinicParser.ReturnStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MinicParser#decOrFun}.
+	 * Enter a parse tree produced by {@link MinicParser#assignBodyOrArgsList}.
 	 * @param ctx the parse tree
 	 */
-	void enterDecOrFun(MinicParser.DecOrFunContext ctx);
+	void enterAssignBodyOrArgsList(MinicParser.AssignBodyOrArgsListContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MinicParser#decOrFun}.
+	 * Exit a parse tree produced by {@link MinicParser#assignBodyOrArgsList}.
 	 * @param ctx the parse tree
 	 */
-	void exitDecOrFun(MinicParser.DecOrFunContext ctx);
+	void exitAssignBodyOrArgsList(MinicParser.AssignBodyOrArgsListContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MinicParser#function}.
+	 * Enter a parse tree produced by {@link MinicParser#assignBody}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunction(MinicParser.FunctionContext ctx);
+	void enterAssignBody(MinicParser.AssignBodyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MinicParser#function}.
+	 * Exit a parse tree produced by {@link MinicParser#assignBody}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunction(MinicParser.FunctionContext ctx);
+	void exitAssignBody(MinicParser.AssignBodyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MinicParser#declaration}.
+	 * Enter a parse tree produced by {@link MinicParser#assignmentOp}.
 	 * @param ctx the parse tree
 	 */
-	void enterDeclaration(MinicParser.DeclarationContext ctx);
+	void enterAssignmentOp(MinicParser.AssignmentOpContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MinicParser#declaration}.
+	 * Exit a parse tree produced by {@link MinicParser#assignmentOp}.
 	 * @param ctx the parse tree
 	 */
-	void exitDeclaration(MinicParser.DeclarationContext ctx);
+	void exitAssignmentOp(MinicParser.AssignmentOpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MinicParser#callArgsList}.
+	 * @param ctx the parse tree
+	 */
+	void enterCallArgsList(MinicParser.CallArgsListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MinicParser#callArgsList}.
+	 * @param ctx the parse tree
+	 */
+	void exitCallArgsList(MinicParser.CallArgsListContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MinicParser#arg}.
 	 * @param ctx the parse tree
@@ -186,6 +199,56 @@ public interface MinicListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArg(MinicParser.ArgContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MinicParser#decOrFunBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterDecOrFunBody(MinicParser.DecOrFunBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MinicParser#decOrFunBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitDecOrFunBody(MinicParser.DecOrFunBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MinicParser#paramListBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterParamListBlock(MinicParser.ParamListBlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MinicParser#paramListBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitParamListBlock(MinicParser.ParamListBlockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MinicParser#paramList}.
+	 * @param ctx the parse tree
+	 */
+	void enterParamList(MinicParser.ParamListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MinicParser#paramList}.
+	 * @param ctx the parse tree
+	 */
+	void exitParamList(MinicParser.ParamListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MinicParser#declarationBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclarationBody(MinicParser.DeclarationBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MinicParser#declarationBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclarationBody(MinicParser.DeclarationBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MinicParser#param}.
+	 * @param ctx the parse tree
+	 */
+	void enterParam(MinicParser.ParamContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MinicParser#param}.
+	 * @param ctx the parse tree
+	 */
+	void exitParam(MinicParser.ParamContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MinicParser#block}.
 	 * @param ctx the parse tree
@@ -220,18 +283,6 @@ public interface MinicListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitReadDouble(MinicParser.ReadDoubleContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code variableReference}
-	 * labeled alternative in {@link MinicParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariableReference(MinicParser.VariableReferenceContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code variableReference}
-	 * labeled alternative in {@link MinicParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariableReference(MinicParser.VariableReferenceContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code toString}
 	 * labeled alternative in {@link MinicParser#expression}.
@@ -305,6 +356,28 @@ public interface MinicListener extends ParseTreeListener {
 	 */
 	void exitReadLine(MinicParser.ReadLineContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code variableOrFunctionCall}
+	 * labeled alternative in {@link MinicParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariableOrFunctionCall(MinicParser.VariableOrFunctionCallContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code variableOrFunctionCall}
+	 * labeled alternative in {@link MinicParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariableOrFunctionCall(MinicParser.VariableOrFunctionCallContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MinicParser#argsListOrNothing}.
+	 * @param ctx the parse tree
+	 */
+	void enterArgsListOrNothing(MinicParser.ArgsListOrNothingContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MinicParser#argsListOrNothing}.
+	 * @param ctx the parse tree
+	 */
+	void exitArgsListOrNothing(MinicParser.ArgsListOrNothingContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MinicParser#parExpression}.
 	 * @param ctx the parse tree
 	 */
@@ -314,26 +387,6 @@ public interface MinicListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitParExpression(MinicParser.ParExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MinicParser#assignment}.
-	 * @param ctx the parse tree
-	 */
-	void enterAssignment(MinicParser.AssignmentContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MinicParser#assignment}.
-	 * @param ctx the parse tree
-	 */
-	void exitAssignment(MinicParser.AssignmentContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MinicParser#assignmentOp}.
-	 * @param ctx the parse tree
-	 */
-	void enterAssignmentOp(MinicParser.AssignmentOpContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MinicParser#assignmentOp}.
-	 * @param ctx the parse tree
-	 */
-	void exitAssignmentOp(MinicParser.AssignmentOpContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code intType}
 	 * labeled alternative in {@link MinicParser#type}.
