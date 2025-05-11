@@ -1,4 +1,5 @@
-package gen;// Generated from /home/erfan/Source/MinicC/src/Minic.g4 by ANTLR 4.13.2
+// Generated from /home/erfan/Source/ObfusC/src/Minic.g4 by ANTLR 4.13.2
+package gen;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -52,25 +53,25 @@ public class MinicBaseListener implements MinicListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignmentStatement(MinicParser.AssignmentStatementContext ctx) { }
+	@Override public void enterAssignmentOrFunCall(MinicParser.AssignmentOrFunCallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignmentStatement(MinicParser.AssignmentStatementContext ctx) { }
+	@Override public void exitAssignmentOrFunCall(MinicParser.AssignmentOrFunCallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeclarationOrFunction(MinicParser.DeclarationOrFunctionContext ctx) { }
+	@Override public void enterDecOrFunDefinition(MinicParser.DecOrFunDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDeclarationOrFunction(MinicParser.DeclarationOrFunctionContext ctx) { }
+	@Override public void exitDecOrFunDefinition(MinicParser.DecOrFunDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -148,49 +149,61 @@ public class MinicBaseListener implements MinicListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeclarationOrFun(MinicParser.DeclarationOrFunContext ctx) { }
+	@Override public void enterReturnStatement(MinicParser.ReturnStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDeclarationOrFun(MinicParser.DeclarationOrFunContext ctx) { }
+	@Override public void exitReturnStatement(MinicParser.ReturnStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDecOrFun(MinicParser.DecOrFunContext ctx) { }
+	@Override public void enterAssignBodyOrArgsList(MinicParser.AssignBodyOrArgsListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDecOrFun(MinicParser.DecOrFunContext ctx) { }
+	@Override public void exitAssignBodyOrArgsList(MinicParser.AssignBodyOrArgsListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunction(MinicParser.FunctionContext ctx) { }
+	@Override public void enterAssignBody(MinicParser.AssignBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunction(MinicParser.FunctionContext ctx) { }
+	@Override public void exitAssignBody(MinicParser.AssignBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeclaration(MinicParser.DeclarationContext ctx) { }
+	@Override public void enterAssignmentOp(MinicParser.AssignmentOpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDeclaration(MinicParser.DeclarationContext ctx) { }
+	@Override public void exitAssignmentOp(MinicParser.AssignmentOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCallArgsList(MinicParser.CallArgsListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCallArgsList(MinicParser.CallArgsListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -203,6 +216,66 @@ public class MinicBaseListener implements MinicListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArg(MinicParser.ArgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDecOrFunBody(MinicParser.DecOrFunBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDecOrFunBody(MinicParser.DecOrFunBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterParamListBlock(MinicParser.ParamListBlockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParamListBlock(MinicParser.ParamListBlockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterParamList(MinicParser.ParamListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParamList(MinicParser.ParamListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeclarationBody(MinicParser.DeclarationBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclarationBody(MinicParser.DeclarationBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterParam(MinicParser.ParamContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParam(MinicParser.ParamContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -239,18 +312,6 @@ public class MinicBaseListener implements MinicListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitReadDouble(MinicParser.ReadDoubleContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterVariableReference(MinicParser.VariableReferenceContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitVariableReference(MinicParser.VariableReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -328,6 +389,30 @@ public class MinicBaseListener implements MinicListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterVariableOrFunctionCall(MinicParser.VariableOrFunctionCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVariableOrFunctionCall(MinicParser.VariableOrFunctionCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArgsListOrNothing(MinicParser.ArgsListOrNothingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArgsListOrNothing(MinicParser.ArgsListOrNothingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParExpression(MinicParser.ParExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -335,30 +420,6 @@ public class MinicBaseListener implements MinicListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitParExpression(MinicParser.ParExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAssignment(MinicParser.AssignmentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAssignment(MinicParser.AssignmentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAssignmentOp(MinicParser.AssignmentOpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAssignmentOp(MinicParser.AssignmentOpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

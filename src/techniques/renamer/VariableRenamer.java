@@ -1,4 +1,4 @@
-package techniques;
+package techniques.renamer;
 
 import gen.MinicBaseListener;
 import gen.MinicParser;
@@ -36,8 +36,8 @@ public class VariableRenamer extends MinicBaseListener {
     }
 
 
-    @Override public void enterDeclarationOrFun(MinicParser.DeclarationOrFunContext ctx) {
-        if (ctx.getToken(MinicParser.Identifier,0) != null) {
+    @Override public void enterDecOrFunDefinition(MinicParser.DecOrFunDefinitionContext ctx) {
+        if (ctx.Identifier()!= null) {
             String originalName = ctx.getToken(MinicParser.Identifier,0).getText();
             String newName = generateRandomName();
             variableMap.put(originalName, newName);
@@ -51,7 +51,7 @@ public class VariableRenamer extends MinicBaseListener {
      * Updates variable references in expressions
      */
     @Override
-    public void enterVariableReference(MinicParser.VariableReferenceContext ctx) {
+    public void enterVariableOrFunctionCall(MinicParser.VariableOrFunctionCallContext ctx) {
         String originalName = ctx.Identifier().getText();
         if (variableMap.containsKey(originalName)) {
             rewriter.replace(ctx.Identifier().getSymbol(), variableMap.get(originalName));
@@ -62,7 +62,7 @@ public class VariableRenamer extends MinicBaseListener {
      * Updates variable references in assignments
      */
     @Override
-    public void enterAssignment(MinicParser.AssignmentContext ctx) {
+    public void enterAssignmentOrFunCall(MinicParser.AssignmentOrFunCallContext ctx) {
         String originalName = ctx.Identifier().getText();
         if (variableMap.containsKey(originalName)) {
             rewriter.replace(ctx.Identifier().getSymbol(), variableMap.get(originalName));
@@ -70,19 +70,19 @@ public class VariableRenamer extends MinicBaseListener {
     }
 
     /**
-     * Get the Minicated source code
+     * Get the source code
      */
     public String getRenamedCode() {
         return rewriter.getText();
     }
 
     /**
-     * Apply Minication to a parse tree
+     * Apply Var renaming to a parse tree
      */
-    public static String renameVar(MinicParser.ProgramContext programContext, CommonTokenStream tokens) {
+    public static String renameVar(MinicParser.ProgramContext tree, CommonTokenStream tokens) {
         VariableRenamer renamer = new VariableRenamer(tokens);
         ParseTreeWalker walker = new ParseTreeWalker();
-        walker.walk(renamer, programContext);
+        walker.walk(renamer, tree);
         return renamer.getRenamedCode();
     }
 }
