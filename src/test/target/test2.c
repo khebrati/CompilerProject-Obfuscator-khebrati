@@ -1,11 +1,11 @@
-int _vodxuruzu(int a, int b) {
-    int _vifbedqmp = a + b;
-    return _vifbedqmp;
+int _vjcpgwpbg(int a, int b) {
+    int _vnflakacm = a + b;
+    return _vnflakacm;
 }
-int _vxgehicmj() {
-    int _vdbwnhswh = 3;
-    int _vdxkvynjs = 4;
-    int _vvzleesnm = _vodxuruzu(_vdbwnhswh, _vdxkvynjs);
-    printf("%d\n", _vvzleesnm);
+int _vwzvxvmyg() {
+    int _vgulgnjoq = 3;
+    int _vrqxeldtj = 4;
+    int _vfdjmmpld = _vjcpgwpbg(_vgulgnjoq, _vrqxeldtj);
+    printf("%d\n", _vfdjmmpld);
     return 0;
 }
