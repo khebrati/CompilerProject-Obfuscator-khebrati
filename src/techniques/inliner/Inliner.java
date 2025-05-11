@@ -36,6 +36,7 @@ public class Inliner extends MinicBaseListener {
         if (ctx.decOrFunBody().paramListBlock() == null) return;
         //Save it's body
         var functionName = ctx.Identifier();
+        if(functionName.getText().equals("main")) return;
         var functionBody = ctx.decOrFunBody().paramListBlock().block().statement();
         map.put(functionName.getText(), functionBody);
         rewriter.delete(ctx.getStart(), ctx.getStop());

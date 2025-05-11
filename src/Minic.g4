@@ -64,7 +64,7 @@ expression
     ;
 
 argsListOrNothing:
-    (paramList)?;
+    (callArgsList)?;
 
 
 parExpression : '(' expression ')';
