@@ -61,10 +61,13 @@ public class VariableRenamerTest {
 
         @Test
         public void changesFunctionNamesWithRef(){
-            String program = "int anotherFunction(int a, string b){ " +
+            String program = "int anotherFunction(int a, double b){ " +
                     "int b = 8 + 9;" +
+                    "return b;" +
                     " }" +
-                    "anotherFunction();";
+                    "int main(){" +
+                    "anotherFunction(3,4);" +
+                    "}";
             var lexer = new MinicLexer(CharStreams.fromString(program));
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             MinicParser parser = new MinicParser(tokens);

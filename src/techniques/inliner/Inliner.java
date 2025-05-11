@@ -27,6 +27,7 @@ public class Inliner extends MinicBaseListener {
 
     /**
      * Find a function definition, save its name and body, remove the definition.
+     *
      * @param ctx the parse tree
      */
     @Override
@@ -45,13 +46,12 @@ public class Inliner extends MinicBaseListener {
      */
     @Override
     public void enterAssignmentOrFunCall(MinicParser.AssignmentOrFunCallContext ctx) {
-        if(ctx.assignBodyOrArgsList().callArgsList() == null) return;
+        if (ctx.assignBodyOrArgsList().callArgsList() == null) return;
         String functionName = ctx.Identifier().getText();
-        if(!map.containsKey(functionName)) return;
+        if (!map.containsKey(functionName)) return;
         StringBuilder replacement = new StringBuilder();
         map.get(functionName).forEach(statement ->
                 replacement.append(statement.getText()).append(" "));
-
         rewriter.replace(ctx.getStart(), ctx.getStop(), replacement.toString().trim());
     }
 
