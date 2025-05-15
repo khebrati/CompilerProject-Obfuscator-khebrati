@@ -1,4 +1,4 @@
-package com.github.test;
+package com.github;
 
 import com.github.gen.MinicLexer;
 import com.github.gen.MinicParser;
@@ -20,7 +20,7 @@ public class TestRunner {
     @Test
     public void convertAllTestFiles() throws IOException {
         var projectDir = System.getProperty("user.dir");
-        Path casesDir = Paths.get(projectDir, "src", "main", "java", "com", "github", "test", "cases");
+        Path casesDir = Paths.get(projectDir, "src", "test", "java", "com", "github", "cases");
 
         if (!Files.exists(casesDir) || !Files.isDirectory(casesDir)) {
             throw new IllegalArgumentException("Cases directory not found at: " + casesDir.toAbsolutePath());

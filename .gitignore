@@ -1,7 +1,7 @@
-target/
+com.github.target/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+!**/src/main/**/com.github.target/
+!**/src/test/**/com.github.target/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
