@@ -41,7 +41,7 @@ public class TestRunner {
                         Path targetFile = targetFolder.resolve(file.getFileName());
                         Files.writeString(targetFile, obfuscated);
                         addStdioHeader(targetFile);
-                        changeFileExtension(targetFile, ".mc");
+//                        changeFileExtension(targetFile, ".mc");
                         System.out.println("Obfuscated file written to: " + targetFile.toAbsolutePath());
                     } catch (IOException e) {
                         System.err.println("Error processing file: " + file + ": " + e.getMessage());
