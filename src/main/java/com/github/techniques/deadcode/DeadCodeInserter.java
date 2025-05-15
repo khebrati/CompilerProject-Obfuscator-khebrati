@@ -8,12 +8,15 @@ import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.util.Random;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DeadCodeInserter extends MinicBaseListener {
     private static final Random random = new Random();
     private final TokenStreamRewriter rewriter;
     private final CommonTokenStream tokens;
     private int dummyCounter = 0;
+    private final Set<Integer> usedDummies = new HashSet<>();
 
     private static final String[] DEAD_CODE_TEMPLATES = {
             "\n    int _dummy%d = %d;\n",
@@ -24,6 +27,16 @@ public class DeadCodeInserter extends MinicBaseListener {
     public DeadCodeInserter(CommonTokenStream tokens) {
         this.rewriter = new TokenStreamRewriter(tokens);
         this.tokens = tokens;
+    }
+
+    @Override
+    public void enterProgram(MinicParser.ProgramContext ctx) {
+        // Insert declarations for all dummy variables at the start of the file
+        StringBuilder declarations = new StringBuilder();
+        for (int i = 1; i <= 10; i++) { // Pre-declare 10 dummy variables
+            declarations.append(String.format("int _dummy%d = 0;\n", i));
+        }
+        rewriter.insertBefore(ctx.getStart(), declarations.toString());
     }
 
     @Override
@@ -48,20 +61,23 @@ public class DeadCodeInserter extends MinicBaseListener {
 
     private String generateDeadCode() {
         int templateIndex = random.nextInt(DEAD_CODE_TEMPLATES.length);
-        dummyCounter++;
+
+        // Use a dummy variable from 1-10 instead of incrementing
+        int dummyNum = random.nextInt(10) + 1;
+        usedDummies.add(dummyNum);
 
         return switch (templateIndex) {
             case 0 -> // Simple assignment
                     String.format(DEAD_CODE_TEMPLATES[0],
-                            dummyCounter, random.nextInt(100));
+                            dummyNum, random.nextInt(100));
             case 1 -> // While loop
                     String.format(DEAD_CODE_TEMPLATES[1],
-                            dummyCounter, random.nextInt(100), dummyCounter);
+                            dummyNum, random.nextInt(100), dummyNum);
             case 2 -> // If-else statement
                     String.format(DEAD_CODE_TEMPLATES[2],
-                            dummyCounter, random.nextInt(100),
-                            dummyCounter, random.nextInt(100),
-                            dummyCounter, random.nextInt(100));
+                            dummyNum, random.nextInt(100),
+                            dummyNum, random.nextInt(100),
+                            dummyNum, random.nextInt(100));
             default -> "";
         };
     }
