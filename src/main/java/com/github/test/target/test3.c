@@ -1,136 +1,118 @@
+int _vxulnywyw;
+_vxulnywyw = 0;
+int _vldraefvr;
+_vldraefvr = 0;
+int _vhxalyrxv;
+_vhxalyrxv = 0;
+int _vyueovvxh;
+_vyueovvxh = 0;
+int _vxgskvoio;
+_vxgskvoio = 0;
+int _vioraqhtw;
+_vioraqhtw = 0;
+int _vvmfjzcns;
+_vvmfjzcns = 0;
+int _vbmrmporn;
+_vbmrmporn = 0;
+int _vvtmwagmp;
+_vvtmwagmp = 0;
+int _vwlryibfv;
+_vwlryibfv = 0;
+int _vsqeyanwl(int n) {
+    while(_vioraqhtw < 67) { _vioraqhtw = ((_vioraqhtw * 2) - (-1 * 2)) / 2; }
 
-int _vggrhgmra;
-_vggrhgmra = 0;
-int _vvlksvxux;
-_vvlksvxux = 0;
-int _vjxvhqlmy;
-_vjxvhqlmy = 0;
-int _vagxduvho;
-_vagxduvho = 0;
-int _vnuaizitj;
-_vnuaizitj = 0;
-int _vnpioduor;
-_vnpioduor = 0;
-int _vgfzwsvnc;
-_vgfzwsvnc = 0;
-int _vpwhpwbah;
-_vpwhpwbah = 0;
-int _vdgftvrvb;
-_vdgftvrvb = 0;
-int _voqvmncjs;
-_voqvmncjs = 0;
-int _vnqlrutna(int n) {
     if (n <= 1) {
         return 1;
     } else {
-        return n * _vnqlrutna(n - 1);
+        return n * _vsqeyanwl(n - 1);
     }
 }
 
-double _vidplmrjb(int count) {
-    if(_vnpioduor > 90) { _vnpioduor = 93; } else { _vnpioduor = 92; }
+double _vvygqjicn(int count) {
+    double _vrgvrvueh = 0.0;
+    int _vbmzxmrkc = 0;
 
-    while(_vvlksvxux < 49) { _vvlksvxux = _vvlksvxux + 1; }
+    while (_vbmzxmrkc < count) {
+    int _vlhpuiafe;
+    _vlhpuiafe = 77;
 
-    if(_vagxduvho > 41) { _vagxduvho = 27; } else { _vagxduvho = 12; }
+    int _vuqtulpae;
+    _vuqtulpae = 42;
 
-    double _veuafgsgq = 0.0;
-    int _vqeiovxxw = 0;
-
-    while (_vqeiovxxw < count) {
-    while(_vgfzwsvnc < 3) { _vgfzwsvnc = _vgfzwsvnc + 1; }
-
-    while(_vnuaizitj < 31) { _vnuaizitj = _vnuaizitj + 1; }
-
-        println(_vqeiovxxw);
-        _veuafgsgq = ((_veuafgsgq * 2) - (-readDouble() * 2)) / 2;
-        _vqeiovxxw = ((_vqeiovxxw * 3) - (-1 * 3)) / 3;
+        println(_vbmzxmrkc);
+        _vrgvrvueh = (_vrgvrvueh - ((readDouble() * -1)));
+        _vbmzxmrkc = ((_vbmzxmrkc * 2) - (-1 * 2)) / 2;
     }
 
     if (count > 0) {
-        return _veuafgsgq / count;
+        return _vrgvrvueh / count;
     } else {
         return 0.0;
     }
 }
 
-bool _vcoecjpbm(int num) {
-    if(_vggrhgmra > 87) { _vggrhgmra = 91; } else { _vggrhgmra = 93; }
-
+bool _vmaikgwto(int num) {
     if (num <= 1) {
         return false;
     }
 
-    int _vjcsodbgk = 2;
-    while (_vjcsodbgk * _vjcsodbgk <= num) {
-        if (num % _vjcsodbgk == 0) {
+    int _vryzhqfmc = 2;
+    while (_vryzhqfmc * _vryzhqfmc <= num) {
+    while(_vxgskvoio < 78) { _vxgskvoio = (_vxgskvoio - (-1)); }
+
+    if(_vwlryibfv > 95) { _vwlryibfv = 59; } else { _vwlryibfv = 51; }
+
+        if (num % _vryzhqfmc == 0) {
             return false;
         }
-        _vjcsodbgk = ((_vjcsodbgk * 3) - (-1 * 3)) / 3;
+        _vryzhqfmc = (_vryzhqfmc - ((1 * -1)));
     }
 
     return true;
 }
 
-string _vpskxsajv(int value) {
-    if(_voqvmncjs > 69) { _voqvmncjs = 44; } else { _voqvmncjs = 58; }
-
-    int _vtqptvcxe;
-    _vtqptvcxe = 3;
-
-    while(_vpwhpwbah < 25) { _vpwhpwbah = _vpwhpwbah + 1; }
-
-    if (_vcoecjpbm(value)) {
+string _vgeijlbkw(int value) {
+    if (_vmaikgwto(value)) {
         return "The number is prime!";
     } else {
         return "The number is not prime.";
     }
 }
 
-int _vieiaggaf() {
-    int _vmnsxzyeg;
-    _vmnsxzyeg = 16;
+int _vprqznynw() {
+    int _vvenzluau;
+    _vvenzluau = 57;
 
     println(5);
-    int _vivtanrik = readInt();
+    int _vfflkvimm = readInt();
 
-    if (_vivtanrik <= 0) {
-    while(_vgfzwsvnc < 60) { _vgfzwsvnc = _vgfzwsvnc + 1; }
-
-    int _viuipnepv;
-    _viuipnepv = 32;
-
-    while(_voqvmncjs < 45) { _voqvmncjs = _voqvmncjs + 1; }
+    if (_vfflkvimm <= 0) {
+    if(_vldraefvr > 98) { _vldraefvr = 30; } else { _vldraefvr = 57; }
 
         println(-1);
         exit();
     }
 
-    int _vjsmkttlv = _vnqlrutna(_vivtanrik);
-    println(_vjsmkttlv);
+    int _vynmylyyr = _vsqeyanwl(_vfflkvimm);
+    println(_vynmylyyr);
 
-    bool _vtmgzpthv = _vcoecjpbm(_vivtanrik);
-    if (_vtmgzpthv) {
-    if(_vggrhgmra > 60) { _vggrhgmra = 27; } else { _vggrhgmra = 69; }
+    bool _vbkokxuse = _vmaikgwto(_vfflkvimm);
+    if (_vbkokxuse) {
+    while(_vioraqhtw < 59) { _vioraqhtw = (_vioraqhtw - (-1)); }
 
-    if(_vagxduvho > 63) { _vagxduvho = 73; } else { _vagxduvho = 55; }
-
-    int _vnzklxggl;
-    _vnzklxggl = 16;
-
-    if(_vdgftvrvb > 24) { _vdgftvrvb = 71; } else { _vdgftvrvb = 5; }
+    while(_vwlryibfv < 69) { _vwlryibfv = (_vwlryibfv - ((1 * -1))); }
 
         println(1);
     } else {
         println(0);
     }
 
-    string _vgqbyprqt = _vpskxsajv(_vivtanrik);
-    println(_vgqbyprqt);
+    string _vwphtqetz = _vgeijlbkw(_vfflkvimm);
+    println(_vwphtqetz);
 
     println(50);
-    double _vlwextcho = _vidplmrjb(3);
-    print(toString(_vlwextcho));
+    double _vrmkudcnm = _vvygqjicn(3);
+    print(toString(_vrmkudcnm));
     println("is the average");
 
     return 0;

@@ -1,10 +1,12 @@
-int anotherFunction(){
+#include <stdio.h>
+int aFunction(){
     int a = 5 + 8;
-    printf(a);
+    printf("%d\n",a);
 }
 int main(){
-    int anotherFunction;
-    anotherFunction = 4;
+    aFunction();
+    int aVariable;
+    aVariable = 4;
     int a = 2 + 3;
-    printf(a);
+    printf("%d\n",a);
 }

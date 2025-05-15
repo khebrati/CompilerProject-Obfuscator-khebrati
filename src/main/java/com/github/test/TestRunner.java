@@ -6,6 +6,7 @@ import com.github.techniques.deadcode.DeadCodeInserter;
 import com.github.techniques.expression.ExpressionRewriter;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.misc.Pair;
 import org.junit.Test;
 import com.github.techniques.renamer.VariableRenamer;
 
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class TestRunner {
     @Test
@@ -52,33 +54,31 @@ public class TestRunner {
                 });
     }
 
-    private String obfuscate(String source) {
-        // Create initial lexer and parser
-        MinicLexer lexer = new MinicLexer(CharStreams.fromString(source));
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        MinicParser parser = new MinicParser(tokens);
-        MinicParser.ProgramContext tree = parser.program();
+    private String obfuscate(String source){
+        // Define a functional interface for the obfuscators
+        interface Obfuscator {
+            String apply(MinicParser.ProgramContext tree, CommonTokenStream tokens);
+        }
 
-        // Apply transformations in sequence
-        String result = source;
+        var obfuscators = List.<Obfuscator>of(
+                DeadCodeInserter::insertDeadCode,
+                VariableRenamer::renameVar,
+                ExpressionRewriter::rewriteExpressions
+        );
 
-        // Expression rewriting
-        result = ExpressionRewriter.rewriteExpressions(tree, tokens);
+        String convertedSource = source;
+        for (var obfuscator : obfuscators) {
+            var pair = getTokensTree(convertedSource);
+            convertedSource = obfuscator.apply(pair.b, pair.a);
+        }
+        return convertedSource;
+    }
 
-        // Create new parser for dead code insertion
-        lexer = new MinicLexer(CharStreams.fromString(result));
-        tokens = new CommonTokenStream(lexer);
-        parser = new MinicParser(tokens);
-        tree = parser.program();
-        result = DeadCodeInserter.insertDeadCode(tree, tokens);
-
-        // Create new parser for variable renaming
-        lexer = new MinicLexer(CharStreams.fromString(result));
-        tokens = new CommonTokenStream(lexer);
-        parser = new MinicParser(tokens);
-        tree = parser.program();
-        result = VariableRenamer.renameVar(tree, tokens);
-
-        return result;
+    private Pair<CommonTokenStream,MinicParser.ProgramContext> getTokensTree(String source){
+        var lexer = new MinicLexer(CharStreams.fromString(source));
+        var tokens = new CommonTokenStream(lexer);
+        var parser = new MinicParser(tokens);
+        var tree = parser.program();
+        return new Pair<>(tokens,tree);
     }
 }
