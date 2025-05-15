@@ -66,9 +66,7 @@ expression
 argsListOrNothing:
     (callArgsList)?;
 
-
 parExpression : '(' expression ')';
-
 
 type : INT_TYPE     # intType
      | DOUBLE_TYPE  # doubleType
@@ -97,18 +95,17 @@ DIGIT : '0'..'9';
 fragment
 LETTER : ('a'..'z' | 'A'..'Z');
 
-fragment ESC :   '\\' (["\\/bfnrt] | UNICODE) ;
+fragment ESC : '\\' (["\\/bfnrt] | UNICODE) ;
 fragment UNICODE : 'u' HEX HEX HEX HEX ;
 fragment HEX : [0-9a-fA-F] ;
-
 
 WS  :  [ \t\r\n\u000C]+ -> channel(HIDDEN)
     ;
 
-BLOCK_COMMENT : '/*' .*? '*/' -> skip
+BLOCK_COMMENT : '/*' .*? '*/' -> channel(HIDDEN)
               ;
 
-LINE_COMMENT : '//' ~[\r\n]* -> skip
+LINE_COMMENT : '//' ~[\r\n]* -> channel(HIDDEN)
              ;
 
 // tokens, needed to be able to be able to reference them via constants
