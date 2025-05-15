@@ -2,18 +2,14 @@ package com.github.test;
 
 import com.github.gen.MinicLexer;
 import com.github.gen.MinicParser;
+import com.github.techniques.deadcode.DeadCodeInserter;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.misc.Pair;
 import org.junit.Test;
-import com.github.techniques.inliner.Inliner;
 import com.github.techniques.renamer.VariableRenamer;
 
-import static org.junit.Assert.assertFalse;
-
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -61,14 +57,15 @@ public class TestRunner {
     }
 
     private String obfuscate(String source){
-        // Define a functional interface for the obfuscators
+        // Define a functional interface for the obfuscates
         interface Obfuscator {
             String apply(MinicParser.ProgramContext tree, CommonTokenStream tokens);
         }
 
         var obfuscators = List.<Obfuscator>of(
 //                Inliner::inlineFunctions,
-                VariableRenamer::renameVar
+                VariableRenamer::renameVar,
+                DeadCodeInserter::insertDeadCode
         );
 
         String convertedSource = source;
