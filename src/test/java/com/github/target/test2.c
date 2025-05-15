@@ -1,35 +1,41 @@
 #include <stdio.h>
-int _vyuevpciz;
-_vyuevpciz = 0;
-int _vvaiupupo;
-_vvaiupupo = 0;
-int _vgvhuigcs;
-_vgvhuigcs = 0;
-int _vijxaciam;
-_vijxaciam = 0;
-int _vfyiliyxh;
-_vfyiliyxh = 0;
-int _vmoldqrez;
-_vmoldqrez = 0;
-int _vtfswqcky;
-_vtfswqcky = 0;
-int _vfixnmplo;
-_vfixnmplo = 0;
-int _valvxvtpt;
-_valvxvtpt = 0;
-int _vhynzkarl;
-_vhynzkarl = 0;
-int _vpibkwfwr(int a, int b) {
-    int _vrucbxcnd = ((a * 3) - (-b * 3)) / 3;
-    return _vrucbxcnd;
+int _vegfudked;
+_vegfudked = 0;
+int _vqtvixait;
+_vqtvixait = 0;
+int _vpxbgreja;
+_vpxbgreja = 0;
+int _vbxlmtlnf;
+_vbxlmtlnf = 0;
+int _voryetvyb;
+_voryetvyb = 0;
+int _vfmnahxdb;
+_vfmnahxdb = 0;
+int _vowovefzf;
+_vowovefzf = 0;
+int _vfwsdsurl;
+_vfwsdsurl = 0;
+int _veopweblw;
+_veopweblw = 0;
+int _vmbpjupda;
+_vmbpjupda = 0;
+int _vykgxnqpo(int a, int b) {
+    while(_vfmnahxdb < 14) { _vfmnahxdb = (_vfmnahxdb - ((1 * -1))); }
+
+    int _vmrgpkxwu = (a - ((b * -1)));
+    return _vmrgpkxwu;
 }
 int main() {
-    int _vjsegcrub;
-    _vjsegcrub = 49;
+    if(_vqtvixait > 7) { _vqtvixait = 85; } else { _vqtvixait = 80; }
 
-    int _vfsxfuvvz = 3;
-    int _vxtmnwmwl = 4;
-    int _vwyoofjgt = _vpibkwfwr(_vfsxfuvvz, _vxtmnwmwl);
-    printf("%d\n", _vwyoofjgt);
+    int _vedymidkt;
+    _vedymidkt = 46;
+
+    while(_vowovefzf < 59) { _vowovefzf = ((_vowovefzf * 2) - (-1 * 2)) / 2; }
+
+    int _vbifhodws = 3;
+    int _vqlexzqhw = 4;
+    int _vvmsuqpqj = _vykgxnqpo(_vbifhodws, _vqlexzqhw);
+    printf("%d\n", _vvmsuqpqj);
     return 0;
 }
