@@ -1,26 +1,43 @@
-int _vvhtcurnz = 0;
-int _vvhcunvvv = 0;
-int _voamhwqlh = 0;
-int _vgtwgbaqy = 0;
-int _vwrobdvoq = 0;
-int _vqsukjrjy = 0;
-int _vfznycnsd = 0;
-int _vewhwdvmj = 0;
-int _vocydipgk = 0;
-int _vtcbhzfup = 0;
-int _vnxkdiqye(){
-    int _vgcxwtfut = (((5 + 8) * 2) / 2);
-    printf(_vgcxwtfut);
+int _vupgjlktt;
+_vupgjlktt = 0;
+int _vrvgbedxl;
+_vrvgbedxl = 0;
+int _vtxqvywik;
+_vtxqvywik = 0;
+int _vatzwnwvl;
+_vatzwnwvl = 0;
+int _vbpvjremg;
+_vbpvjremg = 0;
+int _vibcklnxm;
+_vibcklnxm = 0;
+int _vuwascdaw;
+_vuwascdaw = 0;
+int _vavlsdkhe;
+_vavlsdkhe = 0;
+int _vqtboaglc;
+_vqtboaglc = 0;
+int _veudfgpcs;
+_veudfgpcs = 0;
+int _vzlfdouqa(){
+    if(_veudfgpcs > 96) { _veudfgpcs = 71; } else { _veudfgpcs = 57; }
+
+    int _vblrixeqp = ((5 * 3) - (-8 * 3)) / 3;
+    printf(_vblrixeqp);
 }
-int _vgnscwenm(){
-    int _vywavyees = 96;
+int _vgkjlvclq(){
+    int _vqixfeoot;
+    _vqixfeoot = 84;
 
-    int _vzdwbkvbj = 35;
+    int _vilpzxhjm;
+    _vilpzxhjm = 18;
 
-    int _vjnlszaii = 74;
+    while(_veudfgpcs < 14) { _veudfgpcs = _veudfgpcs + 1; }
 
-    int _vswwkabfo;
-    _vswwkabfo = 4;
-    int _vzdgthhhp = ((2 * 3 + 3 * 3) / 3);
-    printf(_vzdgthhhp);
+    int _vsknvwgzd;
+    _vsknvwgzd = 1;
+
+    int _viqjhskdh;
+    _viqjhskdh = 4;
+    int _vlnmovxou = (2 - ((3 * -1)));
+    printf(_vlnmovxou);
 }
