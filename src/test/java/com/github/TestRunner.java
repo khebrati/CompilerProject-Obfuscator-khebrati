@@ -43,6 +43,7 @@ public class TestRunner {
                         Path targetFile = targetFolder.resolve(file.getFileName());
                         Files.writeString(targetFile, obfuscated);
                         addStdioHeader(targetFile);
+                        changeFileExtension(targetFile, ".mc");
                         System.out.println("Obfuscated file written to: " + targetFile.toAbsolutePath());
                     } catch (IOException e) {
                         System.err.println("Error processing file: " + file + ": " + e.getMessage());
@@ -59,6 +60,11 @@ public class TestRunner {
         } catch (IOException e) {
             System.err.println("Error adding header to file: " + source + ": " + e.getMessage());
         }
+    }
+
+    private void changeFileExtension(Path file, String newExtension) throws IOException {
+        Path newFile = Paths.get(file.toString().replaceFirst("[.][^.]+$", "") + newExtension);
+        Files.move(file, newFile);
     }
 
     private String obfuscate(String source){
