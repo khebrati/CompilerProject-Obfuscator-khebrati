@@ -1,43 +1,42 @@
-int _vnppnfmjz;
-_vnppnfmjz = 0;
-int _vmynzhxna;
-_vmynzhxna = 0;
-int _vkrsheirl;
-_vkrsheirl = 0;
-int _vfllhutqe;
-_vfllhutqe = 0;
-int _vsdpgricq;
-_vsdpgricq = 0;
-int _vzuxpdeva;
-_vzuxpdeva = 0;
-int _vkincslks;
-_vkincslks = 0;
-int _vemprforc;
-_vemprforc = 0;
-int _vasafgxwi;
-_vasafgxwi = 0;
-int _vsihadqbu;
-_vsihadqbu = 0;
-int _vkselzeme(int a, int b) {
-    if(_vemprforc > 43) { _vemprforc = 37; } else { _vemprforc = 1; }
+#include <stdio.h>
+int _vsnvgssrs;
+_vsnvgssrs = 0;
+int _vpapxabhz;
+_vpapxabhz = 0;
+int _viqfvabdj;
+_viqfvabdj = 0;
+int _vjonwjvxz;
+_vjonwjvxz = 0;
+int _vcwzwbuok;
+_vcwzwbuok = 0;
+int _volhmdvfr;
+_volhmdvfr = 0;
+int _vsjlfgywx;
+_vsjlfgywx = 0;
+int _vkfddbmbo;
+_vkfddbmbo = 0;
+int _vvzxmkyln;
+_vvzxmkyln = 0;
+int _vzfuezebb;
+_vzfuezebb = 0;
+int _vcoeoldfu(int a, int b) {
+    if(_vkfddbmbo > 84) { _vkfddbmbo = 85; } else { _vkfddbmbo = 5; }
 
-    while(_vkrsheirl < 58) { _vkrsheirl = (_vkrsheirl - (-1)); }
+    int _vhuybtdoi;
+    _vhuybtdoi = 27;
 
-    int _vkuevvktd;
-    _vkuevvktd = 74;
+    int _vpildvuen;
+    _vpildvuen = 43;
 
-    int _vksshvnan = ((a * 2) - (-b * 2)) / 2;
-    return _vksshvnan;
+    int _vupfvblqb = ((a * 3) - (-b * 3)) / 3;
+    return _vupfvblqb;
 }
-int _vwvmplxlt() {
-    int _vpbpphpyv;
-    _vpbpphpyv = 72;
+int main() {
+    while(_viqfvabdj < 42) { _viqfvabdj = ((_viqfvabdj * 2) - (-1 * 2)) / 2; }
 
-    if(_vpbpphpyv > 54) { _vpbpphpyv = 71; } else { _vpbpphpyv = 34; }
-
-    int _vvneqjlvt = 3;
-    int _vbxyncafn = 4;
-    int _voeatefft = _vkselzeme(_vvneqjlvt, _vbxyncafn);
-    printf("%d\n", _voeatefft);
+    int _vmdidiywo = 3;
+    int _vzphtwfuk = 4;
+    int _vinmawuti = _vcoeoldfu(_vmdidiywo, _vzphtwfuk);
+    printf("%d\n", _vinmawuti);
     return 0;
 }

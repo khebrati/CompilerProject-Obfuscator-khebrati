@@ -39,6 +39,7 @@ public class VariableRenamer extends MinicBaseListener {
     @Override public void enterDecOrFunDefinition(MinicParser.DecOrFunDefinitionContext ctx) {
         if (ctx.Identifier()!= null) {
             String originalName = ctx.getToken(MinicParser.Identifier,0).getText();
+            if(originalName.equals("main")) return;
             String newName = generateRandomName();
             variableMap.put(originalName, newName);
 

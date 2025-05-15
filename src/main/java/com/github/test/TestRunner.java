@@ -42,16 +42,23 @@ public class TestRunner {
 
                         Path targetFile = targetFolder.resolve(file.getFileName());
                         Files.writeString(targetFile, obfuscated);
-
-                        // Print debug information
-                        System.out.println("Processed file: " + file.getFileName());
-                        System.out.println("Original content:\n" + content);
-                        System.out.println("Obfuscated content:\n" + obfuscated);
-
+                        addStdioHeader(targetFile);
+                        System.out.println("Obfuscated file written to: " + targetFile.toAbsolutePath());
                     } catch (IOException e) {
                         System.err.println("Error processing file: " + file + ": " + e.getMessage());
                     }
                 });
+    }
+
+    private void addStdioHeader(Path source){
+        // Add stdio.h header to the beginning of the file
+        String header = "#include <stdio.h>\n";
+        try {
+            String content = Files.readString(source);
+            Files.writeString(source, header + content);
+        } catch (IOException e) {
+            System.err.println("Error adding header to file: " + source + ": " + e.getMessage());
+        }
     }
 
     private String obfuscate(String source){

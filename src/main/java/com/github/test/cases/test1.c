@@ -1,4 +1,3 @@
-#include <stdio.h>
 int aFunction(){
     int a = 5 + 8;
     printf("%d\n",a);
