@@ -3,6 +3,7 @@ com.github.target/
 !**/src/main/**/com.github.target/
 !**/src/test/**/com.github.target/
 
+
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
@@ -36,3 +37,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
+test/java/com/github/target/
