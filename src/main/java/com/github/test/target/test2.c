@@ -1,25 +1,19 @@
-int _vboydnkhz(int a, int b) {
-    while(_dummy1 < 55) { _dummy1++; }
-
-    int _vtbwucnlh = a + b;
-    return _vtbwucnlh;
+int _vrlegoppe(int a, int b) {
+    int _vyqcpctxc = ((a + 0) + (b + 0));
+    return _vyqcpctxc;
 }
-int _vghrflpcj() {
-    if(_dummy2 > 87) { _dummy2 = 52; } else { _dummy2 = 68; }
+int _vmqnhqzaq() {
+    if(_dummy1 > 74) { _dummy1 = 59; } else { _dummy1 = 72; }
 
-    if(_dummy3 > 65) { _dummy3 = 7; } else { _dummy3 = 70; }
+    if(_dummy2 > 84) { _dummy2 = 16; } else { _dummy2 = 33; }
 
-    while(_dummy4 < 29) { _dummy4++; }
+    while(_dummy3 < 9) { _dummy3++; }
 
-    while(_dummy5 < 74) { _dummy5++; }
+    int _vsnkazbey = 68;
 
-    if(_dummy6 > 26) { _dummy6 = 56; } else { _dummy6 = 8; }
-
-    if(_dummy7 > 10) { _dummy7 = 42; } else { _dummy7 = 99; }
-
-    int _vimroivhi = 3;
-    int _vftpkysns = 4;
-    int _vtjvmvihy = _vboydnkhz(_vimroivhi, _vftpkysns);
-    printf("%d\n", _vtjvmvihy);
+    int _vznccitvs = 3;
+    int _veppeilyr = 4;
+    int _vbmiaskgl = _vrlegoppe(_vznccitvs, _veppeilyr);
+    printf("%d\n", _vbmiaskgl);
     return 0;
 }

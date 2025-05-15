@@ -50,21 +50,20 @@ public class DeadCodeInserter extends MinicBaseListener {
         int templateIndex = random.nextInt(DEAD_CODE_TEMPLATES.length);
         dummyCounter++;
 
-        switch (templateIndex) {
-            case 0: // Simple assignment
-                return String.format(DEAD_CODE_TEMPLATES[0],
-                        dummyCounter, random.nextInt(100));
-            case 1: // While loop
-                return String.format(DEAD_CODE_TEMPLATES[1],
-                        dummyCounter, random.nextInt(100), dummyCounter);
-            case 2: // If-else statement
-                return String.format(DEAD_CODE_TEMPLATES[2],
-                        dummyCounter, random.nextInt(100),
-                        dummyCounter, random.nextInt(100),
-                        dummyCounter, random.nextInt(100));
-            default:
-                return "";
-        }
+        return switch (templateIndex) {
+            case 0 -> // Simple assignment
+                    String.format(DEAD_CODE_TEMPLATES[0],
+                            dummyCounter, random.nextInt(100));
+            case 1 -> // While loop
+                    String.format(DEAD_CODE_TEMPLATES[1],
+                            dummyCounter, random.nextInt(100), dummyCounter);
+            case 2 -> // If-else statement
+                    String.format(DEAD_CODE_TEMPLATES[2],
+                            dummyCounter, random.nextInt(100),
+                            dummyCounter, random.nextInt(100),
+                            dummyCounter, random.nextInt(100));
+            default -> "";
+        };
     }
 
     public String getObfuscatedCode() {
