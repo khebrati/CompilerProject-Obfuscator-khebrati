@@ -11,9 +11,7 @@ import org.junit.Test;
 import com.github.techniques.renamer.VariableRenamer;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.List;
 
 public class TestRunner {
@@ -64,7 +62,7 @@ public class TestRunner {
 
     private void changeFileExtension(Path file, String newExtension) throws IOException {
         Path newFile = Paths.get(file.toString().replaceFirst("[.][^.]+$", "") + newExtension);
-        Files.move(file, newFile);
+        Files.move(file, newFile, StandardCopyOption.REPLACE_EXISTING);
     }
 
     private String obfuscate(String source){
