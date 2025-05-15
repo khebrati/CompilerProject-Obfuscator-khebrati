@@ -10,9 +10,10 @@ double calculateAverage(int count) {
     double sum = 0.0;
     int i = 0;
 
+    printf("Counting from zero to the number: \n");
     while (i < count) {
-        println(i);
-        sum = sum + readDouble();
+        printf("%d\n",i);
+        sum = sum + i;
         i = i + 1;
     }
 
@@ -23,56 +24,41 @@ double calculateAverage(int count) {
     }
 }
 
-bool isPrime(int num) {
+int isPrime(int num) {
     if (num <= 1) {
-        return false;
+        return 0;
     }
 
     int i = 2;
     while (i * i <= num) {
         if (num % i == 0) {
-            return false;
+            return 0;
         }
         i = i + 1;
     }
 
-    return true;
+    return 1;
 }
 
-string generateMessage(int value) {
-    if (isPrime(value)) {
-        return "The number is prime!";
-    } else {
-        return "The number is not prime.";
-    }
-}
 
 int main() {
-    println(5);
-    int number = readInt();
-
-    if (number <= 0) {
-        println(-1);
-        exit();
-    }
-
+    int i = 5;
+    printf("Number is %d\n",i);
+    int number = i;
     int fact = factorial(number);
-    println(fact);
+    printf("Its factorial is %d\n",fact);
 
-    bool isPrimeNum = isPrime(number);
+    int isPrimeNum = isPrime(number);
+    printf("Is it prime? ");
     if (isPrimeNum) {
-        println(1);
+        printf("yes\r\n");
     } else {
-        println(0);
+        printf("no\r\n");
     }
 
-    string message = generateMessage(number);
-    println(message);
-
-    println(50);
-    double avg = calculateAverage(3);
-    print(toString(avg));
-    println("is the average");
+    double avg = calculateAverage(i);
+    printf("Its average: ");
+    printf("%f ",avg);
 
     return 0;
 }

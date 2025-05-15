@@ -1,42 +1,40 @@
 #include <stdio.h>
-int _vprsvfuuz;
-_vprsvfuuz = 0;
-int _vcuwezqay;
-_vcuwezqay = 0;
-int _vwtdfvtkq;
-_vwtdfvtkq = 0;
-int _vfqdhhrmp;
-_vfqdhhrmp = 0;
-int _vptevksmy;
-_vptevksmy = 0;
-int _vuugfgzrr;
-_vuugfgzrr = 0;
-int _vgqjcxfkz;
-_vgqjcxfkz = 0;
-int _vvgfhzamx;
-_vvgfhzamx = 0;
-int _vzwukyaje;
-_vzwukyaje = 0;
-int _vpgzpiqcs;
-_vpgzpiqcs = 0;
-int _vfgpmfupz(){
-    if(_vptevksmy > 76) { _vptevksmy = 35; } else { _vptevksmy = 79; }
-
-    int _vlazrwmjb = (5 - ((8 * -1)));
-    printf("%d\n",_vlazrwmjb);
+int _vtlcllgcy;
+_vtlcllgcy = 0;
+int _vlnvujmnm;
+_vlnvujmnm = 0;
+int _vzezpjbvr;
+_vzezpjbvr = 0;
+int _vnpceohtk;
+_vnpceohtk = 0;
+int _vnjqahpub;
+_vnjqahpub = 0;
+int _vhejthtgl;
+_vhejthtgl = 0;
+int _vymbqincp;
+_vymbqincp = 0;
+int _vpohtyowe;
+_vpohtyowe = 0;
+int _vqwissexy;
+_vqwissexy = 0;
+int _vergltsrz;
+_vergltsrz = 0;
+int _vagqgwbwl(){
+    int _vxfqowfgy = ((5 * 2) - (-8 * 2)) / 2;
+    printf("%d\n",_vxfqowfgy);
 }
 int main(){
-    if(_vprsvfuuz > 30) { _vprsvfuuz = 88; } else { _vprsvfuuz = 88; }
+    int _vshecgkor;
+    _vshecgkor = 33;
 
-    while(_vvgfhzamx < 8) { _vvgfhzamx = ((_vvgfhzamx * 3) - (-1 * 3)) / 3; }
+    int _vkoddohym;
+    _vkoddohym = 43;
 
-    while(_vwtdfvtkq < 6) { _vwtdfvtkq = (_vwtdfvtkq - ((1 * -1))); }
+    while(_vnpceohtk < 26) { _vnpceohtk = (_vnpceohtk - (-1)); }
 
-    while(_vpgzpiqcs < 77) { _vpgzpiqcs = ((_vpgzpiqcs * 2) - (-1 * 2)) / 2; }
-
-    _vfgpmfupz();
-    int _vkrjqimgh;
-    _vkrjqimgh = 4;
-    int _vroiykexi = ((2 * 3) - (-3 * 3)) / 3;
-    printf("%d\n",_vroiykexi);
+    _vagqgwbwl();
+    int _vjtxzappl;
+    _vjtxzappl = 4;
+    int _vfgbipxkg = (2 - (-3));
+    printf("%d\n",_vfgbipxkg);
 }

@@ -1,134 +1,117 @@
 #include <stdio.h>
-int _vdzqbaoqv;
-_vdzqbaoqv = 0;
-int _vsijouxbo;
-_vsijouxbo = 0;
-int _vatbiiygp;
-_vatbiiygp = 0;
-int _vvcbetsqi;
-_vvcbetsqi = 0;
-int _vyxwwqgly;
-_vyxwwqgly = 0;
-int _vtcpjycea;
-_vtcpjycea = 0;
-int _vwphxeqkv;
-_vwphxeqkv = 0;
-int _vbloubjzj;
-_vbloubjzj = 0;
-int _vgqlvgpjk;
-_vgqlvgpjk = 0;
-int _vuijzsdhr;
-_vuijzsdhr = 0;
-int _vbextfoty(int n) {
-    while(_vatbiiygp < 94) { _vatbiiygp = ((_vatbiiygp * 2) - (-1 * 2)) / 2; }
-
-    int _vyssmmouw;
-    _vyssmmouw = 66;
-
-    int _vtrfkwvhk;
-    _vtrfkwvhk = 98;
-
+int _vqwkqgfcd;
+_vqwkqgfcd = 0;
+int _vknmshzws;
+_vknmshzws = 0;
+int _vsmxeqwyd;
+_vsmxeqwyd = 0;
+int _vmayqyrra;
+_vmayqyrra = 0;
+int _vfypdsqvt;
+_vfypdsqvt = 0;
+int _veormgvtn;
+_veormgvtn = 0;
+int _vnjnoemuw;
+_vnjnoemuw = 0;
+int _vlmbzfbmn;
+_vlmbzfbmn = 0;
+int _vmiorkoci;
+_vmiorkoci = 0;
+int _veravwxqz;
+_veravwxqz = 0;
+int _vgjgxvlik(int n) {
     if (n <= 1) {
         return 1;
     } else {
-        return n * _vbextfoty(n - 1);
+        return n * _vgjgxvlik(n - 1);
     }
 }
 
-double _vrkkewpuh(int count) {
-    if(_vsijouxbo > 40) { _vsijouxbo = 60; } else { _vsijouxbo = 68; }
+double _vbmuqsrzs(int count) {
+    if(_vknmshzws > 93) { _vknmshzws = 32; } else { _vknmshzws = 38; }
 
-    double _vmjlygmdp = 0.0;
-    int _vvblzrywg = 0;
+    double _voczgvkij = 0.0;
+    int _vrgacnhkr = 0;
 
-    while (_vvblzrywg < count) {
-    while(_vwphxeqkv < 66) { _vwphxeqkv = ((_vwphxeqkv * 2) - (-1 * 2)) / 2; }
+    printf("Counting from zero to the number: \n");
+    while (_vrgacnhkr < count) {
+    while(_vsmxeqwyd < 91) { _vsmxeqwyd = ((_vsmxeqwyd * 2) - (-1 * 2)) / 2; }
 
-    while(_vgqlvgpjk < 90) { _vgqlvgpjk = (_vgqlvgpjk - ((1 * -1))); }
+    while(_vfypdsqvt < 76) { _vfypdsqvt = (_vfypdsqvt - ((1 * -1))); }
 
-        println(_vvblzrywg);
-        _vmjlygmdp = (_vmjlygmdp - (-readDouble()));
-        _vvblzrywg = ((_vvblzrywg * 2) - (-1 * 2)) / 2;
+    while(_vmiorkoci < 80) { _vmiorkoci = ((_vmiorkoci * 3) - (-1 * 3)) / 3; }
+
+    if(_vsmxeqwyd > 51) { _vsmxeqwyd = 96; } else { _vsmxeqwyd = 39; }
+
+        printf("%d\n",_vrgacnhkr);
+        _voczgvkij = ((_voczgvkij * 3) - (-_vrgacnhkr * 3)) / 3;
+        _vrgacnhkr = ((_vrgacnhkr * 2) - (-1 * 2)) / 2;
     }
 
     if (count > 0) {
-        return _vmjlygmdp / count;
+        return _voczgvkij / count;
     } else {
         return 0.0;
     }
 }
 
-bool _vydfwfftr(int num) {
+int _vshrriaxa(int num) {
+    while(_vsmxeqwyd < 9) { _vsmxeqwyd = (_vsmxeqwyd - ((1 * -1))); }
+
+    while(_vmiorkoci < 44) { _vmiorkoci = (_vmiorkoci - ((1 * -1))); }
+
     if (num <= 1) {
-        return false;
+        return 0;
     }
 
-    int _vljtbhskb = 2;
-    while (_vljtbhskb * _vljtbhskb <= num) {
-    while(_vatbiiygp < 52) { _vatbiiygp = ((_vatbiiygp * 3) - (-1 * 3)) / 3; }
+    int _vjdfysryz = 2;
+    while (_vjdfysryz * _vjdfysryz <= num) {
+    while(_veormgvtn < 66) { _veormgvtn = (_veormgvtn - (-1)); }
 
-    while(_vyxwwqgly < 97) { _vyxwwqgly = (_vyxwwqgly - (-1)); }
+    if(_vfypdsqvt > 92) { _vfypdsqvt = 73; } else { _vfypdsqvt = 8; }
 
-    if(_vtrfkwvhk > 53) { _vtrfkwvhk = 33; } else { _vtrfkwvhk = 14; }
-
-        if (num % _vljtbhskb == 0) {
-            return false;
+        if (num % _vjdfysryz == 0) {
+            return 0;
         }
-        _vljtbhskb = ((_vljtbhskb * 2) - (-1 * 2)) / 2;
+        _vjdfysryz = ((_vjdfysryz * 2) - (-1 * 2)) / 2;
     }
 
-    return true;
+    return 1;
 }
 
-string _vzsaxzphj(int value) {
-    if(_vsijouxbo > 55) { _vsijouxbo = 65; } else { _vsijouxbo = 20; }
-
-    if (_vydfwfftr(value)) {
-        return "The number is prime!";
-    } else {
-        return "The number is not prime.";
-    }
-}
 
 int main() {
-    println(5);
-    int _vjzeqtinw = readInt();
+    int _vnkqzjobz;
+    _vnkqzjobz = 13;
 
-    if (_vjzeqtinw <= 0) {
-    while(_vvcbetsqi < 42) { _vvcbetsqi = (_vvcbetsqi - (-1)); }
+    int _vlfpnhted = 5;
+    printf("Number is %d\n",_vlfpnhted);
+    int _vhugrxsxs = _vlfpnhted;
+    int _vugdonuwd = _vgjgxvlik(_vhugrxsxs);
+    printf("Its factorial is %d\n",_vugdonuwd);
 
-    if(_vyssmmouw > 55) { _vyssmmouw = 33; } else { _vyssmmouw = 5; }
+    int _vtfuamaru = _vshrriaxa(_vhugrxsxs);
+    printf("Is it prime? ");
+    if (_vtfuamaru) {
+    int _vuntenprp;
+    _vuntenprp = 74;
 
-    if(_vyxwwqgly > 21) { _vyxwwqgly = 55; } else { _vyxwwqgly = 65; }
+    while(_veravwxqz < 61) { _veravwxqz = ((_veravwxqz * 2) - (-1 * 2)) / 2; }
 
-        println(-1);
-        exit();
-    }
+    while(_vfypdsqvt < 58) { _vfypdsqvt = (_vfypdsqvt - ((1 * -1))); }
 
-    int _vmvbvnmab = _vbextfoty(_vjzeqtinw);
-    println(_vmvbvnmab);
+    if(_veormgvtn > 73) { _veormgvtn = 62; } else { _veormgvtn = 51; }
 
-    bool _vmnsphrwy = _vydfwfftr(_vjzeqtinw);
-    if (_vmnsphrwy) {
-    if(_vbloubjzj > 81) { _vbloubjzj = 82; } else { _vbloubjzj = 63; }
+    while(_vnjnoemuw < 47) { _vnjnoemuw = ((_vnjnoemuw * 2) - (-1 * 2)) / 2; }
 
-    while(_vbloubjzj < 5) { _vbloubjzj = ((_vbloubjzj * 3) - (-1 * 3)) / 3; }
-
-    int _vczbspudn;
-    _vczbspudn = 19;
-
-        println(1);
+        printf("yes\r\n");
     } else {
-        println(0);
+        printf("no\r\n");
     }
 
-    string _vtqpqgvvs = _vzsaxzphj(_vjzeqtinw);
-    println(_vtqpqgvvs);
-
-    println(50);
-    double _vygpxrifp = _vrkkewpuh(3);
-    print(toString(_vygpxrifp));
-    println("is the average");
+    double _vgdihkdjn = _vbmuqsrzs(_vlfpnhted);
+    printf("Its average: ");
+    printf("%f ",_vgdihkdjn);
 
     return 0;
 }
