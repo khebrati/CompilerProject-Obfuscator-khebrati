@@ -1,41 +1,41 @@
 #include <stdio.h>
-int _vegfudked;
-_vegfudked = 0;
-int _vqtvixait;
-_vqtvixait = 0;
-int _vpxbgreja;
-_vpxbgreja = 0;
-int _vbxlmtlnf;
-_vbxlmtlnf = 0;
-int _voryetvyb;
-_voryetvyb = 0;
-int _vfmnahxdb;
-_vfmnahxdb = 0;
-int _vowovefzf;
-_vowovefzf = 0;
-int _vfwsdsurl;
-_vfwsdsurl = 0;
-int _veopweblw;
-_veopweblw = 0;
-int _vmbpjupda;
-_vmbpjupda = 0;
-int _vykgxnqpo(int a, int b) {
-    while(_vfmnahxdb < 14) { _vfmnahxdb = (_vfmnahxdb - ((1 * -1))); }
+int _dummy1;
+_dummy1 = 0;
+int _dummy2;
+_dummy2 = 0;
+int _dummy3;
+_dummy3 = 0;
+int _dummy4;
+_dummy4 = 0;
+int _dummy5;
+_dummy5 = 0;
+int _dummy6;
+_dummy6 = 0;
+int _dummy7;
+_dummy7 = 0;
+int _dummy8;
+_dummy8 = 0;
+int _dummy9;
+_dummy9 = 0;
+int _dummy10;
+_dummy10 = 0;
+int sum(int a, int b) {
+    while(_dummy6 < 94) { _dummy6 = _dummy6 + 1; }
 
-    int _vmrgpkxwu = (a - ((b * -1)));
-    return _vmrgpkxwu;
+    if(_dummy2 > 50) { _dummy2 = 49; } else { _dummy2 = 44; }
+
+    int result = a + b;
+    return result;
 }
 int main() {
-    if(_vqtvixait > 7) { _vqtvixait = 85; } else { _vqtvixait = 80; }
+    while(_dummy8 < 48) { _dummy8 = _dummy8 + 1; }
 
-    int _vedymidkt;
-    _vedymidkt = 46;
+    int _dummy1;
+    _dummy1 = 3;
 
-    while(_vowovefzf < 59) { _vowovefzf = ((_vowovefzf * 2) - (-1 * 2)) / 2; }
-
-    int _vbifhodws = 3;
-    int _vqlexzqhw = 4;
-    int _vvmsuqpqj = _vykgxnqpo(_vbifhodws, _vqlexzqhw);
-    printf("%d\n", _vvmsuqpqj);
+    int x = 3;
+    int y = 4;
+    int total = sum(x, y);
+    printf("%d\n", total);
     return 0;
 }

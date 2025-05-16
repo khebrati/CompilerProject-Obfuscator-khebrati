@@ -26,7 +26,8 @@ public class FileHandling {
             throw new IllegalArgumentException("Cases directory not found at: " + targetDir.toAbsolutePath());
         }
 
-        Files.writeString(Path.of(targetDir.toString(),name),content);
+        String header = "#include <stdio.h>\n";
+        Files.writeString(Path.of(targetDir.toString(),name),header + content);
     }
 
 
