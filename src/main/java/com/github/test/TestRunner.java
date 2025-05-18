@@ -7,7 +7,7 @@ import com.github.techniques.expression.ExpressionRewriter;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.junit.Test;
-import com.github.techniques.renamer.VariableRenamer;
+import com.github.techniques.renamer.Renamer;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -77,7 +77,7 @@ public class TestRunner {
         tokens = new CommonTokenStream(lexer);
         parser = new MinicParser(tokens);
         tree = parser.program();
-        result = VariableRenamer.renameVar(tree, tokens);
+        result = Renamer.renameVar(tree, tokens);
 
         return result;
     }

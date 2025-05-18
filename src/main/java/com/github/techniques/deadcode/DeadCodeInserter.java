@@ -7,29 +7,29 @@ import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class DeadCodeInserter extends MinicBaseListener {
     private static final Random random = new Random();
     private final TokenStreamRewriter rewriter;
-    private final CommonTokenStream tokens;
-
-    private static final String[] DEAD_CODE_TEMPLATES = {
-            "\n    int _dummy%d;\n    _dummy%d = %d;\n",
-            "\n    while(_dummy%d < %d) { _dummy%d = _dummy%d + 1; }\n",
-            "\n    if(_dummy%d > %d) { _dummy%d = %d; } else { _dummy%d = %d; }\n"
-    };
+    public static final int NUM_GLOBAL_DUMMIES = 10;
+    public static final String GLOBAL_DUMMY_PREFIX = "_dummy";
+    private final List<String> globalDummyNames = new ArrayList<>();
 
     public DeadCodeInserter(CommonTokenStream tokens) {
         this.rewriter = new TokenStreamRewriter(tokens);
-        this.tokens = tokens;
+        for (int i = 1; i <= NUM_GLOBAL_DUMMIES; i++) {
+            globalDummyNames.add(GLOBAL_DUMMY_PREFIX + i);
+        }
     }
 
     @Override
     public void enterProgram(MinicParser.ProgramContext ctx) {
         StringBuilder declarations = new StringBuilder();
-        for (int i = 1; i <= 10; i++) {
-            declarations.append(String.format("int _dummy%d;\n_dummy%d = 0;\n", i, i));
+        for (String dummyName : globalDummyNames) {
+            declarations.append(String.format("int %s = 0;\n", dummyName));
         }
         rewriter.insertBefore(ctx.getStart(), declarations.toString());
     }
@@ -37,8 +37,8 @@ public class DeadCodeInserter extends MinicBaseListener {
     @Override
     public void enterDecOrFunDefinition(MinicParser.DecOrFunDefinitionContext ctx) {
         if (random.nextDouble() < 0.7) {
-            for (int i = ctx.getStart().getTokenIndex(); i < tokens.size(); i++) {
-                Token token = tokens.get(i);
+            for (int i = ctx.getStart().getTokenIndex(); i < rewriter.getTokenStream().size(); i++) {
+                Token token = rewriter.getTokenStream().get(i);
                 if (token.getText().equals("{")) {
                     int numInsertions = random.nextInt(3) + 1;
                     for (int j = 0; j < numInsertions; j++) {
@@ -52,20 +52,16 @@ public class DeadCodeInserter extends MinicBaseListener {
     }
 
     private String generateDeadCode() {
-        int templateIndex = random.nextInt(DEAD_CODE_TEMPLATES.length);
-        int dummyNum = random.nextInt(10) + 1;
-
-        return switch (templateIndex) {
-            case 0 -> String.format(DEAD_CODE_TEMPLATES[0],
-                    dummyNum, dummyNum, random.nextInt(100));
-            case 1 -> String.format(DEAD_CODE_TEMPLATES[1],
-                    dummyNum, random.nextInt(100), dummyNum, dummyNum);
-            case 2 -> String.format(DEAD_CODE_TEMPLATES[2],
-                    dummyNum, random.nextInt(100),
-                    dummyNum, random.nextInt(100),
-                    dummyNum, random.nextInt(100));
-            default -> "";
-        };
+        // Only use declared dummy names!
+        String dummyName = globalDummyNames.get(random.nextInt(globalDummyNames.size()));
+        int pick = random.nextInt(3);
+        int a = random.nextInt(100), b = random.nextInt(100), c = random.nextInt(100);
+        switch (pick) {
+            case 0: return String.format("\n    %s = %d;\n", dummyName, a);
+            case 1: return String.format("\n    while(%s < %d) { %s = %s + 1; }\n", dummyName, a, dummyName, dummyName);
+            case 2: return String.format("\n    if(%s > %d) { %s = %d; } else { %s = %d; }\n", dummyName, a, dummyName, b, dummyName, c);
+            default: return "";
+        }
     }
 
     public String getObfuscatedCode() {

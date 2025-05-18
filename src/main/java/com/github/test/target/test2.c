@@ -1,44 +1,21 @@
-int _vevjxvsjb;
-_vevjxvsjb = 0;
-int _vcyldacmd;
-_vcyldacmd = 0;
-int _vukrooolt;
-_vukrooolt = 0;
-int _vxprhrgrf;
-_vxprhrgrf = 0;
-int _vooauaduj;
-_vooauaduj = 0;
-int _vzurojqte;
-_vzurojqte = 0;
-int _vwhcfoihr;
-_vwhcfoihr = 0;
-int _vhaxvtcsx;
-_vhaxvtcsx = 0;
-int _vbqwqdqml;
-_vbqwqdqml = 0;
-int _vxjhsummv;
-_vxjhsummv = 0;
-int _vsexjonvc(int a, int b) {
-    int _vjuvrgjjv;
-    _vjuvrgjjv = 60;
-
-    int _vppipjdnx = (a - (-b));
-    return _vppipjdnx;
+int _vzjwmffhc = 0;
+int _vnyoyldca = 0;
+int _vbsrabern = 0;
+int _vvgqtbvbn = 0;
+int _vtrucvwqk = 0;
+int _vcvjdtuhq = 0;
+int _vcfabypai = 0;
+int _vnyoxlfap = 0;
+int _vcenymvbq = 0;
+int _vqympmcnl = 0;
+int _vccushxbl(int a, int b) {
+    int _vowugraqj = ((a * 3) - (-b * 3)) / 3;
+    return _vowugraqj;
 }
-int _vhwvivulq() {
-    int _vfxtoukft;
-    _vfxtoukft = 11;
-
-    if(_vukrooolt > 13) { _vukrooolt = 19; } else { _vukrooolt = 53; }
-
-    int _vskjacunx;
-    _vskjacunx = 46;
-
-    if(_vxjhsummv > 38) { _vxjhsummv = 56; } else { _vxjhsummv = 43; }
-
-    int _vjahxdkgc = 3;
-    int _vcqukazel = 4;
-    int _vcgttkqtt = _vsexjonvc(_vjahxdkgc, _vcqukazel);
-    printf("%d\n", _vcgttkqtt);
+int main() {
+    int _vdrjderwr = 3;
+    int _vobzeepbo = 4;
+    int _vmvfroira = _vccushxbl(_vdrjderwr, _vobzeepbo);
+    printf("%d\n", _vmvfroira);
     return 0;
 }
