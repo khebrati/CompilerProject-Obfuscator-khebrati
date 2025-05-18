@@ -1,68 +1,64 @@
-int _veuspulwb = 0;
-int _vkpgiztvw = 0;
-int _vsfrnagkt = 0;
-int _vygxsvbps = 0;
-int _vjuyunenu = 0;
-int _vzfbbjjwc = 0;
-int _vymlksfvs = 0;
-int _vqbnpzzqw = 0;
-int _vjdbgbdmp = 0;
-int _vsyirbqsi = 0;
-int _vsisvuotk(int n) {
-    if(_vkpgiztvw > 72) { _vkpgiztvw = 7; } else { _vkpgiztvw = 44; }
+int _vqluhpsaw = 0;
+int _vgyfywewk = 0;
+int _vrsbspdkk = 0;
+int _vgbxcayfz = 0;
+int _vvxuajmnk = 0;
+int _vyvounaor = 0;
+int _vrfrfmxsn = 0;
+int _vonhenyul = 0;
+int _vnwweoszx = 0;
+int _vsbcvlkrc = 0;
+int _vcenrmpde(int n) {
+    while(_vrsbspdkk < 4) { _vrsbspdkk = _vrsbspdkk + 1; }
+
+    _vnwweoszx = 56;
+
+    if(_vgbxcayfz > 75) { _vgbxcayfz = 13; } else { _vgbxcayfz = 26; }
 
     if (n <= 1) {
         return 1;
     } else {
-        return n * _vsisvuotk(n - 1);
+        return n * _vcenrmpde(n - 1);
     }
 }
 
-double _vgzsakhcz(int count) {
-    if(_vqbnpzzqw > 87) { _vqbnpzzqw = 16; } else { _vqbnpzzqw = 31; }
+double _vblywygua(int count) {
+    _vrfrfmxsn = 60;
 
-    while(_vygxsvbps < 32) { _vygxsvbps = _vygxsvbps + 1; }
+    _vonhenyul = 83;
 
-    _vjuyunenu = 28;
+    if(_vgbxcayfz > 18) { _vgbxcayfz = 49; } else { _vgbxcayfz = 53; }
 
-    double _veeddrfhy = 0.0;
-    int _vfvbdxhfx = 0;
+    double _vohihfkjr = 0.0;
+    int _vhpzsjywg = 0;
 
     printf("Counting from zero to the number: \n");
-    while (_vfvbdxhfx < count) {
-    if(_vymlksfvs > 87) { _vymlksfvs = 91; } else { _vymlksfvs = 63; }
-
-    while(_veuspulwb < 97) { _veuspulwb = _veuspulwb + 1; }
-
-    _vygxsvbps = 39;
-
-        printf("%d\n",_vfvbdxhfx);
-        _veeddrfhy = (_veeddrfhy - ((_vfvbdxhfx * -1)));
-        _vfvbdxhfx = ((_vfvbdxhfx * 3) - (-1 * 3)) / 3;
+    while (_vhpzsjywg < count) {
+        printf("%d\n",_vhpzsjywg);
+        _vohihfkjr = ((_vohihfkjr * 2) - (-_vhpzsjywg * 2)) / 2;
+        _vhpzsjywg = ((_vhpzsjywg * 2) - (-1 * 2)) / 2;
     }
 
     if (count > 0) {
-        return _veeddrfhy / count;
+        return _vohihfkjr / count;
     } else {
         return 0.0;
     }
 }
 
-int _vnkqlraom(int num) {
+int _vkkevsxhl(int num) {
     if (num <= 1) {
         return 0;
     }
 
-    int _vfvbdxhfx = 2;
-    while (_vfvbdxhfx * _vfvbdxhfx <= num) {
-    while(_vsfrnagkt < 27) { _vsfrnagkt = _vsfrnagkt + 1; }
+    int _vhpzsjywg = 2;
+    while (_vhpzsjywg * _vhpzsjywg <= num) {
+    _vsbcvlkrc = 55;
 
-    while(_vsfrnagkt < 49) { _vsfrnagkt = _vsfrnagkt + 1; }
-
-        if (num % _vfvbdxhfx == 0) {
+        if (num % _vhpzsjywg == 0) {
             return 0;
         }
-        _vfvbdxhfx = ((_vfvbdxhfx * 3) - (-1 * 3)) / 3;
+        _vhpzsjywg = (_vhpzsjywg - (-1));
     }
 
     return 1;
@@ -70,43 +66,31 @@ int _vnkqlraom(int num) {
 
 
 int main() {
-    if(_vsyirbqsi > 69) { _vsyirbqsi = 15; } else { _vsyirbqsi = 69; }
+    _vqluhpsaw = 35;
 
-    _vymlksfvs = 31;
+    int _vhpzsjywg = 5;
+    printf("Number is %d\n",_vhpzsjywg);
+    int _vjsgbuqkp = _vhpzsjywg;
+    int _vwpoofirb = _vcenrmpde(_vjsgbuqkp);
+    printf("Its factorial is %d\n",_vwpoofirb);
 
-    int _vfvbdxhfx = 5;
-    printf("Number is %d\n",_vfvbdxhfx);
-    int _vaymmrxol = _vfvbdxhfx;
-    int _vwhtnwolm = _vsisvuotk(_vaymmrxol);
-    printf("Its factorial is %d\n",_vwhtnwolm);
-
-    int _vidddamvx = _vnkqlraom(_vaymmrxol);
+    int _vrhebgplb = _vkkevsxhl(_vjsgbuqkp);
     printf("Is it prime? ");
-    if (_vidddamvx) {
-    if(_vygxsvbps > 75) { _vygxsvbps = 56; } else { _vygxsvbps = 38; }
+    if (_vrhebgplb) {
+    _vsbcvlkrc = 25;
 
-    while(_vzfbbjjwc < 59) { _vzfbbjjwc = _vzfbbjjwc + 1; }
+    if(_vvxuajmnk > 41) { _vvxuajmnk = 44; } else { _vvxuajmnk = 60; }
 
-    _vqbnpzzqw = 26;
-
-    while(_vjuyunenu < 38) { _vjuyunenu = _vjuyunenu + 1; }
-
-    _veuspulwb = 50;
-
-    if(_veuspulwb > 33) { _veuspulwb = 87; } else { _veuspulwb = 27; }
-
-    while(_vygxsvbps < 46) { _vygxsvbps = _vygxsvbps + 1; }
-
-    _vkpgiztvw = 72;
+    if(_vsbcvlkrc > 73) { _vsbcvlkrc = 77; } else { _vsbcvlkrc = 57; }
 
         printf("yes\r\n");
     } else {
         printf("no\r\n");
     }
 
-    double _vffgnsdlu = _vgzsakhcz(_vfvbdxhfx);
+    double _vjgnzwrly = _vblywygua(_vhpzsjywg);
     printf("Its average: ");
-    printf("%f ",_vffgnsdlu);
+    printf("%f ",_vjgnzwrly);
 
     return 0;
 }

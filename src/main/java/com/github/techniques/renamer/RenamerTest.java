@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class VariableRenamerTest {
+public class RenamerTest {
     @Test
     public void variableNamesAreChanged() {
         String program = "int x = 10; x = x + 1;";
