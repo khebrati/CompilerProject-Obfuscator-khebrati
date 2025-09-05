@@ -1,8 +1,8 @@
 package com.github.cli
 
 import com.github.file.FileHandling
-import com.github.techniques.Runner
-import com.github.techniques.Techniques
+import com.github.techniques.obfuscate.ObfuscateRunner
+import com.github.techniques.obfuscate.ObfusTechnique
 import com.varabyte.kotter.foundation.anim.text
 import com.varabyte.kotter.foundation.anim.textAnimOf
 import com.varabyte.kotter.foundation.input.input
@@ -70,7 +70,7 @@ fun Session.lastOptions(): Boolean {
     return repeatSession
 }
 
-fun Session.obfuscation(code: String, name: String, tech: Techniques): String {
+fun Session.obfuscation(code: String, name: String, tech: ObfusTechnique): String {
     var finished = false
     val spinnerAnim = textAnimOf(listOf("\\", "|", "/", "-"), 125.milliseconds)
     val thinkingAnim = textAnimOf(listOf("", ".", "..", "..."), 500.milliseconds)
@@ -89,7 +89,7 @@ fun Session.obfuscation(code: String, name: String, tech: Techniques): String {
             text("... Done!")
         }
     }.run {
-        obfuscated = Runner.runTechnique(tech, code)
+        obfuscated = ObfuscateRunner.runTechnique(tech, code)
         FileHandling.writeFile(name, obfuscated)
         runBlocking {
             delay(3.seconds)
@@ -103,8 +103,8 @@ fun Session.obfuscation(code: String, name: String, tech: Techniques): String {
     return obfuscated
 }
 
-fun Session.techniqueSelection(): Techniques? {
-    var tech: Techniques? = null
+fun Session.techniqueSelection(): ObfusTechnique? {
+    var tech: ObfusTechnique? = null
     section {
         blue {
             textLine()
@@ -120,10 +120,10 @@ fun Session.techniqueSelection(): Techniques? {
         onInputEntered {
             val method = input.toInt()
             tech = when (method) {
-                1 -> Techniques.DEAD_CODE
-                2 -> Techniques.NAME_CHANGER
-                3 -> Techniques.EXPRESSION
-                4 -> Techniques.ALL
+                1 -> ObfusTechnique.DEAD_CODE
+                2 -> ObfusTechnique.NAME_CHANGER
+                3 -> ObfusTechnique.EXPRESSION
+                4 -> ObfusTechnique.ALL
                 else -> {
                     println("Invalid option")
                     return@onInputEntered

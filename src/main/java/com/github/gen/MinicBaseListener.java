@@ -1,4 +1,4 @@
-// Generated from /home/erfan/Source/Obfusc2/src/main/java/com/github/Minic.g4 by ANTLR 4.13.2
+// Generated from /home/erfan/Source/CompilerProject-Obfuscator-khebrati/src/main/java/com/github/Minic.g4 by ANTLR 4.13.2
 package com.github.gen;
 
 import org.antlr.v4.runtime.ParserRuleContext;
