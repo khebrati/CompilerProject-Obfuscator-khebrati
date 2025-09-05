@@ -1,5 +1,6 @@
 package com.github.cli
 
+import com.github.file.CRunner
 import com.github.file.FileHandling
 import com.github.techniques.deObfuscate.DeObfusTechnique
 import com.github.techniques.deObfuscate.DeObfuscateRunner
@@ -20,7 +21,6 @@ import com.varabyte.kotter.foundation.text.textLine
 import com.varabyte.kotter.runtime.Session
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
-import kotlin.math.sin
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
@@ -37,16 +37,56 @@ fun Session.mainSession(): Boolean {
     var repeatSession = false
     headerSection()
     val (name, code) = fileSelection()
-    val obfus = obfusSelection()
-    if(obfus){
-        val tech = obfusTechniqueSelection() ?: return false
-        obfuscation(code, name + "-obfus", tech)
-    }else{
-        val tech = deObfusTechniqueSelection() ?: return false
-        DeObfuscation(code, name + "-deObfus", tech)
+    val operation = operationSelection()
+    when(operation){
+        Operation.OBFUSCATE -> {
+            val tech = obfusTechniqueSelection() ?: return false
+            obfuscation(code, "$name-obfus", tech)
+        }
+        Operation.DEOBFUSCATE -> {
+            val tech = deObfusTechniqueSelection() ?: return false
+            DeObfuscation(code, "$name-deObfus", tech)
+        }
+
+        Operation.RUN ->{
+            runFile(name)
+        }
     }
     repeatSession = lastOptions()
     return repeatSession
+}
+
+private fun Session.runFile(name: String): String {
+    var finished = false
+    val spinnerAnim = textAnimOf(listOf("\\", "|", "/", "-"), 125.milliseconds)
+    val thinkingAnim = textAnimOf(listOf("", ".", "..", "..."), 500.milliseconds)
+    var output = ""
+    section {
+        if (!finished) {
+            text(spinnerAnim)
+        } else {
+            text("✓")
+        }
+        textLine()
+        text(" Running your code")
+        if (!finished) {
+            text(thinkingAnim)
+        } else {
+            text("... Done!")
+        }
+    }.run {
+        output = CRunner.runFile(name)
+        runBlocking {
+            delay(3.seconds)
+        }
+        finished = true
+    }
+    section {
+        textLine()
+        textLine("Your code has run! Here is the output: ")
+        textLine(output)
+    }.run()
+    return output
 }
 
 fun Session.lastOptions(): Boolean {
@@ -142,14 +182,15 @@ fun Session.DeObfuscation(code: String, name: String, tech: DeObfusTechnique): S
     return obfuscated
 }
 
-fun Session.obfusSelection(): Boolean {
-    var result: Boolean = false
+fun Session.operationSelection(): Operation {
+    var result: Operation = Operation.OBFUSCATE
     section {
         green {
             textLine()
             textLine("Do you want to obfuscate or de-obfuscate?")
             textLine("1. Obfuscate")
             textLine("2. De-obfuscate")
+            textLine("3. Run")
             text("Input the number: ")
             input()
         }
@@ -157,8 +198,9 @@ fun Session.obfusSelection(): Boolean {
         onInputEntered {
             val method = input.toInt()
             result = when (method) {
-                1 -> true
-                2 -> false
+                1 -> Operation.OBFUSCATE
+                2 -> Operation.DEOBFUSCATE
+                3 -> Operation.RUN
                 else -> {
                     println("Invalid option")
                     return@onInputEntered
@@ -270,3 +312,7 @@ fun Session.headerSection() = section {
     }
 
 }.run()
+
+enum class Operation{
+    OBFUSCATE, DEOBFUSCATE, RUN
+}

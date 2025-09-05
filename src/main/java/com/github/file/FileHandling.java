@@ -15,7 +15,18 @@ public class FileHandling {
             throw new IllegalArgumentException("Cases directory not found at: " + casesDir.toAbsolutePath());
         }
 
-        return Files.readString(Path.of(casesDir.toString(),name + ".c"));
+        String content = Files.readString(Path.of(casesDir.toString(), name + ".c"));
+
+        if (content.stripLeading().startsWith("#include")) {
+            int includeStartIndex = content.indexOf("#include");
+            int newlineIndex = content.indexOf('\n', includeStartIndex);
+            if (newlineIndex != -1) {
+                return content.substring(newlineIndex + 1);
+            } else {
+                return ""; // Return empty string if there's nothing after the include
+            }
+        }
+        return content;
     }
 
     public static void writeFile(String name, String content) throws IOException {
@@ -26,8 +37,6 @@ public class FileHandling {
             throw new IllegalArgumentException("Cases directory not found at: " + targetDir.toAbsolutePath());
         }
 
-        Files.writeString(Path.of(targetDir.toString(),name + ".c"),content);
+        Files.writeString(Path.of(targetDir.toString(), name + ".c"), content);
     }
-
-
 }
