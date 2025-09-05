@@ -35,7 +35,7 @@ public class ExpressionSimplifierTest {
     @Test
     public void testSubtractionOfNegative_ShouldBecomeAddition() {
         String code = "int main() { int result = 10 - (-5); }";
-        String expected = "int main() { int result = 10 + 5; }";
+        String expected = "int main() { int result = 15; }";
         String actual = simplifyCode(code);
         assertEquals(expected, actual.trim());
     }
@@ -43,7 +43,7 @@ public class ExpressionSimplifierTest {
     @Test
     public void testSimpleSubtraction_ShouldRemainUnchanged() {
         String code = "int main() { int result = 10 - 5; }";
-        String expected = "int main() { int result = 10 - 5; }";
+        String expected = "int main() { int result = 5; }";
         String actual = simplifyCode(code);
         assertEquals(expected, actual.trim());
     }
@@ -51,7 +51,7 @@ public class ExpressionSimplifierTest {
     @Test
     public void testAdditionWithNegative_ShouldRemainUnchanged() {
         String code = "int main() { int result = 10 + (-5); }";
-        String expected = "int main() { int result = 10 + (-5); }";
+        String expected = "int main() { int result = 5; }";
         String actual = simplifyCode(code);
         assertEquals(expected, actual.trim());
     }
@@ -59,7 +59,7 @@ public class ExpressionSimplifierTest {
     @Test
     public void testOtherBinaryOperation_ShouldRemainUnchanged() {
         String code = "int main() { int result = 10 * (-5); }";
-        String expected = "int main() { int result = 10 * (-5); }";
+        String expected = "int main() { int result = -50; }";
         String actual = simplifyCode(code);
         assertEquals(expected, actual.trim());
     }
@@ -67,7 +67,7 @@ public class ExpressionSimplifierTest {
     @Test
     public void testNestedExpressionWithSimplification() {
         String code = "int main() { int result = 100 + (20 - (-30)); }";
-        String expected = "int main() { int result = 100 + (20 + 30); }";
+        String expected = "int main() { int result = 150; }";
         String actual = simplifyCode(code);
         assertEquals(expected, actual.trim());
     }
@@ -75,7 +75,7 @@ public class ExpressionSimplifierTest {
     @Test
     public void testMultipleSimplificationsInOneLine() {
         String code = "int main() { int result = (1 - (-2)) - (-3); }";
-        String expected = "int main() { int result = (1 + 2) + 3; }";
+        String expected = "int main() { int result = 6; }";
         String actual = simplifyCode(code);
         assertEquals(expected, actual.trim());
     }
@@ -91,7 +91,14 @@ public class ExpressionSimplifierTest {
     @Test
     public void testHandleMoreComplexExpressionsInvolvingMultiplication() {
         String code = "int main() { i = ((i * 3) - (-1 * 3)) / 3; }";
-        String expected = "int main() { i = i + 1 }";
+        String expected = "int main() { i = i + 1; }";
+        String actual = simplifyCode(code);
+        assertEquals(expected, actual.trim());
+    }
+    @Test
+    public void testHandleMoreComplexExpressionsInvolvingNegation() {
+        String code = "int main() { x = a - (a * -b); }";
+        String expected = "int main() { i = a + b; }";
         String actual = simplifyCode(code);
         assertEquals(expected, actual.trim());
     }
