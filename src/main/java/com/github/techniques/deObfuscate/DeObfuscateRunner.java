@@ -25,6 +25,7 @@ public class DeObfuscateRunner {
                 deObfuscators.add(NameSimplifier::rename);
                 break;
             case ALL:
+                deObfuscators.add(NameSimplifier::rename);
                 deObfuscators.add(ExpressionSimplifier::simplify);
                 break;
         }

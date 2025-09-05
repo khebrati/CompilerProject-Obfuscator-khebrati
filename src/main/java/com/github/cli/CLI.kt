@@ -76,9 +76,6 @@ private fun Session.runFile(name: String): String {
         }
     }.run {
         output = CRunner.runFile(name)
-        runBlocking {
-            delay(3.seconds)
-        }
         finished = true
     }
     section {
@@ -138,7 +135,7 @@ fun Session.obfuscation(code: String, name: String, tech: ObfusTechnique): Strin
         obfuscated = ObfuscateRunner.runTechnique(tech, code)
         FileHandling.writeFile(name, obfuscated)
         runBlocking {
-            delay(3.seconds)
+            delay(2.seconds)
         }
         finished = true
     }
@@ -171,7 +168,7 @@ fun Session.DeObfuscation(code: String, name: String, tech: DeObfusTechnique): S
         obfuscated = DeObfuscateRunner.runTechnique(tech, code)
         FileHandling.writeFile(name, obfuscated)
         runBlocking {
-            delay(3.seconds)
+            delay(2.seconds)
         }
         finished = true
     }
@@ -251,7 +248,7 @@ fun Session.deObfusTechniqueSelection(): DeObfusTechnique? {
             textLine("What obfuscation method do you want to use?")
             textLine("1. Expression simplification")
             textLine("2. Variable renaming")
-            textLine("4. All!")
+            textLine("3. All!")
             text("Input the number: ")
             input()
         }
@@ -261,6 +258,7 @@ fun Session.deObfusTechniqueSelection(): DeObfusTechnique? {
             tech = when (method) {
                 1 -> DeObfusTechnique.SIMPLIFY_EXPRESSION
                 2 -> DeObfusTechnique.RENAMER
+                3 -> DeObfusTechnique.ALL
                 else -> {
                     println("Invalid option")
                     return@onInputEntered
