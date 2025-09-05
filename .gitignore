@@ -37,4 +37,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
-test/java/com/github/target/
+src/test/java/com/github/target/
