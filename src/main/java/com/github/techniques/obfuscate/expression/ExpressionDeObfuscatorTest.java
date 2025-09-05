@@ -8,7 +8,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class ExpressionObfuscatorTest {
+public class ExpressionDeObfuscatorTest {
 
     private String obfuscateExpression(String code) {
         MinicLexer lexer = new MinicLexer(CharStreams.fromString(code));

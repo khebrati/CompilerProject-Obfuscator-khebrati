@@ -2,7 +2,7 @@ package com.github.techniques.deObfuscate;
 
 import com.github.gen.MinicLexer;
 import com.github.gen.MinicParser;
-import com.github.techniques.obfuscate.ObfusTechnique;
+import com.github.techniques.deObfuscate.expression.ExpressionSimplifier;
 import com.github.techniques.obfuscate.deadcode.DeadCodeInserter;
 import com.github.techniques.obfuscate.expression.ExpressionObfuscator;
 import com.github.techniques.obfuscate.renamer.Renamer;
@@ -13,28 +13,20 @@ import org.antlr.v4.runtime.misc.Pair;
 import java.util.ArrayList;
 
 public class DeObfuscateRunner {
-    public static String runTechnique(ObfusTechnique tech, String content){
-        interface Obfuscator {
+    public static String runTechnique(DeObfusTechnique tech, String content){
+        interface DeObfuscator {
             String apply(MinicParser.ProgramContext tree, CommonTokenStream tokens);
         }
-        ArrayList<Obfuscator> obfuscators = new ArrayList<>();
+        ArrayList<DeObfuscator> deObfuscators = new ArrayList<>();
         switch (tech) {
-            case NAME_CHANGER:
-                obfuscators.add(Renamer::renameVar);
-                break;
-            case DEAD_CODE:
-                obfuscators.add(DeadCodeInserter::insertDeadCode);
-                break;
-            case EXPRESSION:
-                obfuscators.add(ExpressionObfuscator::rewriteExpressions);
+            case SIMPLIFY_EXPRESSION:
+                deObfuscators.add(ExpressionSimplifier::simplify);
                 break;
             case ALL:
-                obfuscators.add(DeadCodeInserter::insertDeadCode);
-                obfuscators.add(Renamer::renameVar);
-                obfuscators.add(ExpressionObfuscator::rewriteExpressions);
+                deObfuscators.add(ExpressionSimplifier::simplify);
                 break;
         }
-        for (var obf : obfuscators) {
+        for (var obf : deObfuscators) {
             var pair = getTokensTree(content);
             content = obf.apply(pair.b,pair.a);
         }

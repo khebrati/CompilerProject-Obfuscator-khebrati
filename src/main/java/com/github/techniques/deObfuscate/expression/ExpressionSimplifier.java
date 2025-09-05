@@ -1,14 +1,20 @@
 package com.github.techniques.deObfuscate.expression;
 
 import com.github.gen.MinicBaseListener;
+import com.github.gen.MinicLexer;
 import com.github.gen.MinicParser;
+import com.github.techniques.obfuscate.expression.ExpressionObfuscator;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 
 /**
@@ -17,6 +23,19 @@ import java.util.Map;
  */
 public class ExpressionSimplifier extends MinicBaseListener {
 
+    /**
+     * Convenience static method to simplify a Mini-C parse tree directly.
+     * @param tree The parse tree to walk.
+     * @param tokens The token stream from the lexer.
+     * @return The simplified code.
+     */
+    public static String simplify(MinicParser.ProgramContext tree, CommonTokenStream tokens) {
+        ExpressionSimplifier simplifier = new ExpressionSimplifier(tokens);
+        ParseTreeWalker walker = new ParseTreeWalker();
+        walker.walk(simplifier, tree);
+
+        return simplifier.getRewrittenCode();
+    }
     private final TokenStreamRewriter rewriter;
     // This map stores the computed integer value of constant expression subtrees.
     // It's the key to enabling more advanced simplifications.
@@ -251,33 +270,59 @@ public class ExpressionSimplifier extends MinicBaseListener {
         MinicParser.BinaryOperationContext rightMult = (MinicParser.BinaryOperationContext) R;
 
         if (leftMult.op.getType() != MinicParser.MUL || !C.equals(getConstantValue(leftMult.right))) return;
-        String A_text = leftMult.left.getText();
 
         if (rightMult.op.getType() != MinicParser.MUL || !C.equals(getConstantValue(rightMult.right))) return;
 
+        String A_text = leftMult.left.getText();
         String op_text = topBinOp.op.getText();
-        Integer B_val = getConstantValue(rightMult.left);
-        String B_text = (B_val != null) ? B_val.toString() : rightMult.left.getText();
+        MinicParser.ExpressionContext B_expr = rightMult.left;
 
-        String replacement;
+        String replacement = buildSimplifiedReplacement(A_text, op_text, B_expr);
+        if (replacement != null) {
+            rewriter.replace(ctx.start, ctx.stop, replacement);
+        }
+    }
 
-        if (op_text.equals("-")) {
-            if (B_val != null && B_val < 0) {
-                replacement = String.format("%s + %d", A_text, Math.abs(B_val));
-            } else {
-                replacement = String.format("%s - %s", A_text, B_text);
+    /**
+     * Builds a simplified replacement string for `A op B` by considering identities like
+     * A - (-B) => A + B and A + A => 2 * A.
+     * @return The simplified replacement string, or null if no simplification is applied.
+     */
+    private String buildSimplifiedReplacement(String A_text, String op_text, MinicParser.ExpressionContext B_expr) {
+        MinicParser.ExpressionContext unwrapped_B = unwrapParentheses(B_expr);
+        boolean B_is_negative = unwrapped_B instanceof MinicParser.UnaryOperationContext &&
+                ((MinicParser.UnaryOperationContext) unwrapped_B).op.getType() == MinicParser.MINUS;
+
+        String B_core_text = B_is_negative ? ((MinicParser.UnaryOperationContext) unwrapped_B).expression().getText() : B_expr.getText();
+
+        if (op_text.equals("+")) {
+            if (B_is_negative) { // A + (-B_core) => A - B_core
+                if (A_text.equals(B_core_text)) { // A - A => 0
+                    return "0";
+                }
+                return String.format("%s - %s", A_text, B_core_text);
+            } else { // A + B_core
+                if (A_text.equals(B_core_text)) { // A + A => 2 * A
+                    return String.format("2 * %s", A_text);
+                }
+                return String.format("%s + %s", A_text, B_core_text);
             }
-        } else if (op_text.equals("+")) {
-            if (B_val != null && B_val < 0) {
-                replacement = String.format("%s - %d", A_text, Math.abs(B_val));
-            } else {
-                replacement = String.format("%s + %s", A_text, B_text);
+        } else if (op_text.equals("-")) {
+            if (B_is_negative) { // A - (-B_core) => A + B_core
+                if (A_text.equals(B_core_text)) { // A + A => 2 * A
+                    return String.format("2 * %s", A_text);
+                }
+                return String.format("%s + %s", A_text, B_core_text);
+            } else { // A - B_core
+                if (A_text.equals(B_core_text)) { // A - A => 0
+                    return "0";
+                }
+                return String.format("%s - %s", A_text, B_core_text);
             }
-        } else {
-            replacement = String.format("%s %s %s", A_text, op_text, B_text);
         }
 
-        rewriter.replace(ctx.start, ctx.stop, replacement);
+        // Default for other operators like '*'
+        return String.format("%s %s %s", A_text, op_text, B_expr.getText());
     }
 
 
@@ -304,4 +349,6 @@ public class ExpressionSimplifier extends MinicBaseListener {
     public String getRewrittenCode() {
         return rewriter.getText();
     }
+
+
 }

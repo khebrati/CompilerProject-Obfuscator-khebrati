@@ -102,4 +102,11 @@ public class ExpressionSimplifierTest {
         String actual = simplifyCode(code);
         assertEquals(expected, actual.trim());
     }
+    @Test
+    public void testShouldSimplifyDistributivePropertyWithNegation() {
+        String code = "int main() { int result = ((x * 3) - (-x * 3)) / 3; }";
+        String expected = "int main() { int result = 2 * x; }";
+        String actual = simplifyCode(code);
+        assertEquals(expected, actual.trim());
+    }
 }

@@ -1,6 +1,8 @@
 package com.github.cli
 
 import com.github.file.FileHandling
+import com.github.techniques.deObfuscate.DeObfusTechnique
+import com.github.techniques.deObfuscate.DeObfuscateRunner
 import com.github.techniques.obfuscate.ObfuscateRunner
 import com.github.techniques.obfuscate.ObfusTechnique
 import com.varabyte.kotter.foundation.anim.text
@@ -18,6 +20,7 @@ import com.varabyte.kotter.foundation.text.textLine
 import com.varabyte.kotter.runtime.Session
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import kotlin.math.sin
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
@@ -34,11 +37,14 @@ fun Session.mainSession(): Boolean {
     var repeatSession = false
     headerSection()
     val (name, code) = fileSelection()
-    val tech = techniqueSelection()
-    if (tech == null) {
-        return false
+    val obfus = obfusSelection()
+    if(obfus){
+        val tech = obfusTechniqueSelection() ?: return false
+        obfuscation(code, name, tech)
+    }else{
+        val tech = deObfusTechniqueSelection() ?: return false
+        DeObfuscation(code, name, tech)
     }
-    obfuscation(code, name, tech)
     repeatSession = lastOptions()
     return repeatSession
 }
@@ -103,7 +109,68 @@ fun Session.obfuscation(code: String, name: String, tech: ObfusTechnique): Strin
     return obfuscated
 }
 
-fun Session.techniqueSelection(): ObfusTechnique? {
+fun Session.DeObfuscation(code: String, name: String, tech: DeObfusTechnique): String {
+    var finished = false
+    val spinnerAnim = textAnimOf(listOf("\\", "|", "/", "-"), 125.milliseconds)
+    val thinkingAnim = textAnimOf(listOf("", ".", "..", "..."), 500.milliseconds)
+    var obfuscated = ""
+    section {
+        if (!finished) {
+            text(spinnerAnim)
+        } else {
+            text("✓")
+        }
+        textLine()
+        text(" Doing heavy De-Obfuscation work")
+        if (!finished) {
+            text(thinkingAnim)
+        } else {
+            text("... Done!")
+        }
+    }.run {
+        obfuscated = DeObfuscateRunner.runTechnique(tech, code)
+        FileHandling.writeFile(name, obfuscated)
+        runBlocking {
+            delay(3.seconds)
+        }
+        finished = true
+    }
+    section {
+        textLine()
+        textLine("Your simplified code is ready! Check your test folder. ")
+    }.run()
+    return obfuscated
+}
+
+fun Session.obfusSelection(): Boolean {
+    var result: Boolean = false
+    section {
+        green {
+            textLine()
+            textLine("Do you want to obfuscate or de-obfuscate?")
+            textLine("1. Obfuscate")
+            textLine("2. De-obfuscate")
+            text("Input the number: ")
+            input()
+        }
+    }.runUntilSignal {
+        onInputEntered {
+            val method = input.toInt()
+            result = when (method) {
+                1 -> true
+                2 -> false
+                else -> {
+                    println("Invalid option")
+                    return@onInputEntered
+                }
+            }
+            signal()
+        }
+    }
+    return result
+}
+
+fun Session.obfusTechniqueSelection(): ObfusTechnique? {
     var tech: ObfusTechnique? = null
     section {
         blue {
@@ -124,6 +191,32 @@ fun Session.techniqueSelection(): ObfusTechnique? {
                 2 -> ObfusTechnique.NAME_CHANGER
                 3 -> ObfusTechnique.EXPRESSION
                 4 -> ObfusTechnique.ALL
+                else -> {
+                    println("Invalid option")
+                    return@onInputEntered
+                }
+            }
+            signal()
+        }
+    }
+    return tech
+}
+fun Session.deObfusTechniqueSelection(): DeObfusTechnique? {
+    var tech: DeObfusTechnique? = null
+    section {
+        blue {
+            textLine()
+            textLine("What obfuscation method do you want to use?")
+            textLine("1. Expression simplification")
+            textLine("4. All!")
+            text("Input the number: ")
+            input()
+        }
+    }.runUntilSignal {
+        onInputEntered {
+            val method = input.toInt()
+            tech = when (method) {
+                1 -> DeObfusTechnique.SIMPLIFY_EXPRESSION
                 else -> {
                     println("Invalid option")
                     return@onInputEntered
