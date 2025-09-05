@@ -4,7 +4,7 @@ import com.github.gen.MinicLexer;
 import com.github.gen.MinicParser;
 import com.github.techniques.obfuscate.deadcode.DeadCodeInserter;
 import com.github.techniques.obfuscate.expression.ExpressionObfuscator;
-import com.github.techniques.obfuscate.renamer.Renamer;
+import com.github.techniques.obfuscate.renamer.NameObfuscator;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.misc.Pair;
@@ -19,7 +19,7 @@ public class ObfuscateRunner {
         ArrayList<Obfuscator> obfuscators = new ArrayList<>();
         switch (tech) {
             case NAME_CHANGER:
-                obfuscators.add(Renamer::renameVar);
+                obfuscators.add(NameObfuscator::renameVar);
                 break;
             case DEAD_CODE:
                 obfuscators.add(DeadCodeInserter::insertDeadCode);
@@ -29,7 +29,7 @@ public class ObfuscateRunner {
                 break;
             case ALL:
                 obfuscators.add(DeadCodeInserter::insertDeadCode);
-                obfuscators.add(Renamer::renameVar);
+                obfuscators.add(NameObfuscator::renameVar);
                 obfuscators.add(ExpressionObfuscator::rewriteExpressions);
                 break;
         }

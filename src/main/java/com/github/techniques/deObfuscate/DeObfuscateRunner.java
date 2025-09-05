@@ -3,9 +3,8 @@ package com.github.techniques.deObfuscate;
 import com.github.gen.MinicLexer;
 import com.github.gen.MinicParser;
 import com.github.techniques.deObfuscate.expression.ExpressionSimplifier;
-import com.github.techniques.obfuscate.deadcode.DeadCodeInserter;
-import com.github.techniques.obfuscate.expression.ExpressionObfuscator;
-import com.github.techniques.obfuscate.renamer.Renamer;
+import com.github.techniques.deObfuscate.rename.NameSimplifier;
+import com.github.techniques.obfuscate.renamer.NameObfuscator;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.misc.Pair;
@@ -21,6 +20,9 @@ public class DeObfuscateRunner {
         switch (tech) {
             case SIMPLIFY_EXPRESSION:
                 deObfuscators.add(ExpressionSimplifier::simplify);
+                break;
+            case RENAMER:
+                deObfuscators.add(NameSimplifier::rename);
                 break;
             case ALL:
                 deObfuscators.add(ExpressionSimplifier::simplify);

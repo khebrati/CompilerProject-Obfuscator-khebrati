@@ -40,10 +40,10 @@ fun Session.mainSession(): Boolean {
     val obfus = obfusSelection()
     if(obfus){
         val tech = obfusTechniqueSelection() ?: return false
-        obfuscation(code, name, tech)
+        obfuscation(code, name + "-obfus", tech)
     }else{
         val tech = deObfusTechniqueSelection() ?: return false
-        DeObfuscation(code, name, tech)
+        DeObfuscation(code, name + "-deObfus", tech)
     }
     repeatSession = lastOptions()
     return repeatSession
@@ -208,6 +208,7 @@ fun Session.deObfusTechniqueSelection(): DeObfusTechnique? {
             textLine()
             textLine("What obfuscation method do you want to use?")
             textLine("1. Expression simplification")
+            textLine("2. Variable renaming")
             textLine("4. All!")
             text("Input the number: ")
             input()
@@ -217,6 +218,7 @@ fun Session.deObfusTechniqueSelection(): DeObfusTechnique? {
             val method = input.toInt()
             tech = when (method) {
                 1 -> DeObfusTechnique.SIMPLIFY_EXPRESSION
+                2 -> DeObfusTechnique.RENAMER
                 else -> {
                     println("Invalid option")
                     return@onInputEntered

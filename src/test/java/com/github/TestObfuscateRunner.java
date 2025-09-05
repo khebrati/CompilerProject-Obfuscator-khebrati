@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.misc.Pair;
 import org.junit.Test;
-import com.github.techniques.obfuscate.renamer.Renamer;
+import com.github.techniques.obfuscate.renamer.NameObfuscator;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -73,7 +73,7 @@ public class TestObfuscateRunner {
 
         var obfuscators = List.<Obfuscator>of(
                 DeadCodeInserter::insertDeadCode,
-                Renamer::renameVar,
+                NameObfuscator::renameVar,
                 ExpressionObfuscator::rewriteExpressions
         );
 

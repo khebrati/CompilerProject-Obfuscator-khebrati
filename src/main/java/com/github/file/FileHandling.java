@@ -15,19 +15,18 @@ public class FileHandling {
             throw new IllegalArgumentException("Cases directory not found at: " + casesDir.toAbsolutePath());
         }
 
-        return Files.readString(Path.of(casesDir.toString(),name));
+        return Files.readString(Path.of(casesDir.toString(),name + ".c"));
     }
 
     public static void writeFile(String name, String content) throws IOException {
         var projectDir = System.getProperty("user.dir");
-        Path targetDir = Paths.get(projectDir, "src", "test", "java", "com", "github", "target");
+        Path targetDir = Paths.get(projectDir, "src", "test", "java", "com", "github", "cases");
 
         if (!Files.exists(targetDir) || !Files.isDirectory(targetDir)) {
             throw new IllegalArgumentException("Cases directory not found at: " + targetDir.toAbsolutePath());
         }
 
-        String header = "#include <stdio.h>\n";
-        Files.writeString(Path.of(targetDir.toString(),name),header + content);
+        Files.writeString(Path.of(targetDir.toString(),name + ".c"),content);
     }
 
 

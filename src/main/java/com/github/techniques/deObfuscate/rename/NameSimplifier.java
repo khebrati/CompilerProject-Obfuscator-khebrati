@@ -1,9 +1,7 @@
 package com.github.techniques.deObfuscate.rename;
 
 import com.github.gen.MinicBaseListener;
-import com.github.gen.MinicLexer;
 import com.github.gen.MinicParser;
-import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.TokenStreamRewriter;
@@ -17,39 +15,48 @@ import java.util.Map;
 
 /**
  * Renames obfuscated variable and function names to simpler, standardized ones.
- * Variables are prefixed with their type (e.g., "int_var1").
+ * Variables are renamed to alphabetical characters (a, b, c, ...).
  * This class uses a stack of symbol tables to manage scopes correctly.
  */
-public class VariableRenamer extends MinicBaseListener {
+public class NameSimplifier extends MinicBaseListener {
 
     private final TokenStreamRewriter rewriter;
     private final Deque<Map<String, String>> scopes = new ArrayDeque<>();
-    private int varCounter = 1;
+    private int varIndex = 0; // Used for alphabetical naming
     private int funcCounter = 1;
 
     /**
-     * Convenience static method to rename variables in a Mini-C code string.
-     * @param code The source code to process.
+     * Convenience static method to rename variables in a pre-parsed Mini-C tree.
+     * @param tree The program's parse tree, generated from a parser.
+     * @param tokens The token stream used to generate the tree.
      * @return The code with renamed identifiers.
      */
-    public static String rename(String code) {
-        MinicLexer lexer = new MinicLexer(CharStreams.fromString(code));
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        MinicParser parser = new MinicParser(tokens);
-        MinicParser.ProgramContext tree = parser.program();
-
-        VariableRenamer renamer = new VariableRenamer(tokens);
+    public static String rename(MinicParser.ProgramContext tree, CommonTokenStream tokens) {
+        NameSimplifier renamer = new NameSimplifier(tokens);
         ParseTreeWalker walker = new ParseTreeWalker();
         walker.walk(renamer, tree);
-
         return renamer.getRewrittenCode();
     }
 
-    public VariableRenamer(TokenStream tokens) {
+    public NameSimplifier(TokenStream tokens) {
         this.rewriter = new TokenStreamRewriter(tokens);
         // Start with a global scope
         scopes.push(new HashMap<>());
     }
+
+    /**
+     * Generates a name from the alphabet based on an index.
+     * 0 -> a, 1 -> b, ..., 25 -> z, 26 -> aa, 27 -> ab, etc.
+     */
+    private String generateAlphabeticalName(int index) {
+        StringBuilder name = new StringBuilder();
+        while (index >= 0) {
+            name.insert(0, (char) ('a' + index % 26));
+            index = index / 26 - 1;
+        }
+        return name.toString();
+    }
+
 
     // --- Scope Management ---
 
@@ -75,8 +82,7 @@ public class VariableRenamer extends MinicBaseListener {
     @Override
     public void enterDecOrFunDefinition(MinicParser.DecOrFunDefinitionContext ctx) {
         // A function definition creates a new scope for its parameters and body.
-        // We check for the presence of the paramListBlock child to identify a function.
-        if (ctx.decOrFunBody().paramListBlock() != null) {
+        if (ctx.decOrFunBody() != null && ctx.decOrFunBody().paramListBlock() != null) {
             scopes.push(new HashMap<>());
         }
     }
@@ -87,7 +93,7 @@ public class VariableRenamer extends MinicBaseListener {
         String oldName = id.getText();
 
         // Handle function definitions
-        if (ctx.decOrFunBody().paramListBlock() != null) {
+        if (ctx.decOrFunBody() != null && ctx.decOrFunBody().paramListBlock() != null) {
             // Pop the function's own scope. This is done for all functions.
             scopes.pop();
 
@@ -102,8 +108,7 @@ public class VariableRenamer extends MinicBaseListener {
             rewriter.replace(id.getSymbol(), newName);
 
         } else { // Handle variable declarations
-            String type = ctx.type().getText();
-            String newName = type + "_var" + varCounter++;
+            String newName = generateAlphabeticalName(varIndex++);
             scopes.peek().put(oldName, newName); // Add to the current scope.
             rewriter.replace(id.getSymbol(), newName);
         }
@@ -113,8 +118,7 @@ public class VariableRenamer extends MinicBaseListener {
     public void exitParam(MinicParser.ParamContext ctx) {
         TerminalNode id = ctx.Identifier();
         String oldName = id.getText();
-        String type = ctx.type().getText();
-        String newName = type + "_var" + varCounter++;
+        String newName = generateAlphabeticalName(varIndex++);
         // Parameters are added to the current scope, which is the function's scope.
         scopes.peek().put(oldName, newName);
         rewriter.replace(id.getSymbol(), newName);
