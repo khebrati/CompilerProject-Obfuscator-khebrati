@@ -97,8 +97,8 @@ public class ExpressionSimplifierTest {
     }
     @Test
     public void testHandleMoreComplexExpressionsInvolvingNegation() {
-        String code = "int main() { x = a - (a * -b); }";
-        String expected = "int main() { i = a + b; }";
+        String code = "int main() { x = a - (b * -1); }";
+        String expected = "int main() { x = a + b; }";
         String actual = simplifyCode(code);
         assertEquals(expected, actual.trim());
     }

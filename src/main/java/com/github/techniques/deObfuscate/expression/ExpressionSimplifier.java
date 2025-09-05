@@ -64,19 +64,27 @@ public class ExpressionSimplifier extends MinicBaseListener {
     @Override
     public void exitBinaryOperation(MinicParser.BinaryOperationContext ctx) {
         // --- RULE 1: Constant Folding ---
-        // If both sides of the operator are known constants, we can compute the result now.
         if (tryConstantFolding(ctx)) {
-            return; // The node was simplified to a single number, no more rules apply.
+            return;
         }
 
-        // --- RULE 2: Simplify Subtraction of a Negative ---
-        // This handles cases like `a - (-b)` and turns them into `a + b`.
+        // --- RULE 2: Identity Multiplication (e.g., 1 * x => x) ---
+        if (trySimplifyIdentityMultiplication(ctx)) {
+            // Note: In a multi-pass system, this would trigger another round.
+            // In a single pass, we can't always chain simplifications, but this is a useful rule.
+        }
+
+        // --- RULE 3: Simplify Subtraction of a Negative ---
         if (trySimplifyingSubtraction(ctx)) {
-            return; // The node was simplified, stop processing.
+            return;
         }
 
-        // --- RULE 3: Simplify Distributive Property over Division ---
-        // This is the most complex rule, handling patterns like `(a*c - b*c) / c`.
+        // --- RULE 4: Simplify Subtraction of a Negative Product ---
+        if (trySimplifySubtractionOfNegativeProduct(ctx)) {
+            return;
+        }
+
+        // --- RULE 5: Simplify Distributive Property over Division ---
         trySimplifyingDistributiveDivision(ctx);
     }
 
@@ -112,6 +120,39 @@ public class ExpressionSimplifier extends MinicBaseListener {
     }
 
     /**
+     * Simplifies identity multiplications, e.g., (1 * x) => x or (x * 1) => x.
+     * @return true if a simplification was performed, false otherwise.
+     */
+    private boolean trySimplifyIdentityMultiplication(MinicParser.BinaryOperationContext ctx) {
+        if (ctx.op.getType() != MinicParser.MUL) {
+            return false;
+        }
+
+        Integer leftVal = getConstantValue(ctx.left);
+        Integer rightVal = getConstantValue(ctx.right);
+
+        // Case 1: (1 * X). Replace the whole expression with X.
+        if (leftVal != null && leftVal == 1) {
+            rewriter.replace(ctx.start, ctx.stop, ctx.right.getText());
+            if (rightVal != null) {
+                constantValues.put(ctx, rightVal);
+            }
+            return true;
+        }
+
+        // Case 2: (X * 1). Replace the whole expression with X.
+        if (rightVal != null && rightVal == 1) {
+            rewriter.replace(ctx.start, ctx.stop, ctx.left.getText());
+            if (leftVal != null) {
+                constantValues.put(ctx, leftVal);
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Simplifies expressions of the form `a - (-b)` to `a + b`.
      * @return true if a simplification was performed, false otherwise.
      */
@@ -131,13 +172,70 @@ public class ExpressionSimplifier extends MinicBaseListener {
     }
 
     /**
+     * Simplifies expressions of the form A - (B * -C) or A - (-B * C).
+     * This transforms the expression into A + (B * C) and simplifies identity multiplications.
+     * @return true if a simplification was performed, false otherwise.
+     */
+    private boolean trySimplifySubtractionOfNegativeProduct(MinicParser.BinaryOperationContext ctx) {
+        if (ctx.op.getType() != MinicParser.MINUS) {
+            return false;
+        }
+
+        MinicParser.ExpressionContext rightExpr = unwrapParentheses(ctx.right);
+        if (!(rightExpr instanceof MinicParser.BinaryOperationContext)) {
+            return false;
+        }
+
+        MinicParser.BinaryOperationContext product = (MinicParser.BinaryOperationContext) rightExpr;
+        if (product.op.getType() != MinicParser.MUL) {
+            return false;
+        }
+
+        MinicParser.ExpressionContext productLeft = unwrapParentheses(product.left);
+        MinicParser.ExpressionContext productRight = unwrapParentheses(product.right);
+
+        String B_text = null;
+        String C_text = null;
+        boolean matched = false;
+
+        if (productRight instanceof MinicParser.UnaryOperationContext &&
+                ((MinicParser.UnaryOperationContext) productRight).op.getType() == MinicParser.MINUS) {
+            B_text = productLeft.getText();
+            C_text = ((MinicParser.UnaryOperationContext) productRight).expression().getText();
+            matched = true;
+        } else if (productLeft instanceof MinicParser.UnaryOperationContext &&
+                ((MinicParser.UnaryOperationContext) productLeft).op.getType() == MinicParser.MINUS) {
+            B_text = ((MinicParser.UnaryOperationContext) productLeft).expression().getText();
+            C_text = productRight.getText();
+            matched = true;
+        }
+
+        if (matched) {
+            rewriter.replace(ctx.op, "+");
+            String replacementProduct;
+            // Check for identity multiplication before creating the replacement string
+            if ("1".equals(C_text)) {
+                replacementProduct = B_text; // e.g., (b * 1) => b
+            } else if ("1".equals(B_text)) {
+                replacementProduct = C_text; // e.g., (1 * c) => c
+            } else {
+                replacementProduct = String.format("(%s * %s)", B_text, C_text);
+            }
+            rewriter.replace(ctx.right.start, ctx.right.stop, replacementProduct);
+            return true;
+        }
+
+        return false;
+    }
+
+
+    /**
      * Simplifies expressions of the form `((a*c) op (b*c)) / c` to `a op b`.
      * This handles the complex case from the unit test by evaluating the final operation.
      */
     private void trySimplifyingDistributiveDivision(MinicParser.BinaryOperationContext ctx) {
         if (ctx.op.getType() != MinicParser.DIV) return;
 
-        // Divisor C must be a non-zero constant.
         Integer C = getConstantValue(ctx.right);
         if (C == null || C == 0) return;
 
@@ -145,7 +243,6 @@ public class ExpressionSimplifier extends MinicBaseListener {
         if (!(dividend instanceof MinicParser.BinaryOperationContext)) return;
         MinicParser.BinaryOperationContext topBinOp = (MinicParser.BinaryOperationContext) dividend;
 
-        // We expect (L op R) / C
         MinicParser.ExpressionContext L = unwrapParentheses(topBinOp.left);
         MinicParser.ExpressionContext R = unwrapParentheses(topBinOp.right);
 
@@ -153,47 +250,30 @@ public class ExpressionSimplifier extends MinicBaseListener {
         MinicParser.BinaryOperationContext leftMult = (MinicParser.BinaryOperationContext) L;
         MinicParser.BinaryOperationContext rightMult = (MinicParser.BinaryOperationContext) R;
 
-        // Check if L is A * C
         if (leftMult.op.getType() != MinicParser.MUL || !C.equals(getConstantValue(leftMult.right))) return;
         String A_text = leftMult.left.getText();
 
-        // Check if R is B * C
         if (rightMult.op.getType() != MinicParser.MUL || !C.equals(getConstantValue(rightMult.right))) return;
-
-        // At this point, the pattern `((A*C) op (B*C)) / C` is matched.
-        // We can now build the simplified expression: `A op B`
 
         String op_text = topBinOp.op.getText();
         Integer B_val = getConstantValue(rightMult.left);
-        String B_text;
-
-        if (B_val != null) {
-            B_text = B_val.toString();
-        } else {
-            B_text = rightMult.left.getText();
-        }
+        String B_text = (B_val != null) ? B_val.toString() : rightMult.left.getText();
 
         String replacement;
 
-        // Simplify the operation `A op B` based on the operator and whether B is a negative constant
         if (op_text.equals("-")) {
             if (B_val != null && B_val < 0) {
-                // A - (-B_abs)  => A + B_abs
                 replacement = String.format("%s + %d", A_text, Math.abs(B_val));
             } else {
-                // A - B
                 replacement = String.format("%s - %s", A_text, B_text);
             }
         } else if (op_text.equals("+")) {
             if (B_val != null && B_val < 0) {
-                // A + (-B_abs) => A - B_abs
                 replacement = String.format("%s - %d", A_text, Math.abs(B_val));
             } else {
-                // A + B
                 replacement = String.format("%s + %s", A_text, B_text);
             }
         } else {
-            // For other ops like '*' or '/'
             replacement = String.format("%s %s %s", A_text, op_text, B_text);
         }
 
