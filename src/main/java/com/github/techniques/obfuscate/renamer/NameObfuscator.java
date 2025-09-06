@@ -10,13 +10,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class Renamer extends MinicBaseListener {
+public class NameObfuscator extends MinicBaseListener {
 
     private final Map<String, String> variableMap = new HashMap<>();
     private final Random random = new Random();
     private TokenStreamRewriter rewriter;
 
-    public Renamer(CommonTokenStream tokens) {
+    public NameObfuscator(CommonTokenStream tokens) {
         this.rewriter = new TokenStreamRewriter(tokens);
     }
 
@@ -74,9 +74,9 @@ public class Renamer extends MinicBaseListener {
     }
 
     public static String renameVar(MinicParser.ProgramContext tree, CommonTokenStream tokens) {
-        Renamer renamer = new Renamer(tokens);
+        NameObfuscator nameObfuscator = new NameObfuscator(tokens);
         ParseTreeWalker walker = new ParseTreeWalker();
-        walker.walk(renamer, tree);
-        return renamer.getRenamedCode();
+        walker.walk(nameObfuscator, tree);
+        return nameObfuscator.getRenamedCode();
     }
 }

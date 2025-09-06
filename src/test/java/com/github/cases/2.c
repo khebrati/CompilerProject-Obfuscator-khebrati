@@ -1,6 +1,6 @@
 #include <stdio.h>
 int sum(int a, int b) {
-    int result = ((a * 3) - (-b * 3)) / 3;
+    int result = a + b;
     return result;
 }
 int main() {

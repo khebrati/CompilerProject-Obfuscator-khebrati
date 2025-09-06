@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class RenamerTest {
+public class NameObfuscatorTest {
     @Test
     public void variableNamesAreChanged() {
         String program = "int x = 10; x = x + 1;";
@@ -17,7 +17,7 @@ public class RenamerTest {
         MinicParser parser = new MinicParser(tokens);
         MinicParser.ProgramContext tree = parser.program();
 
-        String variableRenamedCode = Renamer.renameVar(tree, tokens);
+        String variableRenamedCode = NameObfuscator.renameVar(tree, tokens);
 
         assertNotEquals("Variable names should be changed", program, variableRenamedCode);
         System.out.println(variableRenamedCode);
@@ -31,7 +31,7 @@ public class RenamerTest {
         MinicParser parser = new MinicParser(tokens);
         MinicParser.ProgramContext tree = parser.program();
 
-        String MiniccatedCode = Renamer.renameVar(tree, tokens);
+        String MiniccatedCode = NameObfuscator.renameVar(tree, tokens);
 
         assertEquals("Code without variables should remain unchanged", program, MiniccatedCode);
     }
@@ -44,7 +44,7 @@ public class RenamerTest {
         MinicParser parser = new MinicParser(tokens);
         MinicParser.ProgramContext tree = parser.program();
 
-        String varChangedCode = Renamer.renameVar(tree, tokens);
+        String varChangedCode = NameObfuscator.renameVar(tree, tokens);
 
         System.out.println(varChangedCode);
     }
@@ -55,7 +55,7 @@ public class RenamerTest {
         var lexer = new MinicLexer(CharStreams.fromString(program));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         MinicParser parser = new MinicParser(tokens);
-        var funRenamedCode = Renamer.renameVar(parser.program(), tokens);
+        var funRenamedCode = NameObfuscator.renameVar(parser.program(), tokens);
         System.out.println(funRenamedCode);
     }
 
@@ -71,7 +71,7 @@ public class RenamerTest {
         var lexer = new MinicLexer(CharStreams.fromString(program));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         MinicParser parser = new MinicParser(tokens);
-        var funRenamedCode = Renamer.renameVar(parser.program(), tokens);
+        var funRenamedCode = NameObfuscator.renameVar(parser.program(), tokens);
         System.out.println(funRenamedCode);
     }
 
@@ -84,7 +84,7 @@ public class RenamerTest {
         MinicParser parser = new MinicParser(tokens);
         MinicParser.ProgramContext tree = parser.program();
 
-        String MiniccatedCode = Renamer.renameVar(tree, tokens);
+        String MiniccatedCode = NameObfuscator.renameVar(tree, tokens);
 
         assertEquals("Empty program should remain unchanged", program, MiniccatedCode);
     }
@@ -97,7 +97,7 @@ public class RenamerTest {
         var lexer = new MinicLexer(CharStreams.fromString(program));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         MinicParser parser = new MinicParser(tokens);
-        var funRenamedCode = Renamer.renameVar(parser.program(), tokens);
+        var funRenamedCode = NameObfuscator.renameVar(parser.program(), tokens);
         System.out.println(funRenamedCode);
     }
 }

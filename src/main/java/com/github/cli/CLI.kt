@@ -1,6 +1,9 @@
 package com.github.cli
 
+import com.github.file.CRunner
 import com.github.file.FileHandling
+import com.github.techniques.deObfuscate.DeObfusTechnique
+import com.github.techniques.deObfuscate.DeObfuscateRunner
 import com.github.techniques.obfuscate.ObfuscateRunner
 import com.github.techniques.obfuscate.ObfusTechnique
 import com.varabyte.kotter.foundation.anim.text
@@ -34,13 +37,53 @@ fun Session.mainSession(): Boolean {
     var repeatSession = false
     headerSection()
     val (name, code) = fileSelection()
-    val tech = techniqueSelection()
-    if (tech == null) {
-        return false
+    val operation = operationSelection()
+    when(operation){
+        Operation.OBFUSCATE -> {
+            val tech = obfusTechniqueSelection() ?: return false
+            obfuscation(code, "$name-obfus", tech)
+        }
+        Operation.DEOBFUSCATE -> {
+            val tech = deObfusTechniqueSelection() ?: return false
+            DeObfuscation(code, "$name-deObfus", tech)
+        }
+
+        Operation.RUN ->{
+            runFile(name)
+        }
     }
-    obfuscation(code, name, tech)
     repeatSession = lastOptions()
     return repeatSession
+}
+
+private fun Session.runFile(name: String): String {
+    var finished = false
+    val spinnerAnim = textAnimOf(listOf("\\", "|", "/", "-"), 125.milliseconds)
+    val thinkingAnim = textAnimOf(listOf("", ".", "..", "..."), 500.milliseconds)
+    var output = ""
+    section {
+        if (!finished) {
+            text(spinnerAnim)
+        } else {
+            text("✓")
+        }
+        textLine()
+        text(" Running your code")
+        if (!finished) {
+            text(thinkingAnim)
+        } else {
+            text("... Done!")
+        }
+    }.run {
+        output = CRunner.runFile(name)
+        finished = true
+    }
+    section {
+        textLine()
+        textLine("Your code has run! Here is the output: ")
+        textLine(output)
+    }.run()
+    return output
 }
 
 fun Session.lastOptions(): Boolean {
@@ -92,7 +135,7 @@ fun Session.obfuscation(code: String, name: String, tech: ObfusTechnique): Strin
         obfuscated = ObfuscateRunner.runTechnique(tech, code)
         FileHandling.writeFile(name, obfuscated)
         runBlocking {
-            delay(3.seconds)
+            delay(2.seconds)
         }
         finished = true
     }
@@ -103,7 +146,70 @@ fun Session.obfuscation(code: String, name: String, tech: ObfusTechnique): Strin
     return obfuscated
 }
 
-fun Session.techniqueSelection(): ObfusTechnique? {
+fun Session.DeObfuscation(code: String, name: String, tech: DeObfusTechnique): String {
+    var finished = false
+    val spinnerAnim = textAnimOf(listOf("\\", "|", "/", "-"), 125.milliseconds)
+    val thinkingAnim = textAnimOf(listOf("", ".", "..", "..."), 500.milliseconds)
+    var obfuscated = ""
+    section {
+        if (!finished) {
+            text(spinnerAnim)
+        } else {
+            text("✓")
+        }
+        textLine()
+        text(" Doing heavy De-Obfuscation work")
+        if (!finished) {
+            text(thinkingAnim)
+        } else {
+            text("... Done!")
+        }
+    }.run {
+        obfuscated = DeObfuscateRunner.runTechnique(tech, code)
+        FileHandling.writeFile(name, obfuscated)
+        runBlocking {
+            delay(2.seconds)
+        }
+        finished = true
+    }
+    section {
+        textLine()
+        textLine("Your simplified code is ready! Check your test folder. ")
+    }.run()
+    return obfuscated
+}
+
+fun Session.operationSelection(): Operation {
+    var result: Operation = Operation.OBFUSCATE
+    section {
+        green {
+            textLine()
+            textLine("Do you want to obfuscate or de-obfuscate?")
+            textLine("1. Obfuscate")
+            textLine("2. De-obfuscate")
+            textLine("3. Run")
+            text("Input the number: ")
+            input()
+        }
+    }.runUntilSignal {
+        onInputEntered {
+            val method = input.toInt()
+            result = when (method) {
+                1 -> Operation.OBFUSCATE
+                2 -> Operation.DEOBFUSCATE
+                3 -> Operation.RUN
+                else -> {
+                    println("Invalid option")
+                    return@onInputEntered
+                }
+            }
+            signal()
+        }
+    }
+    return result
+}
+
+fun Session.obfusTechniqueSelection(): ObfusTechnique? {
     var tech: ObfusTechnique? = null
     section {
         blue {
@@ -124,6 +230,35 @@ fun Session.techniqueSelection(): ObfusTechnique? {
                 2 -> ObfusTechnique.NAME_CHANGER
                 3 -> ObfusTechnique.EXPRESSION
                 4 -> ObfusTechnique.ALL
+                else -> {
+                    println("Invalid option")
+                    return@onInputEntered
+                }
+            }
+            signal()
+        }
+    }
+    return tech
+}
+fun Session.deObfusTechniqueSelection(): DeObfusTechnique? {
+    var tech: DeObfusTechnique? = null
+    section {
+        blue {
+            textLine()
+            textLine("What obfuscation method do you want to use?")
+            textLine("1. Expression simplification")
+            textLine("2. Variable renaming")
+            textLine("3. All!")
+            text("Input the number: ")
+            input()
+        }
+    }.runUntilSignal {
+        onInputEntered {
+            val method = input.toInt()
+            tech = when (method) {
+                1 -> DeObfusTechnique.SIMPLIFY_EXPRESSION
+                2 -> DeObfusTechnique.RENAMER
+                3 -> DeObfusTechnique.ALL
                 else -> {
                     println("Invalid option")
                     return@onInputEntered
@@ -175,3 +310,7 @@ fun Session.headerSection() = section {
     }
 
 }.run()
+
+enum class Operation{
+    OBFUSCATE, DEOBFUSCATE, RUN
+}
