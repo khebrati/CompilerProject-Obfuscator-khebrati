@@ -1,22 +1,19 @@
-int _vcmsmukue = 0;
-int _vsorozyqw = 0;
-int _vykdoadpn(int a, int b) {
-
-
-    if(_vsorozyqw > 47) { _vsorozyqw = 65; } else { _vsorozyqw = 6; }
-
-    int _vfawjmgdl = (a - (-b));
-    return _vfawjmgdl;
+int _dummy3 = 0;
+int _dummy8 = 0;
+int _dummy10 = 0;
+int sum(int a, int b) {
+int result = a + b;
+return result;
 }
 int main() {
-    if(_vcmsmukue > 28) { _vcmsmukue = 39; } else { _vcmsmukue = 66; }
-
-    _vcmsmukue = 35;
-
-
-    int _vzihflcpm = 3;
-    int _vywzfjnlo = 4;
-    int _volfjxxzd = _vykdoadpn(_vzihflcpm, _vywzfjnlo);
-    printf("%d\n", _volfjxxzd);
-    return 0;
+_dummy10 = 12;
+_dummy8 = 99;
+while(_dummy3 < 35) {
+_dummy3 = _dummy3 + 1;
+}
+int x = 3;
+int y = 4;
+int total = sum(x, y);
+printf("%d\n", total);
+return 0;
 }
