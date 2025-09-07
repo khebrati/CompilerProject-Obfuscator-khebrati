@@ -17,6 +17,8 @@ public class DeadCodeRemover extends MinicBaseListener {
     private final Deque<MinicParser.BlockContext> blockStack = new ArrayDeque<>();
     private final Map<String, ParserRuleContext> variableDeclarations = new HashMap<>();
     private final Set<ParserRuleContext> emptyBlocks = new HashSet<>();
+    private final Set<ParserRuleContext> functionDefinitions = new HashSet<>();
+    private final Set<String> globalVariables = new HashSet<>();
 
     public DeadCodeRemover(CommonTokenStream tokens) {
         this.tokens = tokens;
@@ -26,6 +28,19 @@ public class DeadCodeRemover extends MinicBaseListener {
         DeadCodeRemover remover = new DeadCodeRemover(tokens);
         ParseTreeWalker.DEFAULT.walk(remover, tree);
         return remover.getProcessedCode();
+    }
+
+    @Override
+    public void enterProgram(MinicParser.ProgramContext ctx) {
+        // Reset state for new program analysis
+        declaredVariables.clear();
+        usedVariables.clear();
+        statementsToRemove.clear();
+        blockStack.clear();
+        variableDeclarations.clear();
+        emptyBlocks.clear();
+        functionDefinitions.clear();
+        globalVariables.clear();
     }
 
     @Override
@@ -45,10 +60,18 @@ public class DeadCodeRemover extends MinicBaseListener {
 
     @Override
     public void enterDecOrFunDefinition(MinicParser.DecOrFunDefinitionContext ctx) {
-        if (ctx.Identifier() != null && !isInDeadCode(ctx)) {
+        if (ctx.Identifier() != null) {
             String varName = ctx.Identifier().getText();
             declaredVariables.add(varName);
             variableDeclarations.put(varName, ctx);
+
+            // Check if this is a function definition
+            if (ctx.decOrFunBody().paramListBlock() != null) {
+                functionDefinitions.add(ctx);
+            } else {
+                // This is a global variable declaration
+                globalVariables.add(varName);
+            }
         }
     }
 
@@ -60,7 +83,34 @@ public class DeadCodeRemover extends MinicBaseListener {
     }
 
     @Override
-    public void exitReturnStatement(MinicParser.ReturnStatementContext ctx) {
+    public void enterAssignmentOrFunCall(MinicParser.AssignmentOrFunCallContext ctx) {
+        if (ctx.Identifier() != null && !isInDeadCode(ctx)) {
+            // This is a variable assignment, so mark it as used
+            usedVariables.add(ctx.Identifier().getText());
+        }
+    }
+
+    @Override
+    public void enterPrintStatement(MinicParser.PrintStatementContext ctx) {
+        if (!isInDeadCode(ctx)) {
+            markVariablesInExpression(ctx.parExpression().expression());
+        }
+    }
+
+    @Override
+    public void enterPrintlnStatement(MinicParser.PrintlnStatementContext ctx) {
+        if (!isInDeadCode(ctx)) {
+            markVariablesInExpression(ctx.parExpression().expression());
+        }
+    }
+
+    @Override
+    public void enterReturnStatement(MinicParser.ReturnStatementContext ctx) {
+        if (ctx.expression() != null && !isInDeadCode(ctx)) {
+            markVariablesInExpression(ctx.expression());
+        }
+
+        // Mark code after return as dead
         if (!blockStack.isEmpty()) {
             MinicParser.BlockContext block = blockStack.peek();
             boolean afterReturn = false;
@@ -77,6 +127,29 @@ public class DeadCodeRemover extends MinicBaseListener {
         }
     }
 
+    private void markVariablesInExpression(MinicParser.ExpressionContext expr) {
+        if (expr instanceof MinicParser.VariableOrFunctionCallContext) {
+            MinicParser.VariableOrFunctionCallContext varCall =
+                    (MinicParser.VariableOrFunctionCallContext) expr;
+            if (varCall.Identifier() != null) {
+                usedVariables.add(varCall.Identifier().getText());
+            }
+        } else if (expr instanceof MinicParser.BinaryOperationContext) {
+            MinicParser.BinaryOperationContext binOp =
+                    (MinicParser.BinaryOperationContext) expr;
+            markVariablesInExpression(binOp.left);
+            markVariablesInExpression(binOp.right);
+        } else if (expr instanceof MinicParser.UnaryOperationContext) {
+            MinicParser.UnaryOperationContext unaryOp =
+                    (MinicParser.UnaryOperationContext) expr;
+            markVariablesInExpression(unaryOp.expression());
+        } else if (expr instanceof MinicParser.ParenthesesExpressionContext) {
+            MinicParser.ParenthesesExpressionContext parenExpr =
+                    (MinicParser.ParenthesesExpressionContext) expr;
+            markVariablesInExpression(parenExpr.parExpression().expression());
+        }
+    }
+
     private boolean isInDeadCode(ParserRuleContext ctx) {
         ParserRuleContext parent = ctx;
         while (parent != null) {
@@ -89,9 +162,18 @@ public class DeadCodeRemover extends MinicBaseListener {
     }
 
     private String getProcessedCode() {
-        // First, mark unused variable declarations for removal
+        // First, mark unused variable declarations for removal (excluding function definitions)
         Set<String> unusedVars = new HashSet<>(declaredVariables);
         unusedVars.removeAll(usedVariables);
+
+        // Don't remove function definitions
+        for (ParserRuleContext funcDef : functionDefinitions) {
+            if (funcDef instanceof MinicParser.DecOrFunDefinitionContext) {
+                MinicParser.DecOrFunDefinitionContext decOrFun = (MinicParser.DecOrFunDefinitionContext) funcDef;
+                unusedVars.remove(decOrFun.Identifier().getText());
+            }
+        }
+
         for (String unusedVar : unusedVars) {
             ParserRuleContext decl = variableDeclarations.get(unusedVar);
             if (decl != null) {
@@ -124,35 +206,25 @@ public class DeadCodeRemover extends MinicBaseListener {
     }
 
     private String cleanUpCode(String code) {
-        // Remove multiple spaces but preserve single spaces
-        code = code.replaceAll("\\s+", " ");
+        // Remove multiple consecutive spaces
+        code = code.replaceAll(" +", " ");
 
-        // Add spaces around parentheses for control statements
-        code = code.replaceAll("(if|while|for)\\(", "$1 (");
-        code = code.replaceAll("(if|while|for) \\(", "$1 (");
+        // Clean up around specific tokens while preserving newlines
+        code = code.replaceAll("\\s*;\\s*", ";\n");
+        code = code.replaceAll("\\s*\\{\\s*", " {\n");
+        code = code.replaceAll("\\s*}\\s*", "\n}\n");
 
-        // Ensure space after closing parenthesis before opening brace
-        code = code.replaceAll("\\)\\{", ") {");
+        // Remove empty lines and trim each line
+        String[] lines = code.split("\n");
+        StringBuilder result = new StringBuilder();
 
-        // Clean up around semicolons
-        code = code.replaceAll("\\s*;\\s*", "; ");
+        for (String line : lines) {
+            String trimmed = line.trim();
+            if (!trimmed.isEmpty()) {
+                result.append(trimmed).append("\n");
+            }
+        }
 
-        // Remove trailing spaces
-        code = code.trim();
-
-        // Remove spaces before commas
-        code = code.replaceAll("\\s*,", ",");
-
-        // Remove empty statements
-        code = code.replaceAll(";\\s*;", ";");
-
-        // Ensure proper spacing around braces
-        code = code.replaceAll("\\s*\\{\\s*", " { ");
-        code = code.replaceAll("\\s*}\\s*", " } ");
-
-        // Final cleanup of multiple spaces
-        code = code.replaceAll("\\s+", " ");
-
-        return code.trim();
+        return result.toString().trim();
     }
 }
