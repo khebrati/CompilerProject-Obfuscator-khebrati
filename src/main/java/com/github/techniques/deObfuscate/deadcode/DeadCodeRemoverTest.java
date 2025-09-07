@@ -1,90 +1,230 @@
 package com.github.techniques.deObfuscate.deadcode;
 
-import com.github.gen.MinicLexer;
+import com.github.gen.MinicBaseListener;
 import com.github.gen.MinicParser;
-import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
-public class DeadCodeRemoverTest {
+import java.util.*;
 
-    private String removeDeadCode(String code) {
-        MinicLexer lexer = new MinicLexer(CharStreams.fromString(code));
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        MinicParser parser = new MinicParser(tokens);
-        MinicParser.ProgramContext tree = parser.program();
-        return DeadCodeRemover.removeDeadCode(tree, tokens).trim();
+public class DeadCodeRemover extends MinicBaseListener {
+
+    private final CommonTokenStream tokens;
+    private final Set<String> declaredVariables = new HashSet<>();
+    private final Set<String> usedVariables = new HashSet<>();
+    private final Set<ParserRuleContext> statementsToRemove = new HashSet<>();
+    private final Deque<MinicParser.BlockContext> blockStack = new ArrayDeque<>();
+    private final Map<String, ParserRuleContext> variableDeclarations = new HashMap<>();
+    private final Set<ParserRuleContext> emptyBlocks = new HashSet<>();
+    private final Set<ParserRuleContext> functionDefinitions = new HashSet<>();
+    private final Set<String> globalVariables = new HashSet<>();
+
+    public DeadCodeRemover(CommonTokenStream tokens) {
+        this.tokens = tokens;
     }
 
-    @Test
-    public void testUnusedVariableRemoval() {
-        String input = "int x = 5;\nint unused = 10;\nprint(x);";
-        String output = removeDeadCode(input);
-        assertTrue("Should keep used variable x", output.contains("x = 5"));
-        assertFalse("Should remove unused variable", output.contains("unused"));
+    public static String removeDeadCode(MinicParser.ProgramContext tree, CommonTokenStream tokens) {
+        DeadCodeRemover remover = new DeadCodeRemover(tokens);
+        ParseTreeWalker.DEFAULT.walk(remover, tree);
+        return remover.getProcessedCode();
     }
 
-    @Test
-    public void testCodeAfterReturn() {
-        String input =
-                "{\n" +
-                        "    int x = 5;\n" +
-                        "    return x;\n" +
-                        "    print(x);\n" +
-                        "}";
-        String output = removeDeadCode(input);
-        assertTrue("Should keep return statement", output.contains("return x"));
-        assertFalse("Should remove code after return", output.contains("print(x)"));
+    @Override
+    public void enterProgram(MinicParser.ProgramContext ctx) {
+        // Reset state for new program analysis
+        declaredVariables.clear();
+        usedVariables.clear();
+        statementsToRemove.clear();
+        blockStack.clear();
+        variableDeclarations.clear();
+        emptyBlocks.clear();
+        functionDefinitions.clear();
+        globalVariables.clear();
     }
 
-    @Test
-    public void testEmptyBlockRemoval() {
-        String input = "if (x > 0) { }\nwhile (y < 10) {\n}\n";
-        String output = removeDeadCode(input);
-        assertFalse("Should remove empty blocks", output.contains("{ }"));
-        assertFalse("Should remove empty blocks with newlines", output.contains("{\n}"));
+    @Override
+    public void enterBlock(MinicParser.BlockContext ctx) {
+        blockStack.push(ctx);
     }
 
-    @Test
-    public void testComplexCase() {
-        String input =
-                "int main() {\n" +
-                        "    int x = 5;\n" +
-                        "    int unused = 10;\n" +
-                        "    if (x > 0) {\n" +
-                        "        return x;\n" +
-                        "        print(unused);\n" +
-                        "    }\n" +
-                        "    print(x);\n" +
-                        "}";
+    @Override
+    public void exitBlock(MinicParser.BlockContext ctx) {
+        blockStack.pop();
 
-        String output = removeDeadCode(input);
-
-        assertTrue("Should keep main function", output.contains("int main()"));
-        assertTrue("Should keep used variable x", output.contains("x = 5"));
-        assertFalse("Should remove unused variable", output.contains("unused = 10"));
-        assertTrue("Should keep return statement", output.contains("return x"));
-        assertFalse("Should remove code after return", output.contains("print(unused)"));
+        // Check if block is empty
+        if (ctx.statement().isEmpty()) {
+            emptyBlocks.add(ctx);
+        }
     }
 
-    @Test
-    public void testNestedBlocks() {
-        String input =
-                "{\n" +
-                        "    int x = 1;\n" +
-                        "    {\n" +
-                        "        return x;\n" +
-                        "        {\n" +
-                        "            print(x);\n" +
-                        "        }\n" +
-                        "    }\n" +
-                        "}";
+    @Override
+    public void enterDecOrFunDefinition(MinicParser.DecOrFunDefinitionContext ctx) {
+        if (ctx.Identifier() != null) {
+            String varName = ctx.Identifier().getText();
+            declaredVariables.add(varName);
+            variableDeclarations.put(varName, ctx);
 
-        String output = removeDeadCode(input);
-        assertTrue("Should keep outer block", output.contains("{"));
-        assertTrue("Should keep variable declaration", output.contains("x = 1"));
-        assertTrue("Should keep return statement", output.contains("return x"));
-        assertFalse("Should remove nested block after return", output.contains("print(x)"));
+            // Check if this is a function definition
+            if (ctx.decOrFunBody().paramListBlock() != null) {
+                functionDefinitions.add(ctx);
+            } else {
+                // This is a global variable declaration
+                globalVariables.add(varName);
+            }
+        }
+    }
+
+    @Override
+    public void enterVariableOrFunctionCall(MinicParser.VariableOrFunctionCallContext ctx) {
+        if (ctx.Identifier() != null && !isInDeadCode(ctx)) {
+            usedVariables.add(ctx.Identifier().getText());
+        }
+    }
+
+    @Override
+    public void enterAssignmentOrFunCall(MinicParser.AssignmentOrFunCallContext ctx) {
+        if (ctx.Identifier() != null && !isInDeadCode(ctx)) {
+            // This is a variable assignment, so mark it as used
+            usedVariables.add(ctx.Identifier().getText());
+        }
+    }
+
+    @Override
+    public void enterPrintStatement(MinicParser.PrintStatementContext ctx) {
+        if (!isInDeadCode(ctx)) {
+            markVariablesInExpression(ctx.parExpression().expression());
+        }
+    }
+
+    @Override
+    public void enterPrintlnStatement(MinicParser.PrintlnStatementContext ctx) {
+        if (!isInDeadCode(ctx)) {
+            markVariablesInExpression(ctx.parExpression().expression());
+        }
+    }
+
+    @Override
+    public void enterReturnStatement(MinicParser.ReturnStatementContext ctx) {
+        if (ctx.expression() != null && !isInDeadCode(ctx)) {
+            markVariablesInExpression(ctx.expression());
+        }
+
+        // Mark code after return as dead
+        if (!blockStack.isEmpty()) {
+            MinicParser.BlockContext block = blockStack.peek();
+            boolean afterReturn = false;
+
+            for (MinicParser.StatementContext st : block.statement()) {
+                if (st == ctx) {
+                    afterReturn = true;
+                    continue;
+                }
+                if (afterReturn) {
+                    statementsToRemove.add(st);
+                }
+            }
+        }
+    }
+
+    private void markVariablesInExpression(MinicParser.ExpressionContext expr) {
+        if (expr instanceof MinicParser.VariableOrFunctionCallContext) {
+            MinicParser.VariableOrFunctionCallContext varCall =
+                    (MinicParser.VariableOrFunctionCallContext) expr;
+            if (varCall.Identifier() != null) {
+                usedVariables.add(varCall.Identifier().getText());
+            }
+        } else if (expr instanceof MinicParser.BinaryOperationContext) {
+            MinicParser.BinaryOperationContext binOp =
+                    (MinicParser.BinaryOperationContext) expr;
+            markVariablesInExpression(binOp.left);
+            markVariablesInExpression(binOp.right);
+        } else if (expr instanceof MinicParser.UnaryOperationContext) {
+            MinicParser.UnaryOperationContext unaryOp =
+                    (MinicParser.UnaryOperationContext) expr;
+            markVariablesInExpression(unaryOp.expression());
+        } else if (expr instanceof MinicParser.ParenthesesExpressionContext) {
+            MinicParser.ParenthesesExpressionContext parenExpr =
+                    (MinicParser.ParenthesesExpressionContext) expr;
+            markVariablesInExpression(parenExpr.parExpression().expression());
+        }
+    }
+
+    private boolean isInDeadCode(ParserRuleContext ctx) {
+        ParserRuleContext parent = ctx;
+        while (parent != null) {
+            if (statementsToRemove.contains(parent)) {
+                return true;
+            }
+            parent = parent.getParent();
+        }
+        return false;
+    }
+
+    private String getProcessedCode() {
+        // First, mark unused variable declarations for removal (excluding function definitions)
+        Set<String> unusedVars = new HashSet<>(declaredVariables);
+        unusedVars.removeAll(usedVariables);
+
+        // Don't remove function definitions
+        for (ParserRuleContext funcDef : functionDefinitions) {
+            if (funcDef instanceof MinicParser.DecOrFunDefinitionContext) {
+                MinicParser.DecOrFunDefinitionContext decOrFun = (MinicParser.DecOrFunDefinitionContext) funcDef;
+                unusedVars.remove(decOrFun.Identifier().getText());
+            }
+        }
+
+        for (String unusedVar : unusedVars) {
+            ParserRuleContext decl = variableDeclarations.get(unusedVar);
+            if (decl != null) {
+                statementsToRemove.add(decl);
+            }
+        }
+
+        // Add empty blocks to statements to remove
+        statementsToRemove.addAll(emptyBlocks);
+
+        // Create a sorted list of contexts to remove (from end to beginning)
+        List<ParserRuleContext> sortedContexts = new ArrayList<>(statementsToRemove);
+        sortedContexts.sort((a, b) -> b.getStart().getStartIndex() - a.getStart().getStartIndex());
+
+        // Build the result by removing the marked contexts
+        StringBuilder result = new StringBuilder(tokens.getText());
+
+        for (ParserRuleContext ctx : sortedContexts) {
+            int start = ctx.getStart().getStartIndex();
+            int end = ctx.getStop().getStopIndex() + 1;
+
+            // Make sure we don't go out of bounds
+            if (start >= 0 && end <= result.length()) {
+                result.delete(start, end);
+            }
+        }
+
+        // Clean up the result with proper spacing
+        return cleanUpCode(result.toString());
+    }
+
+    private String cleanUpCode(String code) {
+        // Remove multiple consecutive spaces
+        code = code.replaceAll(" +", " ");
+
+        // Clean up around specific tokens while preserving newlines
+        code = code.replaceAll("\\s*;\\s*", ";\n");
+        code = code.replaceAll("\\s*\\{\\s*", " {\n");
+        code = code.replaceAll("\\s*}\\s*", "\n}\n");
+
+        // Remove empty lines and trim each line
+        String[] lines = code.split("\n");
+        StringBuilder result = new StringBuilder();
+
+        for (String line : lines) {
+            String trimmed = line.trim();
+            if (!trimmed.isEmpty()) {
+                result.append(trimmed).append("\n");
+            }
+        }
+
+        return result.toString().trim();
     }
 }
