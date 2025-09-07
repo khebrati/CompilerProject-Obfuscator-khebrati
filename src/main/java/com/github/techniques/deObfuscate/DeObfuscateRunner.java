@@ -24,13 +24,13 @@ public class DeObfuscateRunner {
             case RENAMER:
                 deObfuscators.add(NameSimplifier::rename);
                 break;
-            case DEAD_CODE_REMOVER:  // Add this case
+            case DEAD_CODE_REMOVER:
                 deObfuscators.add(DeadCodeRemover::removeDeadCode);
                 break;
             case ALL:
                 deObfuscators.add(NameSimplifier::rename);
                 deObfuscators.add(ExpressionSimplifier::simplify);
-                deObfuscators.add(DeadCodeRemover::removeDeadCode);  // Add this line
+                deObfuscators.add(DeadCodeRemover::removeDeadCode);
                 break;
         }
         for (var obf : deObfuscators) {

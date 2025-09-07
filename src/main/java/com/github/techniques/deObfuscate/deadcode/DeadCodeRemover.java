@@ -5,20 +5,29 @@ import com.github.gen.MinicParser;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.*;
 
 public class DeadCodeRemover extends MinicBaseListener {
 
     private final CommonTokenStream tokens;
+
+    // declarations and reads
     private final Set<String> declaredVariables = new HashSet<>();
     private final Set<String> usedVariables = new HashSet<>();
+
+    // contexts to remove
     private final Set<ParserRuleContext> statementsToRemove = new HashSet<>();
     private final Deque<MinicParser.BlockContext> blockStack = new ArrayDeque<>();
+
+    // maps/collections to find contexts later
     private final Map<String, ParserRuleContext> variableDeclarations = new HashMap<>();
-    private final Set<ParserRuleContext> emptyBlocks = new HashSet<>();
     private final Set<ParserRuleContext> functionDefinitions = new HashSet<>();
-    private final Set<String> globalVariables = new HashSet<>();
+    private final Set<ParserRuleContext> emptyBlocks = new HashSet<>();
+
+    // record assignment statements: varName -> list of statement contexts (assignment statements)
+    private final Map<String, List<ParserRuleContext>> assignmentStatements = new HashMap<>();
 
     public DeadCodeRemover(CommonTokenStream tokens) {
         this.tokens = tokens;
@@ -32,7 +41,7 @@ public class DeadCodeRemover extends MinicBaseListener {
 
     @Override
     public void enterProgram(MinicParser.ProgramContext ctx) {
-        // Reset state for new program analysis
+        // reset state (safe if re-used)
         declaredVariables.clear();
         usedVariables.clear();
         statementsToRemove.clear();
@@ -40,7 +49,7 @@ public class DeadCodeRemover extends MinicBaseListener {
         variableDeclarations.clear();
         emptyBlocks.clear();
         functionDefinitions.clear();
-        globalVariables.clear();
+        assignmentStatements.clear();
     }
 
     @Override
@@ -51,8 +60,6 @@ public class DeadCodeRemover extends MinicBaseListener {
     @Override
     public void exitBlock(MinicParser.BlockContext ctx) {
         blockStack.pop();
-
-        // Check if block is empty
         if (ctx.statement().isEmpty()) {
             emptyBlocks.add(ctx);
         }
@@ -60,171 +67,232 @@ public class DeadCodeRemover extends MinicBaseListener {
 
     @Override
     public void enterDecOrFunDefinition(MinicParser.DecOrFunDefinitionContext ctx) {
-        if (ctx.Identifier() != null) {
-            String varName = ctx.Identifier().getText();
-            declaredVariables.add(varName);
-            variableDeclarations.put(varName, ctx);
+        if (ctx.Identifier() == null) return;
+        String varName = ctx.Identifier().getText();
+        declaredVariables.add(varName);
+        variableDeclarations.put(varName, ctx);
 
-            // Check if this is a function definition
-            if (ctx.decOrFunBody().paramListBlock() != null) {
-                functionDefinitions.add(ctx);
-            } else {
-                // This is a global variable declaration
-                globalVariables.add(varName);
+        // if decOrFunBody -> paramListBlock != null => function definition
+        if (ctx.decOrFunBody() != null && ctx.decOrFunBody().paramListBlock() != null) {
+            functionDefinitions.add(ctx);
+        }
+        // If a declaration has initializer, mark reads inside its RHS expression so we capture dependencies
+        if (ctx.decOrFunBody() != null && ctx.decOrFunBody().declarationBody() != null) {
+            MinicParser.DeclarationBodyContext db = ctx.decOrFunBody().declarationBody();
+            // declarationBody: (assignmentOp expression)? SEMI
+            // find any expression child and walk it
+            for (ParseTree ch : db.children) {
+                if (ch instanceof MinicParser.ExpressionContext) {
+                    markVariablesInExpression((MinicParser.ExpressionContext) ch);
+                }
             }
         }
     }
 
     @Override
     public void enterVariableOrFunctionCall(MinicParser.VariableOrFunctionCallContext ctx) {
-        if (ctx.Identifier() != null && !isInDeadCode(ctx)) {
+        if (ctx.Identifier() != null) {
+            // identifier itself is read (either variable or function name)
             usedVariables.add(ctx.Identifier().getText());
+        }
+        // also scan children for argument expressions and mark reads inside them
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            ParseTree ch = ctx.getChild(i);
+            if (ch instanceof MinicParser.ExpressionContext) {
+                markVariablesInExpression((MinicParser.ExpressionContext) ch);
+            }
         }
     }
 
     @Override
     public void enterAssignmentOrFunCall(MinicParser.AssignmentOrFunCallContext ctx) {
-        if (ctx.Identifier() != null && !isInDeadCode(ctx)) {
-            // This is a variable assignment, so mark it as used
-            usedVariables.add(ctx.Identifier().getText());
+        // This context corresponds to: Identifier assignBodyOrArgsList
+        if (ctx.Identifier() == null) return;
+
+        // Determine whether it's an assignment (assignBody present) or a call (args)
+        MinicParser.AssignBodyOrArgsListContext abo = ctx.assignBodyOrArgsList();
+        if (abo == null) return;
+
+        // assignment case: assignBody -> assignmentOp expression SEMI
+        if (abo.assignBody() != null) {
+            MinicParser.AssignBodyContext ab = abo.assignBody();
+            // mark reads in RHS expression (this counts as variable uses)
+            for (ParseTree ch : ab.children) {
+                if (ch instanceof MinicParser.ExpressionContext) {
+                    markVariablesInExpression((MinicParser.ExpressionContext) ch);
+                }
+            }
+            // record assignment statement context for potential removal later (do NOT mark LHS as used)
+            String lhs = ctx.Identifier().getText();
+            assignmentStatements.computeIfAbsent(lhs, k -> new ArrayList<>()).add(ctx);
+        } else {
+            // function-call-with-args: mark reads in its argument expressions
+            for (ParseTree ch : abo.children) {
+                if (ch instanceof MinicParser.ExpressionContext) {
+                    markVariablesInExpression((MinicParser.ExpressionContext) ch);
+                }
+            }
         }
     }
 
     @Override
     public void enterPrintStatement(MinicParser.PrintStatementContext ctx) {
-        if (!isInDeadCode(ctx)) {
+        if (ctx.parExpression() != null && ctx.parExpression().expression() != null) {
             markVariablesInExpression(ctx.parExpression().expression());
         }
     }
 
     @Override
     public void enterPrintlnStatement(MinicParser.PrintlnStatementContext ctx) {
-        if (!isInDeadCode(ctx)) {
+        if (ctx.parExpression() != null && ctx.parExpression().expression() != null) {
+            markVariablesInExpression(ctx.parExpression().expression());
+        }
+    }
+
+    @Override
+    public void enterIfStatement(MinicParser.IfStatementContext ctx) {
+        if (ctx.parExpression() != null && ctx.parExpression().expression() != null) {
+            markVariablesInExpression(ctx.parExpression().expression());
+        }
+    }
+
+    @Override
+    public void enterWhileStatement(MinicParser.WhileStatementContext ctx) {
+        if (ctx.parExpression() != null && ctx.parExpression().expression() != null) {
             markVariablesInExpression(ctx.parExpression().expression());
         }
     }
 
     @Override
     public void enterReturnStatement(MinicParser.ReturnStatementContext ctx) {
-        if (ctx.expression() != null && !isInDeadCode(ctx)) {
+        if (ctx.expression() != null) {
             markVariablesInExpression(ctx.expression());
         }
 
-        // Mark code after return as dead
+        // Mark all subsequent statements IN THE SAME BLOCK as dead (textually after this return)
         if (!blockStack.isEmpty()) {
-            MinicParser.BlockContext block = blockStack.peek();
-            boolean afterReturn = false;
-
-            for (MinicParser.StatementContext st : block.statement()) {
-                if (st == ctx) {
-                    afterReturn = true;
-                    continue;
-                }
-                if (afterReturn) {
+            MinicParser.BlockContext blk = blockStack.peek();
+            int retEnd = ctx.getStop().getStopIndex();
+            for (MinicParser.StatementContext st : blk.statement()) {
+                if (st.getStart().getStartIndex() > retEnd) {
                     statementsToRemove.add(st);
                 }
             }
         }
     }
 
+    // recursively mark variables used in an expression
     private void markVariablesInExpression(MinicParser.ExpressionContext expr) {
-        if (expr instanceof MinicParser.VariableOrFunctionCallContext) {
-            MinicParser.VariableOrFunctionCallContext varCall =
-                    (MinicParser.VariableOrFunctionCallContext) expr;
-            if (varCall.Identifier() != null) {
-                usedVariables.add(varCall.Identifier().getText());
-            }
-        } else if (expr instanceof MinicParser.BinaryOperationContext) {
-            MinicParser.BinaryOperationContext binOp =
-                    (MinicParser.BinaryOperationContext) expr;
-            markVariablesInExpression(binOp.left);
-            markVariablesInExpression(binOp.right);
-        } else if (expr instanceof MinicParser.UnaryOperationContext) {
-            MinicParser.UnaryOperationContext unaryOp =
-                    (MinicParser.UnaryOperationContext) expr;
-            markVariablesInExpression(unaryOp.expression());
-        } else if (expr instanceof MinicParser.ParenthesesExpressionContext) {
-            MinicParser.ParenthesesExpressionContext parenExpr =
-                    (MinicParser.ParenthesesExpressionContext) expr;
-            markVariablesInExpression(parenExpr.parExpression().expression());
-        }
-    }
+        if (expr == null) return;
 
-    private boolean isInDeadCode(ParserRuleContext ctx) {
-        ParserRuleContext parent = ctx;
-        while (parent != null) {
-            if (statementsToRemove.contains(parent)) {
-                return true;
+        // Variable or function call (Identifier argsListOrNothing)
+        if (expr instanceof MinicParser.VariableOrFunctionCallContext) {
+            MinicParser.VariableOrFunctionCallContext v = (MinicParser.VariableOrFunctionCallContext) expr;
+            if (v.Identifier() != null) usedVariables.add(v.Identifier().getText());
+            // mark reads in possible arg expressions
+            for (int i = 0; i < v.getChildCount(); i++) {
+                ParseTree ch = v.getChild(i);
+                if (ch instanceof MinicParser.ExpressionContext) {
+                    markVariablesInExpression((MinicParser.ExpressionContext) ch);
+                }
             }
-            parent = parent.getParent();
+            return;
         }
-        return false;
+
+        // Binary operation
+        if (expr instanceof MinicParser.BinaryOperationContext) {
+            MinicParser.BinaryOperationContext b = (MinicParser.BinaryOperationContext) expr;
+            markVariablesInExpression(b.left);
+            markVariablesInExpression(b.right);
+            return;
+        }
+
+        // Unary operation
+        if (expr instanceof MinicParser.UnaryOperationContext) {
+            MinicParser.UnaryOperationContext u = (MinicParser.UnaryOperationContext) expr;
+            markVariablesInExpression(u.expression());
+            return;
+        }
+
+        // Parentheses expression
+        if (expr instanceof MinicParser.ParenthesesExpressionContext) {
+            MinicParser.ParenthesesExpressionContext p = (MinicParser.ParenthesesExpressionContext) expr;
+            if (p.parExpression() != null && p.parExpression().expression() != null) {
+                markVariablesInExpression(p.parExpression().expression());
+            }
+            return;
+        }
+
+        // other expression types (literals, reads like readInt/readDouble/readLine, toString) do not mark identifiers
     }
 
     private String getProcessedCode() {
-        // First, mark unused variable declarations for removal (excluding function definitions)
+        // 1) Remove unused declarations (as before)
         Set<String> unusedVars = new HashSet<>(declaredVariables);
         unusedVars.removeAll(usedVariables);
 
-        // Don't remove function definitions
+        // Don't remove function definitions (even if never referenced)
         for (ParserRuleContext funcDef : functionDefinitions) {
             if (funcDef instanceof MinicParser.DecOrFunDefinitionContext) {
-                MinicParser.DecOrFunDefinitionContext decOrFun = (MinicParser.DecOrFunDefinitionContext) funcDef;
-                unusedVars.remove(decOrFun.Identifier().getText());
+                MinicParser.DecOrFunDefinitionContext d = (MinicParser.DecOrFunDefinitionContext) funcDef;
+                if (d.Identifier() != null) unusedVars.remove(d.Identifier().getText());
             }
         }
 
-        for (String unusedVar : unusedVars) {
-            ParserRuleContext decl = variableDeclarations.get(unusedVar);
-            if (decl != null) {
-                statementsToRemove.add(decl);
+        // mark declaration contexts for removal
+        for (String v : unusedVars) {
+            ParserRuleContext decl = variableDeclarations.get(v);
+            if (decl != null) statementsToRemove.add(decl);
+        }
+
+        // 2) Remove assignment statements for variables that are never read anywhere
+        for (Map.Entry<String, List<ParserRuleContext>> e : assignmentStatements.entrySet()) {
+            String var = e.getKey();
+            if (!usedVariables.contains(var)) {
+                for (ParserRuleContext asgCtx : e.getValue()) {
+                    statementsToRemove.add(asgCtx);
+                }
             }
         }
 
-        // Add empty blocks to statements to remove
+        // 3) Add empty blocks
         statementsToRemove.addAll(emptyBlocks);
 
-        // Create a sorted list of contexts to remove (from end to beginning)
-        List<ParserRuleContext> sortedContexts = new ArrayList<>(statementsToRemove);
-        sortedContexts.sort((a, b) -> b.getStart().getStartIndex() - a.getStart().getStartIndex());
+        // 4) Sort and delete from token stream text
+        List<ParserRuleContext> sorted = new ArrayList<>(statementsToRemove);
+        sorted.sort((a, b) -> Integer.compare(b.getStart().getStartIndex(), a.getStart().getStartIndex()));
 
-        // Build the result by removing the marked contexts
         StringBuilder result = new StringBuilder(tokens.getText());
-
-        for (ParserRuleContext ctx : sortedContexts) {
-            int start = ctx.getStart().getStartIndex();
-            int end = ctx.getStop().getStopIndex() + 1;
-
-            // Make sure we don't go out of bounds
-            if (start >= 0 && end <= result.length()) {
+        for (ParserRuleContext ctx : sorted) {
+            int start = Math.max(0, ctx.getStart().getStartIndex());
+            int end = Math.min(result.length(), ctx.getStop().getStopIndex() + 1);
+            if (start < end) {
                 result.delete(start, end);
             }
         }
 
-        // Clean up the result with proper spacing
+        // 5) Final cleanup and pretty printing (multi-line)
         return cleanUpCode(result.toString());
     }
 
     private String cleanUpCode(String code) {
-        // Remove multiple consecutive spaces
-        code = code.replaceAll(" +", " ");
+        // normalize spaces
+        code = code.replaceAll("[ \\t\\f\\r]+", " ");
 
-        // Clean up around specific tokens while preserving newlines
+        // place semicolons and braces on their own/adjacent lines for readability
         code = code.replaceAll("\\s*;\\s*", ";\n");
         code = code.replaceAll("\\s*\\{\\s*", " {\n");
         code = code.replaceAll("\\s*}\\s*", "\n}\n");
 
-        // Remove empty lines and trim each line
+        // remove consecutive empty lines and trim each line
         String[] lines = code.split("\n");
-        StringBuilder result = new StringBuilder();
-
+        StringBuilder out = new StringBuilder();
         for (String line : lines) {
-            String trimmed = line.trim();
-            if (!trimmed.isEmpty()) {
-                result.append(trimmed).append("\n");
+            String t = line.trim();
+            if (!t.isEmpty()) {
+                out.append(t).append("\n");
             }
         }
-
-        return result.toString().trim();
+        return out.toString().trim();
     }
 }
