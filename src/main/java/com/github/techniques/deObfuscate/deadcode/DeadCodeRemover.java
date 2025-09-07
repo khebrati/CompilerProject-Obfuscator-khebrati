@@ -4,155 +4,155 @@ import com.github.gen.MinicBaseListener;
 import com.github.gen.MinicParser;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.misc.Interval;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class DeadCodeRemover extends MinicBaseListener {
+
     private final CommonTokenStream tokens;
-    private String simplifiedCode;
-    private final Set<String> declaredVariables;
-    private final Set<String> usedVariables;
-    private boolean afterReturn;
-    private boolean inCurrentBlock;
+    private final Set<String> declaredVariables = new HashSet<>();
+    private final Set<String> usedVariables = new HashSet<>();
+    private final Set<ParserRuleContext> statementsToRemove = new HashSet<>();
+    private final Deque<MinicParser.BlockContext> blockStack = new ArrayDeque<>();
+    private final Map<String, ParserRuleContext> variableDeclarations = new HashMap<>();
+    private final Set<ParserRuleContext> emptyBlocks = new HashSet<>();
 
     public DeadCodeRemover(CommonTokenStream tokens) {
         this.tokens = tokens;
-        this.simplifiedCode = tokens.getText(new Interval(0, tokens.size() - 1));
-        this.declaredVariables = new HashSet<>();
-        this.usedVariables = new HashSet<>();
-        this.afterReturn = false;
-        this.inCurrentBlock = false;
     }
 
     public static String removeDeadCode(MinicParser.ProgramContext tree, CommonTokenStream tokens) {
         DeadCodeRemover remover = new DeadCodeRemover(tokens);
-        ParseTreeWalker walker = new ParseTreeWalker();
-        walker.walk(remover, tree);
-        return remover.getSimplifiedCode();
+        ParseTreeWalker.DEFAULT.walk(remover, tree);
+        return remover.getProcessedCode();
+    }
+
+    @Override
+    public void enterBlock(MinicParser.BlockContext ctx) {
+        blockStack.push(ctx);
+    }
+
+    @Override
+    public void exitBlock(MinicParser.BlockContext ctx) {
+        blockStack.pop();
+
+        // Check if block is empty
+        if (ctx.statement().isEmpty()) {
+            emptyBlocks.add(ctx);
+        }
     }
 
     @Override
     public void enterDecOrFunDefinition(MinicParser.DecOrFunDefinitionContext ctx) {
-        // Record variable declarations
-        if (ctx.Identifier() != null) {
+        if (ctx.Identifier() != null && !isInDeadCode(ctx)) {
             String varName = ctx.Identifier().getText();
             declaredVariables.add(varName);
+            variableDeclarations.put(varName, ctx);
         }
     }
 
     @Override
     public void enterVariableOrFunctionCall(MinicParser.VariableOrFunctionCallContext ctx) {
-        // Record variable usage
-        if (ctx.Identifier() != null) {
-            String varName = ctx.Identifier().getText();
-            usedVariables.add(varName);
+        if (ctx.Identifier() != null && !isInDeadCode(ctx)) {
+            usedVariables.add(ctx.Identifier().getText());
         }
     }
 
     @Override
-    public void enterReturnStatement(MinicParser.ReturnStatementContext ctx) {
-        afterReturn = true;
-        inCurrentBlock = true;
-    }
+    public void exitReturnStatement(MinicParser.ReturnStatementContext ctx) {
+        if (!blockStack.isEmpty()) {
+            MinicParser.BlockContext block = blockStack.peek();
+            boolean afterReturn = false;
 
-    @Override
-    public void enterBlock(MinicParser.BlockContext ctx) {
-        if (afterReturn && inCurrentBlock) {
-            // Mark all statements after return in this block for removal
-            handleBlockAfterReturn(ctx);
-        }
-    }
-
-    private void handleBlockAfterReturn(MinicParser.BlockContext ctx) {
-        boolean foundReturn = false;
-        for (MinicParser.StatementContext stmt : ctx.statement()) {
-            if (stmt instanceof MinicParser.ReturnStatementContext) {
-                foundReturn = true;
-                continue;
-            }
-            if (foundReturn) {
-                safeRemoveFromSource(stmt);
-            }
-        }
-    }
-
-    @Override
-    public void exitBlock(MinicParser.BlockContext ctx) {
-        inCurrentBlock = false;
-
-        // Check for empty blocks
-        String blockContent = tokens.getText(ctx);
-        if (blockContent.trim().matches("\\{\\s*\\}")) {
-            safeRemoveFromSource(ctx);
-        }
-    }
-
-    @Override
-    public void exitProgram(MinicParser.ProgramContext ctx) {
-        // Remove unused variables
-        Set<String> unusedVars = new HashSet<>(declaredVariables);
-        unusedVars.removeAll(usedVariables);
-
-        for (String unusedVar : unusedVars) {
-            removeVariableDeclaration(unusedVar);
-        }
-    }
-
-    private void removeVariableDeclaration(String varName) {
-        String[] lines = simplifiedCode.split("\n");
-        StringBuilder result = new StringBuilder();
-        boolean skipNext = false;
-
-        for (String line : lines) {
-            if (skipNext) {
-                skipNext = false;
-                continue;
-            }
-
-            // Skip declarations of unused variables
-            if (!line.trim().matches(".*\\b" + varName + "\\s*([;=]|\\s*=\\s*[^,;]+[;,]).*")) {
-                result.append(line).append("\n");
-            }
-        }
-
-        simplifiedCode = result.toString().trim();
-    }
-
-    private void safeRemoveFromSource(ParserRuleContext ctx) {
-        try {
-            if (ctx != null && ctx.start != null && ctx.stop != null) {
-                int startIndex = ctx.start.getStartIndex();
-                int stopIndex = ctx.stop.getStopIndex();
-
-                if (startIndex >= 0 && stopIndex >= 0 &&
-                        startIndex < simplifiedCode.length() &&
-                        stopIndex < simplifiedCode.length() &&
-                        startIndex <= stopIndex) {
-
-                    String beforeContext = simplifiedCode.substring(0, startIndex);
-                    String afterContext = simplifiedCode.substring(stopIndex + 1);
-
-                    // Clean up trailing semicolons and whitespace
-                    beforeContext = beforeContext.replaceAll("\\s*;\\s*$", "");
-
-                    // Add newline if needed
-                    if (!beforeContext.endsWith("\n") && !afterContext.startsWith("\n")) {
-                        afterContext = "\n" + afterContext;
-                    }
-
-                    simplifiedCode = beforeContext + afterContext;
+            for (MinicParser.StatementContext st : block.statement()) {
+                if (st == ctx) {
+                    afterReturn = true;
+                    continue;
+                }
+                if (afterReturn) {
+                    statementsToRemove.add(st);
                 }
             }
-        } catch (StringIndexOutOfBoundsException e) {
-            // Log error but continue processing
-            System.err.println("Error removing code segment: " + e.getMessage());
         }
     }
 
-    public String getSimplifiedCode() {
-        return simplifiedCode;
+    private boolean isInDeadCode(ParserRuleContext ctx) {
+        ParserRuleContext parent = ctx;
+        while (parent != null) {
+            if (statementsToRemove.contains(parent)) {
+                return true;
+            }
+            parent = parent.getParent();
+        }
+        return false;
+    }
+
+    private String getProcessedCode() {
+        // First, mark unused variable declarations for removal
+        Set<String> unusedVars = new HashSet<>(declaredVariables);
+        unusedVars.removeAll(usedVariables);
+        for (String unusedVar : unusedVars) {
+            ParserRuleContext decl = variableDeclarations.get(unusedVar);
+            if (decl != null) {
+                statementsToRemove.add(decl);
+            }
+        }
+
+        // Add empty blocks to statements to remove
+        statementsToRemove.addAll(emptyBlocks);
+
+        // Create a sorted list of contexts to remove (from end to beginning)
+        List<ParserRuleContext> sortedContexts = new ArrayList<>(statementsToRemove);
+        sortedContexts.sort((a, b) -> b.getStart().getStartIndex() - a.getStart().getStartIndex());
+
+        // Build the result by removing the marked contexts
+        StringBuilder result = new StringBuilder(tokens.getText());
+
+        for (ParserRuleContext ctx : sortedContexts) {
+            int start = ctx.getStart().getStartIndex();
+            int end = ctx.getStop().getStopIndex() + 1;
+
+            // Make sure we don't go out of bounds
+            if (start >= 0 && end <= result.length()) {
+                result.delete(start, end);
+            }
+        }
+
+        // Clean up the result with proper spacing
+        return cleanUpCode(result.toString());
+    }
+
+    private String cleanUpCode(String code) {
+        // Remove multiple spaces but preserve single spaces
+        code = code.replaceAll("\\s+", " ");
+
+        // Add spaces around parentheses for control statements
+        code = code.replaceAll("(if|while|for)\\(", "$1 (");
+        code = code.replaceAll("(if|while|for) \\(", "$1 (");
+
+        // Ensure space after closing parenthesis before opening brace
+        code = code.replaceAll("\\)\\{", ") {");
+
+        // Clean up around semicolons
+        code = code.replaceAll("\\s*;\\s*", "; ");
+
+        // Remove trailing spaces
+        code = code.trim();
+
+        // Remove spaces before commas
+        code = code.replaceAll("\\s*,", ",");
+
+        // Remove empty statements
+        code = code.replaceAll(";\\s*;", ";");
+
+        // Ensure proper spacing around braces
+        code = code.replaceAll("\\s*\\{\\s*", " { ");
+        code = code.replaceAll("\\s*}\\s*", " } ");
+
+        // Final cleanup of multiple spaces
+        code = code.replaceAll("\\s+", " ");
+
+        return code.trim();
     }
 }
