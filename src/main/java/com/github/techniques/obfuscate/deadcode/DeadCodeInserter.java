@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 public class DeadCodeInserter extends MinicBaseListener {
-    private static final Random random = new Random();
+    private static final Random random = new Random(12);
     private final TokenStreamRewriter rewriter;
     public static final int NUM_GLOBAL_DUMMIES = 10;
     public static final String GLOBAL_DUMMY_PREFIX = "_dummy";
