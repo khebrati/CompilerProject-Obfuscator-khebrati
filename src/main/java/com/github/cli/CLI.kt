@@ -240,15 +240,17 @@ fun Session.obfusTechniqueSelection(): ObfusTechnique? {
     }
     return tech
 }
+
 fun Session.deObfusTechniqueSelection(): DeObfusTechnique? {
     var tech: DeObfusTechnique? = null
     section {
         blue {
             textLine()
-            textLine("What obfuscation method do you want to use?")
+            textLine("What de-obfuscation method do you want to use?")
             textLine("1. Expression simplification")
             textLine("2. Variable renaming")
-            textLine("3. All!")
+            textLine("3. Dead code removal")
+            textLine("4. All!")
             text("Input the number: ")
             input()
         }
@@ -258,7 +260,8 @@ fun Session.deObfusTechniqueSelection(): DeObfusTechnique? {
             tech = when (method) {
                 1 -> DeObfusTechnique.SIMPLIFY_EXPRESSION
                 2 -> DeObfusTechnique.RENAMER
-                3 -> DeObfusTechnique.ALL
+                3 -> DeObfusTechnique.DEAD_CODE_REMOVER
+                4 -> DeObfusTechnique.ALL
                 else -> {
                     println("Invalid option")
                     return@onInputEntered

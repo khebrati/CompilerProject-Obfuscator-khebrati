@@ -1,25 +1,42 @@
-int a = 0;
-int b = 0;
-int c = 0;
 int d = 0;
 int e = 0;
-int f = 0;
-int g = 0;
 int h = 0;
-int i = 0;
 int j = 0;
 int func1(int k, int l) {
-    e = 90;
-
-    int m = k + l;
-    return m;
+while(d < 39) {
+d = d + 1;
+}
+int m = (k + l);
+return m;
 }
 int main() {
-    if(h > 29) { h = 15; } else { h = 56; }
-
-    int n = 3;
-    int o = 4;
-    int p = func1(n, o);
-    printf("%d\n", p);
-    return 0;
+if(e > 19) {
+e = 36;
+}
+else {
+e = 98;
+}
+if(j > 24) {
+j = 92;
+}
+else {
+j = 56;
+}
+if(d > 32) {
+d = 26;
+}
+else {
+d = 28;
+}
+if(h > 46) {
+h = 99;
+}
+else {
+h = 17;
+}
+int n = 3;
+int o = 4;
+int p = func1(n, o);
+printf("%d\n", p);
+return 0;
 }

@@ -13,7 +13,7 @@ import java.util.Random;
 public class NameObfuscator extends MinicBaseListener {
 
     private final Map<String, String> variableMap = new HashMap<>();
-    private final Random random = new Random();
+    private final Random random = new Random(10);
     private TokenStreamRewriter rewriter;
 
     public NameObfuscator(CommonTokenStream tokens) {
