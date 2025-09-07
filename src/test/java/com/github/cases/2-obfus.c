@@ -1,25 +1,33 @@
-int _vwhmcekxj = 0;
-int _vcvojbial = 0;
-int _vpnizzegw = 0;
-int _vcrbtrvlv = 0;
-int _vgrznlvcn = 0;
-int _vhokuyxis = 0;
-int _vyrfbklqe = 0;
-int _vvvjvfnsl = 0;
-int _vaexpnted = 0;
-int _vwmyrjarn = 0;
-int _vszizblur(int a, int b) {
-    _vgrznlvcn = 90;
+int _vunleazmt = 0;
+int _vkdgkpjna = 0;
+int _vcmsmukue = 0;
+int _vzqnfoiqd = 0;
+int _vicixldpt = 0;
+int _vxajopwqs = 0;
+int _vmmsnjami = 0;
+int _vovtxqqke = 0;
+int _vsorozyqw = 0;
+int _vuodqufki = 0;
+int _vykdoadpn(int a, int b) {
+    _vovtxqqke = 69;
 
-    int _vnyrvpyic = ((a * 2) - (-b * 2)) / 2;
-    return _vnyrvpyic;
+    _vxajopwqs = 19;
+
+    if(_vsorozyqw > 47) { _vsorozyqw = 65; } else { _vsorozyqw = 6; }
+
+    int _vfawjmgdl = (a - (-b));
+    return _vfawjmgdl;
 }
 int main() {
-    if(_vvvjvfnsl > 29) { _vvvjvfnsl = 15; } else { _vvvjvfnsl = 56; }
+    if(_vcmsmukue > 28) { _vcmsmukue = 39; } else { _vcmsmukue = 66; }
 
-    int _vhnivkslc = 3;
-    int _vcpbrksza = 4;
-    int _vlksshzqx = _vszizblur(_vhnivkslc, _vcpbrksza);
-    printf("%d\n", _vlksshzqx);
+    _vcmsmukue = 35;
+
+    _vmmsnjami = 43;
+
+    int _vzihflcpm = 3;
+    int _vywzfjnlo = 4;
+    int _volfjxxzd = _vykdoadpn(_vzihflcpm, _vywzfjnlo);
+    printf("%d\n", _volfjxxzd);
     return 0;
 }
